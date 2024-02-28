@@ -1,0 +1,228 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\Gaston Mica y juan\\Desktop\\Deportes.api\\Deportes.Infra\\Deportes.Infra.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\Gaston Mica y juan\\Desktop\\Deportes.api\\Deportes.Infra\\Deportes.Infra.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Gaston Mica y juan\\Desktop\\Deportes.api\\Deportes.Infra\\Deportes.Infra.csproj",
+        "projectName": "Deportes.Infra",
+        "projectPath": "C:\\Users\\Gaston Mica y juan\\Desktop\\Deportes.api\\Deportes.Infra\\Deportes.Infra.csproj",
+        "packagesPath": "C:\\Users\\Gaston Mica y juan\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Gaston Mica y juan\\Desktop\\Deportes.api\\Deportes.Infra\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\Gaston Mica y juan\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "C:\\Users\\Gaston Mica y juan\\Desktop\\Deportes.api\\Deportes.Modelo\\Deportes.Modelo.csproj": {
+                "projectPath": "C:\\Users\\Gaston Mica y juan\\Desktop\\Deportes.api\\Deportes.Modelo\\Deportes.Modelo.csproj"
+              },
+              "C:\\Users\\Gaston Mica y juan\\Desktop\\Deportes.api\\Deportes.Servicio\\Deportes.Servicio.csproj": {
+                "projectPath": "C:\\Users\\Gaston Mica y juan\\Desktop\\Deportes.api\\Deportes.Servicio\\Deportes.Servicio.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[7.0.10, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[7.0.10, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[7.0.10, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[7.0.10, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\Gaston Mica y juan\\Desktop\\Deportes.api\\Deportes.Modelo\\Deportes.Modelo.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Gaston Mica y juan\\Desktop\\Deportes.api\\Deportes.Modelo\\Deportes.Modelo.csproj",
+        "projectName": "Deportes.Modelo",
+        "projectPath": "C:\\Users\\Gaston Mica y juan\\Desktop\\Deportes.api\\Deportes.Modelo\\Deportes.Modelo.csproj",
+        "packagesPath": "C:\\Users\\Gaston Mica y juan\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Gaston Mica y juan\\Desktop\\Deportes.api\\Deportes.Modelo\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\Gaston Mica y juan\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\Gaston Mica y juan\\Desktop\\Deportes.api\\Deportes.Servicio\\Deportes.Servicio.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Gaston Mica y juan\\Desktop\\Deportes.api\\Deportes.Servicio\\Deportes.Servicio.csproj",
+        "projectName": "Deportes.Servicio",
+        "projectPath": "C:\\Users\\Gaston Mica y juan\\Desktop\\Deportes.api\\Deportes.Servicio\\Deportes.Servicio.csproj",
+        "packagesPath": "C:\\Users\\Gaston Mica y juan\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Gaston Mica y juan\\Desktop\\Deportes.api\\Deportes.Servicio\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\Gaston Mica y juan\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "C:\\Users\\Gaston Mica y juan\\Desktop\\Deportes.api\\Deportes.Modelo\\Deportes.Modelo.csproj": {
+                "projectPath": "C:\\Users\\Gaston Mica y juan\\Desktop\\Deportes.api\\Deportes.Modelo\\Deportes.Modelo.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.Http.Abstractions": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.Extensions.Configuration.Abstractions": {
+              "target": "Package",
+              "version": "[7.0.0, )"
+            },
+            "Microsoft.Extensions.Configuration.Binder": {
+              "target": "Package",
+              "version": "[7.0.0, )"
+            },
+            "Microsoft.IdentityModel.Tokens": {
+              "target": "Package",
+              "version": "[6.35.0, )"
+            },
+            "System.IdentityModel.Tokens.Jwt": {
+              "target": "Package",
+              "version": "[6.35.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
