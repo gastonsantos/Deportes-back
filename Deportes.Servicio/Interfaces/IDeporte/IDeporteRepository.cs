@@ -9,7 +9,7 @@ namespace Deportes.Servicio.Interfaces.IDeporte
 {
     public interface IDeporteRepository
     {
-        public IList<Deporte> GetAll()
+        public IList<Deporte> GetAllDeportes();
 
     }
 }
