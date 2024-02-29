@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Deportes.Modelo.DeporteModel;
 using Deportes.Modelo.UsuarioModel;
 using Microsoft.EntityFrameworkCore;
 
@@ -9,7 +10,8 @@ namespace Deportes.Infra;
 public class DeportesContext : DbContext
 {
     public DbSet<Usuario> Usuario { get; set; }
-
+    
+    public DbSet<Deporte> Deporte { get; set; }
     public DeportesContext(DbContextOptions<DeportesContext> options)
    : base(options)
     {
@@ -31,6 +33,12 @@ public class DeportesContext : DbContext
         {
             entity.HasKey(e => e.Id);
             entity.ToTable("Usuario");
+        });
+
+        modelBuilder.Entity<Deporte>(entity =>
+        {
+            entity.HasKey(e => e.Id);
+            entity.ToTable("Deporte");
         });
 
     }

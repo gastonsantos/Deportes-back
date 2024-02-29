@@ -1,7 +1,10 @@
 using Deportes.Infra;
+using Deportes.Infra.Database.DeporteRepository;
 using Deportes.Infra.Database.UsuarioRepository;
+using Deportes.Servicio.Interfaces.IDeporte;
 using Deportes.Servicio.Interfaces.IToken;
 using Deportes.Servicio.Interfaces.IUsuario;
+using Deportes.Servicio.Servicios.DeporteServices;
 using Deportes.Servicio.Servicios.TokenServices;
 using Deportes.Servicio.Servicios.UsuarioServices;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -83,7 +86,8 @@ builder.Services.AddScoped<IUsuarioService, UsuarioService>();
 builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
 builder.Services.AddScoped<ITokenService, TokenServices>();
 builder.Services.AddScoped<IAutorizacionService, AutorizacionService>();
-
+builder.Services.AddScoped<IDeporteService, DeporteService>();
+builder.Services.AddScoped<IDeporteRepository, DeporteRepository>();
 
 
 //Configuraciones JWT
@@ -111,6 +115,16 @@ builder.Services.AddAuthentication(config =>
     };
 });
 
+builder.Services.AddCors(options => 
+{
+    options.AddDefaultPolicy(builder =>
+    {
+        builder.AllowAnyOrigin()
+               .AllowAnyMethod()
+               .AllowAnyHeader();
+    });
+});
+
 
 var app = builder.Build();
 
@@ -121,7 +135,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-
+//Cors
+app.UseCors();
 
 app.UseHttpsRedirection();
 
