@@ -1,8 +1,10 @@
 ﻿using Azure;
 using Deportes.api.Controllers.Dto;
 using Deportes.Modelo.Custom;
+using Deportes.Modelo.DeporteModel;
 using Deportes.Modelo.JwtModel;
 using Deportes.Modelo.UsuarioModel;
+using Deportes.Servicio.Interfaces.IDeporte;
 using Deportes.Servicio.Interfaces.IToken;
 using Deportes.Servicio.Interfaces.IUsuario;
 using Microsoft.AspNetCore.Authorization;
@@ -26,14 +28,16 @@ public class UsuarioController : Controller
     private readonly ITokenService _tokenService;
     private readonly IAutorizacionService _autorizacionService;
     private readonly IHttpContextAccessor _httpContextAccessor;
+    private readonly IDeporteService _deportesService;
     public IConfiguration _configuration;
-    public UsuarioController(IUsuarioService usuarioService, IConfiguration configuration, ITokenService tokenService, IAutorizacionService autorizacionService, IHttpContextAccessor httpContextAccessor)
+    public UsuarioController(IDeporteService deporteService ,IUsuarioService usuarioService, IConfiguration configuration, ITokenService tokenService, IAutorizacionService autorizacionService, IHttpContextAccessor httpContextAccessor)
     {
         _usuarioSerive = usuarioService;
         _configuration = configuration;
         _tokenService = tokenService;
         _autorizacionService = autorizacionService;
         _httpContextAccessor = httpContextAccessor;
+        _deportesService = deporteService;
     }
 
     [Authorize] // Autorize es un decorador que se le ponen a todos los endPoint que necesiten tener un Token Valido
@@ -158,5 +162,23 @@ public class UsuarioController : Controller
         return Ok(result);
 
     }
+
+
+    //[Authorize] 
+    [HttpGet("AllDeportes", Name = "AllDeportes")]
+    [Produces("application/json")]
+    [SwaggerOperation(Summary = "Permite devolver todos los Deportes")]
+    [SwaggerResponse(400, "El objeto request es invalido.")]
+    [SwaggerResponse(200, "Se devuelven los deprotes.")]
+    public IEnumerable<Deporte> GetAllDeportes()
+    {
+        var deporte = _deportesService.GetAllDeportes()
+            .ToArray();
+
+        return deporte;
+    }
+
+
+
 
 }
