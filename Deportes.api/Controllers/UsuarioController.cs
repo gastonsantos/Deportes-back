@@ -2,7 +2,6 @@
 using Deportes.api.Controllers.Dto;
 using Deportes.Modelo.Custom;
 using Deportes.Modelo.DeporteModel;
-using Deportes.Modelo.JwtModel;
 using Deportes.Modelo.UsuarioModel;
 using Deportes.Servicio.Interfaces.IDeporte;
 using Deportes.Servicio.Interfaces.IToken;
@@ -25,16 +24,16 @@ namespace Deportes.api.Controllers;
 public class UsuarioController : Controller
 {
     private readonly IUsuarioService _usuarioSerive;
-    private readonly ITokenService _tokenService;
+   
     private readonly IAutorizacionService _autorizacionService;
     private readonly IHttpContextAccessor _httpContextAccessor;
     private readonly IDeporteService _deportesService;
     public IConfiguration _configuration;
-    public UsuarioController(IDeporteService deporteService ,IUsuarioService usuarioService, IConfiguration configuration, ITokenService tokenService, IAutorizacionService autorizacionService, IHttpContextAccessor httpContextAccessor)
+    public UsuarioController(IDeporteService deporteService ,IUsuarioService usuarioService, IConfiguration configuration, IAutorizacionService autorizacionService, IHttpContextAccessor httpContextAccessor)
     {
         _usuarioSerive = usuarioService;
         _configuration = configuration;
-        _tokenService = tokenService;
+        
         _autorizacionService = autorizacionService;
         _httpContextAccessor = httpContextAccessor;
         _deportesService = deporteService;
@@ -74,6 +73,36 @@ public class UsuarioController : Controller
     [SwaggerOperation(Summary = "Permite Devolver un Usuario Por Email y Contraseña")]
     [SwaggerResponse(400, "El objeto request es invalido.")]
     [SwaggerResponse(200, "Se devuelve un Usuario por Email y Contraseña")]
+    [HttpPost("LoginAuto", Name = "LoginAuto")]
+
+    public async Task<IActionResult> LoginAuto([FromBody] RefreshTokenRequest ReAutorizacion)
+    {
+        var tokenHandler = new JwtSecurityTokenHandler();
+        var tokenExpiradoSupuestamente = tokenHandler.ReadJwtToken(ReAutorizacion.TokenExpirado);
+        if (tokenExpiradoSupuestamente.ValidTo > DateTime.UtcNow)
+            return BadRequest(new AutorizacionResponse
+            {
+                Resultado = false, 
+                Msg = "Token No expirado"
+
+            });
+
+        string idUsuario = tokenExpiradoSupuestamente.Claims.First(x => x.Type == JwtRegisteredClaimNames.NameId).Value.ToString(); 
+        var autorizationResponse = await _autorizacionService.DevolverRefreshToken(ReAutorizacion, int.Parse(idUsuario));
+        if (autorizationResponse.Resultado)
+        {
+            return Ok(autorizationResponse);
+        }
+        else
+        {
+            return BadRequest(autorizationResponse);
+        }
+    }
+
+    [Produces("application/json")]
+    [SwaggerOperation(Summary = "Permite Devolver un Usuario Por Email y Contraseña")]
+    [SwaggerResponse(400, "El objeto request es invalido.")]
+    [SwaggerResponse(200, "Se devuelve un Usuario por Email y Contraseña")]
     [HttpPost("Login2", Name = "Login2")]
 
     public async Task<IActionResult> Login2([FromBody] AutorizacionRequest autorizacion)
@@ -101,70 +130,11 @@ public class UsuarioController : Controller
         return Ok(resultado_autorizacion);
     }
 
-    /*
-    [Produces("application/json")]
-    [SwaggerOperation(Summary = "Permite Devolver un Usuario Por Email y Contraseña")]
-    [SwaggerResponse(400, "El objeto request es invalido.")]
-    [SwaggerResponse(200, "Se devuelve un Usuario por Email y Contraseña")]
-    [HttpPost("Login", Name = "Login")]
-
-    public ActionResult Login([FromBody] DtoUserLogin userDto)
-
-    {
-
-        Usuario usuario = _usuarioSerive.ObtenerUsuarioMailContraseña(userDto.Email, userDto.Contrasenia);
-        if (usuario == null)
-        {
-            return Ok("No se encontro ningun Usuario con ese Email y Contraseña");
-        }
-
-        var jwt = _configuration.GetSection("Jwt").Get<Jwt>(); // aca lo que hago es traer el Jwt del appSetting y lo puedo usar como un objeto de Modelo que hice 
-                                                               //estos son los datos que se van a guardar en el JWT
-        var claims = new[]
-        {
-            new Claim(JwtRegisteredClaimNames.Sub, jwt.Subject), //datos de configuracion
-            new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),//datos de configuracion
-            new Claim(JwtRegisteredClaimNames.Iat, DateTime.UtcNow.ToString()),//datos de configuracion
-            new Claim ("usuario", usuario.Nombre), // datos extras que se los agrego yo
-            new Claim("id", usuario.Id.ToString())  // estos datos siempre tienen que ser string
-
-        };
+   
+  
 
 
-        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwt.Key));
-        var signIn = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-
-        var token = new JwtSecurityToken(
-            jwt.Issuer,
-            jwt.Audience,
-            claims,
-            expires: DateTime.Now.AddMinutes(60),
-            signingCredentials: signIn
-            );
-
-        return Ok(new { token = new JwtSecurityTokenHandler().WriteToken(token) });
-
-
-    }
-
-    */
-    [HttpPost("Eliminar", Name = "Eliminar")]
-
-    public ActionResult EliminarUsuario([FromBody] DtoUserBorrar userDto)
-    {
-        var identity = HttpContext.User.Identity as ClaimsIdentity;
-        if(identity == null)
-        {
-            return BadRequest("sin Token");
-        }
-        string result = _tokenService.validarToken(identity);
-       
-        return Ok(result);
-
-    }
-
-
-    //[Authorize] 
+    [Authorize] 
     [HttpGet("AllDeportes", Name = "AllDeportes")]
     [Produces("application/json")]
     [SwaggerOperation(Summary = "Permite devolver todos los Deportes")]
@@ -178,6 +148,20 @@ public class UsuarioController : Controller
         return deporte;
     }
 
+    [Authorize]
+    [HttpPost("UsuarioPerfil", Name = "UsuarioPerfil")]
+    [Produces("application/json")]
+    [SwaggerOperation(Summary = "Permite devolver los datos de un usuario determinado por id")]
+    [SwaggerResponse(400, "El objeto request es invalido.")]
+    [SwaggerResponse(200, "Se devuelve el usuario de manera satisfactoria")]
+    public ActionResult UsuarioPorId([FromBody] DtoUsuarioPerfil usuarioDto)
+    {
+
+        var usuario = _usuarioSerive.ObtenerUsuarioPorId(usuarioDto.Id);
+        return Ok(usuario);
+
+
+    }
 
 
 

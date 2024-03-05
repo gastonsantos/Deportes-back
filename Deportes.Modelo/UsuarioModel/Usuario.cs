@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Deportes.Modelo.HistorialRefreshModel;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -16,9 +17,9 @@ namespace Deportes.Modelo.UsuarioModel
         public string Email { get; set; }
         public string Contrasenia { get; set; } 
         public string Telefono { get; set; }
-        public DateTime Fecha_nacimiento { get; set; }
+        public DateTime? FechaNacimiento { get; set; }
 
-
+        public virtual ICollection<HistorialRefreshToken> HistorialRefreshTokens { get; set; } = new List<HistorialRefreshToken>();
 
     }
 }

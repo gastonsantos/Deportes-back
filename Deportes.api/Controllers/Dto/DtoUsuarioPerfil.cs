@@ -1,6 +1,6 @@
 ﻿namespace Deportes.api.Controllers.Dto
 {
-    public class DtoUserBorrar
+    public class DtoUsuarioPerfil
     {
         public int Id { get; set; }
     }

@@ -1,4 +1,6 @@
-﻿using Deportes.Modelo.UsuarioModel;
+﻿using Deportes.Modelo.Custom;
+using Deportes.Modelo.HistorialRefreshModel;
+using Deportes.Modelo.UsuarioModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,5 +15,8 @@ namespace Deportes.Servicio.Interfaces.IUsuario
         public Usuario? ObtenerUsuarioMailContraseña(string email, string contra);
 
         public Usuario? ObtenerUsuarioPorId(int id);
+
+        public void GuardarHistorialRefreshToken(HistorialRefreshToken historial);
+        public HistorialRefreshToken? DevolverRefreshToken(RefreshTokenRequest refreshTokenRequest, int idUsuario);
     }
 }

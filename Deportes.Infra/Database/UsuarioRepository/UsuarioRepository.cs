@@ -1,4 +1,6 @@
-﻿using Deportes.Modelo.UsuarioModel;
+﻿
+using Deportes.Modelo.UsuarioModel;
+using Deportes.Modelo.HistorialRefreshModel;
 using Deportes.Servicio.Interfaces.IUsuario;
 using System;
 using System.Collections.Generic;
@@ -6,6 +8,7 @@ using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
+using Deportes.Modelo.Custom;
 
 namespace Deportes.Infra.Database.UsuarioRepository;
 
@@ -33,6 +36,20 @@ public class UsuarioRepository : IUsuarioRepository
         return _context.Usuario.FirstOrDefault(u => u.Id == id);
     }
 
+    public  void GuardarHistorialRefreshToken(HistorialRefreshToken historial)
+    {
+        _context.HistorialRefreshTokens.Add(historial); 
+        _context.SaveChanges();
+
+    }
+
+    public HistorialRefreshToken? DevolverRefreshToken(RefreshTokenRequest refreshTokenRequest, int idUsuario)
+    {
+        return _context.HistorialRefreshTokens.FirstOrDefault(x => x.Token == refreshTokenRequest.TokenExpirado &&
+        x.RefreshToken == refreshTokenRequest.RefreshToken &&
+        x.IdUsuario == idUsuario);
+    }
+ 
 
 
 }

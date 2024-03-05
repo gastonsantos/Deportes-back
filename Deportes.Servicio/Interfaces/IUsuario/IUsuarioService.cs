@@ -1,4 +1,5 @@
-﻿using Deportes.Modelo.UsuarioModel;
+﻿using Deportes.Modelo.Custom;
+using Deportes.Modelo.UsuarioModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,5 +13,6 @@ namespace Deportes.Servicio.Interfaces.IUsuario
         public IList<Usuario> GetAll();
         public Usuario? ObtenerUsuarioMailContraseña(string email, string contra);
         public Usuario? ObtenerUsuarioPorId(int id);
+     
     }
 }

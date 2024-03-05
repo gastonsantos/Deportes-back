@@ -84,7 +84,6 @@ builder.Services.AddHttpContextAccessor();
 //Agrego las Dependencias
 builder.Services.AddScoped<IUsuarioService, UsuarioService>();
 builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
-builder.Services.AddScoped<ITokenService, TokenServices>();
 builder.Services.AddScoped<IAutorizacionService, AutorizacionService>();
 builder.Services.AddScoped<IDeporteService, DeporteService>();
 builder.Services.AddScoped<IDeporteRepository, DeporteRepository>();

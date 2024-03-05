@@ -1,5 +1,5 @@
 ﻿using Deportes.Modelo.Custom;
-using Deportes.Modelo.JwtModel;
+using Deportes.Modelo.HistorialRefreshModel;
 using Deportes.Modelo.UsuarioModel;
 using Deportes.Servicio.Interfaces.IToken;
 using Deportes.Servicio.Interfaces.IUsuario;
@@ -8,6 +8,7 @@ using Microsoft.IdentityModel.Tokens;
 using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using System.Security.Cryptography;
 using System.Text;
 
 
@@ -48,7 +49,7 @@ namespace Deportes.Servicio.Servicios.TokenServices
             var tokenDescription = new SecurityTokenDescriptor // define propiedades al Token 
             { 
                 Subject = claims, //son las Claims que contienen la info del usuario
-                Expires = DateTime.UtcNow.AddMinutes(60), // fecha y hora de expiracion del token
+                Expires = DateTime.UtcNow.AddMinutes(30), // fecha y hora de expiracion del token
                 SigningCredentials = credencialesToeken // las credenciales de firma para asegurar el token
             };
             var tokenHandler = new JwtSecurityTokenHandler(); // se encarga el TokenHandler de la creacion y analiss de tokens JWT
@@ -58,6 +59,42 @@ namespace Deportes.Servicio.Servicios.TokenServices
             return tokenCreado;
 
         }
+
+        private string GenerarRefreshToken()
+        {
+
+            var byteArray = new byte[64];
+            var refreshToken = "";
+            using (var rng= RandomNumberGenerator.Create())
+            {
+                rng.GetBytes(byteArray);
+                refreshToken = Convert.ToBase64String(byteArray);
+            }
+            return refreshToken;
+        }
+
+        private async Task<AutorizacionResponse> GuardarHistorialRefreshToken(int idUsuario, string token, string refreshToken)
+        {
+            var historialRefreshToken = new HistorialRefreshToken
+            {
+                IdUsuario = idUsuario,
+                Token = token,
+                RefreshToken = refreshToken,
+                FechaCreacion = DateTime.UtcNow,
+                FechaExpiracion = DateTime.UtcNow.AddMinutes(60)
+            };
+
+             _usuarioRepository.GuardarHistorialRefreshToken(historialRefreshToken);
+
+            return new AutorizacionResponse
+            {
+                Token= token,
+                RefreshToken= refreshToken,
+                Resultado = true,
+                Msg = "Ok"
+            };
+        }
+
 
         public async Task<AutorizacionResponse> DevolverToken(AutorizacionRequest autorizacion)
         {
@@ -70,9 +107,24 @@ namespace Deportes.Servicio.Servicios.TokenServices
 
             string tokenCreado = GenerarToken(usuario_encontrado);
 
+            string refreshToken = GenerarRefreshToken();
 
-            return new AutorizacionResponse() { Token = tokenCreado,Resultado = true, Msg="Ok" };
+            return await GuardarHistorialRefreshToken(usuario_encontrado.Id, tokenCreado, refreshToken);
+        }
 
+        public async Task<AutorizacionResponse> DevolverRefreshToken(RefreshTokenRequest refreshToken, int idUsuario)
+        {
+            var refreshTokenEncontrado = _usuarioRepository.DevolverRefreshToken(refreshToken, idUsuario);
+            var usuario_encontado = _usuarioRepository.ObtenerUsuarioPorId(idUsuario);
+
+            if(refreshTokenEncontrado == null)
+            {
+                return new AutorizacionResponse { Resultado = false, Msg = "No existe Token o Refresh Token" };
+            }
+            var refreshTokenCreado = GenerarRefreshToken();
+            var tokenCreado = GenerarToken(usuario_encontado);
+
+            return await GuardarHistorialRefreshToken(usuario_encontado.Id, tokenCreado, refreshTokenCreado);
         }
     }
 }

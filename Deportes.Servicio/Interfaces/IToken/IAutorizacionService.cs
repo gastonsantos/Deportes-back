@@ -10,4 +10,6 @@ namespace Deportes.Servicio.Interfaces.IToken;
 public interface IAutorizacionService
 {
     Task<AutorizacionResponse> DevolverToken(AutorizacionRequest autorizacion);
+
+    Task<AutorizacionResponse> DevolverRefreshToken(RefreshTokenRequest refreshToken, int idUsuario);
 }
