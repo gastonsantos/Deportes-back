@@ -7,16 +7,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Deportes.Servicio.Interfaces.IUsuario
+namespace Deportes.Servicio.Interfaces.IUsuario;
+
+public interface IUsuarioRepository
 {
-    public interface IUsuarioRepository
-    {
-        public IList<Usuario> GetAll();
-        public Usuario? ObtenerUsuarioMailContraseña(string email, string contra);
+    public IList<Usuario> GetAll();
+    public Usuario? ObtenerUsuarioMailContraseña(string email, string contra);
 
-        public Usuario? ObtenerUsuarioPorId(int id);
+    public Usuario? ObtenerUsuarioPorId(int id);
 
-        public void GuardarHistorialRefreshToken(HistorialRefreshToken historial);
-        public HistorialRefreshToken? DevolverRefreshToken(RefreshTokenRequest refreshTokenRequest, int idUsuario);
-    }
+    public void GuardarHistorialRefreshToken(HistorialRefreshToken historial);
+    public HistorialRefreshToken? DevolverRefreshToken(RefreshTokenRequest refreshTokenRequest, int idUsuario);
+    public void GuardarUsuarioEnBd(Usuario usuario);
+    public Usuario ObtenerUsuarioPorEmail(string email);
 }

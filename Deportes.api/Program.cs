@@ -1,10 +1,18 @@
 using Deportes.Infra;
 using Deportes.Infra.Database.DeporteRepository;
+using Deportes.Infra.Database.EventoRepository;
+using Deportes.Infra.Database.ParticipantesRepository;
 using Deportes.Infra.Database.UsuarioRepository;
+using Deportes.Servicio.Interfaces.IChathub;
 using Deportes.Servicio.Interfaces.IDeporte;
+using Deportes.Servicio.Interfaces.IEvento;
+using Deportes.Servicio.Interfaces.IParticipantes;
 using Deportes.Servicio.Interfaces.IToken;
 using Deportes.Servicio.Interfaces.IUsuario;
+using Deportes.Servicio.Servicios.ChatServices;
 using Deportes.Servicio.Servicios.DeporteServices;
+using Deportes.Servicio.Servicios.MiClaseSignalR;
+using Deportes.Servicio.Servicios.ParticipantesServices;
 using Deportes.Servicio.Servicios.TokenServices;
 using Deportes.Servicio.Servicios.UsuarioServices;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -20,6 +28,9 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddControllers();
+
+builder.Services.AddSignalR();
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
@@ -87,8 +98,10 @@ builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
 builder.Services.AddScoped<IAutorizacionService, AutorizacionService>();
 builder.Services.AddScoped<IDeporteService, DeporteService>();
 builder.Services.AddScoped<IDeporteRepository, DeporteRepository>();
-
-
+builder.Services.AddScoped<IEventoRepository, EventoRepository>();
+builder.Services.AddScoped<IParticipantesRepository, ParticipantesRepository>();
+builder.Services.AddScoped<IParticipantesServices, ParticipantesServices>();
+builder.Services.AddScoped<IChatHub, ChatHub>();
 //Configuraciones JWT
 var key = builder.Configuration.GetValue<string>("Jwt:key");
 var keyBytes = Encoding.ASCII.GetBytes(key);
@@ -134,6 +147,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseRouting();
 //Cors
 app.UseCors();
 
@@ -143,6 +157,12 @@ app.UseHttpsRedirection();
 app.UseAuthentication();
 
 app.UseAuthorization();
+
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapHub<MiClaseSignalR>("/chatHub");
+    endpoints.MapControllers();
+});
 
 app.MapControllers();
 

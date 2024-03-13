@@ -159,10 +159,18 @@ public class UsuarioController : Controller
 
         var usuario = _usuarioSerive.ObtenerUsuarioPorId(usuarioDto.Id);
         return Ok(usuario);
-
-
     }
-
+   
+    [HttpPost("RegistrarUsuario", Name = "RegistrarUsuario")]
+    [Produces("application/json")]
+    [SwaggerOperation(Summary = "Permite Registrar un usurio en la Bd")]
+    [SwaggerResponse(400, "El objeto request es invalido.")]
+    [SwaggerResponse(200, "Se ah registrado un usuario de forma satisfactoria")]
+    public ActionResult RegistrarUsuario([FromBody] DtoUsuarioRegistrar usuarioDto)
+    {
+        _usuarioSerive.GuardarUsuarioEnBd(usuarioDto.Nombre, usuarioDto.Apellido, usuarioDto.Email, usuarioDto.Contrasenia, usuarioDto.Provincia, usuarioDto.Localidad, usuarioDto.Direccion, usuarioDto.Numero);
+        return Ok();
+    }
 
 
 }

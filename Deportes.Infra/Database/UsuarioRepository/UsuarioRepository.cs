@@ -31,6 +31,17 @@ public class UsuarioRepository : IUsuarioRepository
         return _context.Usuario.FirstOrDefault(u => u.Email == email && u.Contrasenia == contra);
     }
 
+    public Usuario ObtenerUsuarioPorEmail(string email)
+    {
+        return _context.Usuario.FirstOrDefault(u => u.Email == email);
+
+    }
+    public void GuardarUsuarioEnBd(Usuario usuario)
+    {
+        _context.Usuario.Add(usuario);
+        _context.SaveChanges();
+    }
+
     public Usuario? ObtenerUsuarioPorId(int id)
     {
         return _context.Usuario.FirstOrDefault(u => u.Id == id);
