@@ -112,3 +112,11 @@ C:\Users\Gaston Mica y juan\Desktop\Deportes.api\Deportes.api\bin\Debug\net6.0\r
 C:\Users\Gaston Mica y juan\Desktop\Deportes.api\Deportes.api\bin\Debug\net6.0\runtimes\win-x86\native\sni.dll
 C:\Users\Gaston Mica y juan\Desktop\Deportes.api\Deportes.api\bin\Debug\net6.0\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
 C:\Users\Gaston Mica y juan\Desktop\Deportes.api\Deportes.api\bin\Debug\net6.0\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
+C:\Users\Gaston Mica y juan\Desktop\Deportes.api\Deportes.api\bin\Debug\net6.0\BouncyCastle.Cryptography.dll
+C:\Users\Gaston Mica y juan\Desktop\Deportes.api\Deportes.api\bin\Debug\net6.0\MailKit.dll
+C:\Users\Gaston Mica y juan\Desktop\Deportes.api\Deportes.api\bin\Debug\net6.0\MimeKit.dll
+C:\Users\Gaston Mica y juan\Desktop\Deportes.api\Deportes.api\bin\Debug\net6.0\System.Formats.Asn1.dll
+C:\Users\Gaston Mica y juan\Desktop\Deportes.api\Deportes.api\bin\Debug\net6.0\System.Security.Cryptography.Pkcs.dll
+C:\Users\Gaston Mica y juan\Desktop\Deportes.api\Deportes.api\bin\Debug\net6.0\System.Text.Encoding.CodePages.dll
+C:\Users\Gaston Mica y juan\Desktop\Deportes.api\Deportes.api\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Security.Cryptography.Pkcs.dll
+C:\Users\Gaston Mica y juan\Desktop\Deportes.api\Deportes.api\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Text.Encoding.CodePages.dll

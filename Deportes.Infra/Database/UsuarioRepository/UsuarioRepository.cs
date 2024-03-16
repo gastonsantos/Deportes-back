@@ -26,7 +26,7 @@ public class UsuarioRepository : IUsuarioRepository
         return _context.Usuario.ToList();
     }
 
-    public Usuario? ObtenerUsuarioMailContraseña(string email, string contra)
+    public Usuario ObtenerUsuarioMailContraseña(string email, string contra)
     {
         return _context.Usuario.FirstOrDefault(u => u.Email == email && u.Contrasenia == contra);
     }
@@ -60,7 +60,47 @@ public class UsuarioRepository : IUsuarioRepository
         x.RefreshToken == refreshTokenRequest.RefreshToken &&
         x.IdUsuario == idUsuario);
     }
- 
 
+    public Usuario ObtenerUsuarioPorToken(string token)
+    {
+        return _context.Usuario.FirstOrDefault(u => u.TokenConfirmacion == token);
+    }
+
+    public bool ConfirmarEmailUsuarioYNullearToken(string token)
+    {
+        var usuario = _context.Usuario.FirstOrDefault(u => u.TokenConfirmacion == token);
+        if (usuario == null) {
+            return false;
+        }
+        else
+        {
+            usuario.VerifyEmail = true;
+            usuario.TokenConfirmacion = null;
+            _context.SaveChanges();
+            return true;
+        }
+
+    }
+
+    public void GuardoTokenCambioContraseniaPorEmailUsuario(string email, string tokenCambio)
+    {
+        var usuario = _context.Usuario.FirstOrDefault(u => u.Email == email);
+        usuario.TokenCambioContrasenia = tokenCambio;
+        _context.SaveChanges(); 
+
+    }
+
+    public void CambioContraseniaPorToken(string contraseniaNueva, string tokenCambio)
+    {
+        var usuario = _context.Usuario.FirstOrDefault(u => u.TokenCambioContrasenia == tokenCambio);
+        usuario.Contrasenia = contraseniaNueva;
+        usuario.TokenCambioContrasenia = null;
+        _context.SaveChanges();
+    }
+
+    public Usuario ObtenerUsuarioPorTokenCambioContrasenia(string token)
+    {
+        return _context.Usuario.FirstOrDefault(u => u.TokenCambioContrasenia == token);
+    }
 
 }

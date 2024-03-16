@@ -3,6 +3,8 @@ using Deportes.Modelo.HistorialRefreshModel;
 using Deportes.Modelo.UsuarioModel;
 using Deportes.Servicio.Interfaces.IToken;
 using Deportes.Servicio.Interfaces.IUsuario;
+using Deportes.Servicio.Servicios.TokenServices.Errores;
+using Deportes.Servicio.Servicios.UsuarioServices.Errores;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System;
@@ -100,11 +102,16 @@ namespace Deportes.Servicio.Servicios.TokenServices
         {
             var usuario_encontrado = _usuarioRepository.ObtenerUsuarioMailContraseña(autorizacion.Email, autorizacion.Clave);
 
-            if(usuario_encontrado == null)
+            if(usuario_encontrado == null )
             {
-                return await Task.FromResult<AutorizacionResponse>(null);
+                throw  new UsuarioNoEncontradoException();
             }
-
+            
+            if(usuario_encontrado.VerifyEmail == false)
+            {
+                throw new EmailNoValidadoException();
+            }
+            
             string tokenCreado = GenerarToken(usuario_encontrado);
 
             string refreshToken = GenerarRefreshToken();

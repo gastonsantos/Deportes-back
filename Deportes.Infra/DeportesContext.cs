@@ -171,6 +171,8 @@ public class DeportesContext : DbContext
             entity.Property(e => e.Nombre).HasMaxLength(255);
             entity.Property(e => e.Numero).HasMaxLength(100);
             entity.Property(e => e.Provincia).HasMaxLength(255);
+            entity.Property(e => e.TokenConfirmacion).HasMaxLength(255);
+            entity.Property(e => e.TokenCambioContrasenia).HasMaxLength(255);
         });
         
     }

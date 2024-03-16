@@ -32,6 +32,9 @@ namespace Deportes.Modelo.UsuarioModel
 
         public string Numero { get; set; } = null!;
 
+        public string? TokenConfirmacion { get; set; }
+
+        public string? TokenCambioContrasenia { get; set; }
         public bool? VerifyEmail { get; set; }
 
         public bool? Activo { get; set; }

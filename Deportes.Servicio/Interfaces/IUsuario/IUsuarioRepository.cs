@@ -20,4 +20,10 @@ public interface IUsuarioRepository
     public HistorialRefreshToken? DevolverRefreshToken(RefreshTokenRequest refreshTokenRequest, int idUsuario);
     public void GuardarUsuarioEnBd(Usuario usuario);
     public Usuario ObtenerUsuarioPorEmail(string email);
+
+    public Usuario ObtenerUsuarioPorToken(string token);
+    public bool ConfirmarEmailUsuarioYNullearToken(string token);
+    public void GuardoTokenCambioContraseniaPorEmailUsuario(string email, string tokenCambio);
+    public void CambioContraseniaPorToken(string contraseniaNueva, string tokenCambio);
+    public Usuario ObtenerUsuarioPorTokenCambioContrasenia(string token);
 }

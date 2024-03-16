@@ -9,6 +9,7 @@ using Deportes.Servicio.Interfaces.IUsuario;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.JsonWebTokens;
 using Microsoft.IdentityModel.Tokens;
 using Swashbuckle.AspNetCore.Annotations;
@@ -172,5 +173,40 @@ public class UsuarioController : Controller
         return Ok();
     }
 
+    [HttpPost("confirmar", Name = "ConfirmarUsuario")]
+    [Produces("application/json")]
+    [SwaggerOperation(Summary = "Permite la confirmación del email")]
+    [SwaggerResponse(400, "El objeto request es invalido.")]
+    [SwaggerResponse(200, "Se ah confirmado el email de forma exitosa")]
+    public ActionResult ConfirmarUsuario([FromBody] string token)
+    {
+        var resultado = _usuarioSerive.ConfirmarEmailUsuario(token);
+
+        return Ok(resultado);
+    }
+
+    [HttpPost("enviaMailCambioContrasenia", Name = "enviaMailCambioContrasenia")]
+    [Produces("application/json")]
+    [SwaggerOperation(Summary = "Permite el cambio de contrasenia")]
+    [SwaggerResponse(400, "El objeto request es invalido.")]
+    [SwaggerResponse(200, "Se ah enviado el mail para cambio contrasenia")]
+    public ActionResult EnviarMailCambioContrasenia([FromBody] string email)
+    {
+        var resultado = _usuarioSerive.EnvioCambiarContrasenia(email);
+
+        return Ok(resultado);
+    }
+
+    [HttpPost("cambioContrasenia", Name = "cambioContrasenia")]
+    [Produces("application/json")]
+    [SwaggerOperation(Summary = "Permite el cambio de contrasenia")]
+    [SwaggerResponse(400, "El objeto request es invalido.")]
+    [SwaggerResponse(200, "Se ah modificado la contrasenia de forma correcta")]
+    public ActionResult CambioContrasenia([FromBody] DtoUsuarioCambioContrasenia usuario)
+    {
+        var resultado = _usuarioSerive.CambioContrasenia(usuario.Contrasenia, usuario.TokenCambioContrasenia);
+
+        return Ok(resultado);
+    }
 
 }
