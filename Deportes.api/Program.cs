@@ -1,3 +1,4 @@
+using Deportes.api.Config;
 using Deportes.Infra;
 using Deportes.Infra.Database.DeporteRepository;
 using Deportes.Infra.Database.EventoRepository;
@@ -149,6 +150,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseMiddleware<ErrorHandlerMiddleware>();
 
 app.UseRouting();
 //Cors
