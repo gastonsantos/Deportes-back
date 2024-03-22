@@ -1,5 +1,9 @@
 ﻿using Deportes.Modelo.EventoModel;
+using Deportes.Modelo.FichaBasquetModel;
 using Deportes.Modelo.FichaDeporteModel;
+using Deportes.Modelo.FichaDeportistaModel;
+using Deportes.Modelo.FichaFutbolModel;
+using Deportes.Modelo.FichaTenisModel;
 using Deportes.Modelo.HistorialRefreshModel;
 using Deportes.Modelo.ParticipanteModel;
 using System;
@@ -20,6 +24,8 @@ namespace Deportes.Modelo.UsuarioModel
 
         public string Apellido { get; set; } = null!;
 
+        public string? Apodo { get; set; }
+
         public string? Email { get; set; }
 
         public string? Contrasenia { get; set; }
@@ -31,17 +37,23 @@ namespace Deportes.Modelo.UsuarioModel
         public string Direccion { get; set; } = null!;
 
         public string Numero { get; set; } = null!;
-
         public string? TokenConfirmacion { get; set; }
 
         public string? TokenCambioContrasenia { get; set; }
+
         public bool? VerifyEmail { get; set; }
 
         public bool? Activo { get; set; }
 
         public virtual ICollection<Evento> Eventos { get; set; } = new List<Evento>();
 
-        public virtual ICollection<FichaDeporte> FichaDeportes { get; set; } = new List<FichaDeporte>();
+        public virtual ICollection<FichaBasquet> FichaBasquets { get; set; } = new List<FichaBasquet>();
+
+        public virtual ICollection<FichaDeportistum> FichaDeportista { get; set; } = new List<FichaDeportistum>();
+
+        public virtual ICollection<FichaFutbol> FichaFutbols { get; set; } = new List<FichaFutbol>();
+
+        public virtual ICollection<FichaTeni> FichaTenis { get; set; } = new List<FichaTeni>();
 
         public virtual ICollection<HistorialRefreshToken> HistorialRefreshTokens { get; set; } = new List<HistorialRefreshToken>();
 

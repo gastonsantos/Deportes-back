@@ -7,6 +7,10 @@ using Microsoft.EntityFrameworkCore;
 using Deportes.Modelo.EventoModel;
 using Deportes.Modelo.ParticipanteModel;
 using Deportes.Modelo.FichaDeporteModel;
+using Deportes.Modelo.FichaBasquetModel;
+using Deportes.Modelo.FichaDeportistaModel;
+using Deportes.Modelo.FichaFutbolModel;
+using Deportes.Modelo.FichaTenisModel;
 
 namespace Deportes.Infra;
 
@@ -14,14 +18,14 @@ public class DeportesContext : DbContext
 {
   
     public DbSet<HistorialRefreshToken> HistorialRefreshTokens { get; set; }
-   
     public  DbSet<Deporte> Deporte { get; set; }
-
     public  DbSet<Evento> Evento { get; set; }
-    public  DbSet<FichaDeporte> FichaDeporte { get; set; }
+    public  DbSet<FichaDeportistum> FichaDeportista { get; set; }
+    public  DbSet<FichaFutbol> FichaFutbols { get; set; }
     public  DbSet<Participante> Participante { get; set; }
-
     public  DbSet<Usuario> Usuario { get; set; }
+    public virtual DbSet<FichaBasquet> FichaBasquet { get; set; }
+    public virtual DbSet<FichaTeni> FichaTeni { get; set; }
 
     public DeportesContext(DbContextOptions<DeportesContext> options)
    : base(options)
@@ -35,7 +39,7 @@ public class DeportesContext : DbContext
 
         modelBuilder.Entity<Deporte>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Deporte__3214EC07DAC436D9");
+            entity.HasKey(e => e.Id).HasName("PK__Deporte__3214EC07891614B8");
 
             entity.ToTable("Deporte");
 
@@ -48,7 +52,7 @@ public class DeportesContext : DbContext
 
         modelBuilder.Entity<Evento>(entity =>
         {
-            entity.HasKey(e => e.IdEvento).HasName("PK__Evento__034EFC04DE28FBA0");
+            entity.HasKey(e => e.IdEvento).HasName("PK__Evento__034EFC04E8419F4C");
 
             entity.ToTable("Evento");
 
@@ -63,19 +67,29 @@ public class DeportesContext : DbContext
             entity.HasOne(d => d.IdDeporteNavigation).WithMany(p => p.Eventos)
                 .HasForeignKey(d => d.IdDeporte)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Evento__IdDeport__29572725");
+                .HasConstraintName("FK_Evento_IdDeporte");
 
             entity.HasOne(d => d.IdUsuarioCreadorNavigation).WithMany(p => p.Eventos)
                 .HasForeignKey(d => d.IdUsuarioCreador)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Evento__IdUsuari__286302EC");
+                .HasConstraintName("FK_Evento_IdUsuarioCreador");
         });
 
-        modelBuilder.Entity<FichaDeporte>(entity =>
+        modelBuilder.Entity<FichaBasquet>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__FichaDep__3214EC071FBECE5C");
+            entity.HasKey(e => e.Id).HasName("PK__FichaBas__3214EC07E1E3C3F6");
 
-            entity.ToTable("FichaDeporte");
+            entity.ToTable("FichaBasquet");
+
+            entity.HasOne(d => d.IdUsuarioNavigation).WithMany(p => p.FichaBasquets)
+                .HasForeignKey(d => d.IdUsuario)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_FichaBasquet_Usuario");
+        });
+
+        modelBuilder.Entity<FichaDeportistum>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__FichaDep__3214EC07E7BD1CE1");
 
             entity.Property(e => e.Altura)
                 .HasMaxLength(20)
@@ -99,20 +113,37 @@ public class DeportesContext : DbContext
                 .HasMaxLength(50)
                 .IsUnicode(false);
 
-            entity.HasOne(d => d.IdDeporteNavigation).WithMany(p => p.FichaDeportes)
-                .HasForeignKey(d => d.IdDeporte)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_Ficha_Deporte");
-
-            entity.HasOne(d => d.IdUsuarioNavigation).WithMany(p => p.FichaDeportes)
+            entity.HasOne(d => d.IdUsuarioNavigation).WithMany(p => p.FichaDeportista)
                 .HasForeignKey(d => d.IdUsuario)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_Ficha_Usuario");
         });
 
+        modelBuilder.Entity<FichaFutbol>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__FichaFut__3214EC07E825038B");
+
+            entity.ToTable("FichaFutbol");
+
+            entity.HasOne(d => d.IdUsuarioNavigation).WithMany(p => p.FichaFutbols)
+                .HasForeignKey(d => d.IdUsuario)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_FichaFutbol_Usuario");
+        });
+
+        modelBuilder.Entity<FichaTeni>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__FichaTen__3214EC074863C313");
+
+            entity.HasOne(d => d.IdUsuarioNavigation).WithMany(p => p.FichaTenis)
+                .HasForeignKey(d => d.IdUsuario)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_FichaTenis_Usuario");
+        });
+
         modelBuilder.Entity<HistorialRefreshToken>(entity =>
         {
-            entity.HasKey(e => e.IdHistorialToken).HasName("PK__Historia__03DC48A5721F7B3A");
+            entity.HasKey(e => e.IdHistorialToken).HasName("PK__Historia__03DC48A5B0040F4D");
 
             entity.ToTable("HistorialRefreshToken");
 
@@ -133,33 +164,34 @@ public class DeportesContext : DbContext
 
         modelBuilder.Entity<Participante>(entity =>
         {
-            entity.HasKey(e => e.IdParticipantes).HasName("PK__Particip__229AD7211CEB6F67");
+            entity.HasKey(e => e.IdParticipantes).HasName("PK__Particip__229AD721108712B9");
 
             entity.ToTable("Participante");
 
             entity.HasOne(d => d.IdEventoNavigation).WithMany(p => p.Participantes)
                 .HasForeignKey(d => d.IdEvento)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Participa__IdEve__2C3393D0");
+                .HasConstraintName("FK_Participante_IdEvento");
 
             entity.HasOne(d => d.IdUsuarioCreadorEventoNavigation).WithMany(p => p.ParticipanteIdUsuarioCreadorEventoNavigations)
                 .HasForeignKey(d => d.IdUsuarioCreadorEvento)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Participa__IdUsu__2E1BDC42");
+                .HasConstraintName("FK_Participante_IdCreadorEvento");
 
             entity.HasOne(d => d.IdUsuarioParticipanteNavigation).WithMany(p => p.ParticipanteIdUsuarioParticipanteNavigations)
                 .HasForeignKey(d => d.IdUsuarioParticipante)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Participa__IdUsu__2D27B809");
+                .HasConstraintName("FK_Participante_IdParticipante");
         });
 
         modelBuilder.Entity<Usuario>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Usuario__3214EC07F7EDAD4D");
+            entity.HasKey(e => e.Id).HasName("PK__Usuario__3214EC07D4767CDC");
 
             entity.ToTable("Usuario");
 
             entity.Property(e => e.Apellido).HasMaxLength(255);
+            entity.Property(e => e.Apodo).HasMaxLength(255);
             entity.Property(e => e.Contrasenia)
                 .HasMaxLength(200)
                 .IsUnicode(false);
@@ -174,6 +206,6 @@ public class DeportesContext : DbContext
             entity.Property(e => e.TokenConfirmacion).HasMaxLength(255);
             entity.Property(e => e.TokenCambioContrasenia).HasMaxLength(255);
         });
-        
+
     }
 }

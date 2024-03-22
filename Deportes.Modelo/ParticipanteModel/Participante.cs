@@ -14,9 +14,9 @@ public class Participante
 
     public int IdEvento { get; set; }
 
-    public int IdUsuarioParticipante { get; set; }
-
     public int IdUsuarioCreadorEvento { get; set; }
+
+    public int IdUsuarioParticipante { get; set; }
 
     public bool? Aceptado { get; set; }
 

@@ -22,7 +22,5 @@ public class Deporte
 
     public virtual ICollection<Evento> Eventos { get; set; } = new List<Evento>();
 
-    public virtual ICollection<FichaDeporte> FichaDeportes { get; set; } = new List<FichaDeporte>();
-
 
 }
