@@ -10,6 +10,7 @@ using Swashbuckle.AspNetCore.Annotations;
 
 namespace Deportes.api.Controllers;
 
+
 public class ParticipantesController : Controller
 {
     private readonly IParticipantesServices _participantesServices;

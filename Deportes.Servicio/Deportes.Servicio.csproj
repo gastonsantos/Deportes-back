@@ -26,4 +26,8 @@
     <ProjectReference Include="..\Deportes.Modelo\Deportes.Modelo.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Servicios\FichaServices\Errores\" />
+  </ItemGroup>
+
 </Project>
