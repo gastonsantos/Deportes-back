@@ -65,14 +65,25 @@ public class FichaServices : IFichaServices
         _fichaRespoitory.AgregarFichaFutbol(fichaFutbol);
     }
 
-    public FichaDeportistum DevolverFichaDeportistaPorId(int id)
+    public DtoFichaDeportista DevolverFichaDeportistaPorId(int id)
     {
         var usuario = _usuarioService.ObtenerUsuarioPorId(id);
         if(usuario == null)
         {
             throw new UsuarioNoEncontradoException();
         }
-       return  _fichaRespoitory.DevolverFichaDeportistaPorId(id);
+        DtoFichaDeportista fichaDep = new DtoFichaDeportista();
+        var deportista = _fichaRespoitory.DevolverFichaDeportistaPorId(usuario.Id);
+
+        fichaDep.Altura = deportista.Altura;
+        fichaDep.Avatar = deportista.Avatar;
+        fichaDep.Edad= deportista.Edad;
+        fichaDep.Peso = deportista.Peso;
+        fichaDep.IdUsuario= deportista.IdUsuario;
+        fichaDep.ManoHabil = deportista.ManoHabil;
+        fichaDep.PieHabil = deportista.PieHabil;
+        fichaDep.Posicion= deportista.Posicion;
+        return fichaDep;
     }
 
     public FichaFutbol DevolverFichaFutbol(int id)

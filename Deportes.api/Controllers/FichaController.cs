@@ -59,8 +59,8 @@ public class FichaController : Controller
     [SwaggerResponse(200, "Se ha obtenido la ficha de deportista basica")]
     public ActionResult ObtieneFichaDeportista([FromBody] DtoUsuarioPerfil fichaDeportista)
     {
-
-         return Ok(_fichaServices.DevolverFichaDeportistaPorId(fichaDeportista.Id));
+        var respuesta = _fichaServices.DevolverFichaDeportistaPorId(fichaDeportista.Id);
+         return Ok(respuesta);
         
 
     }
