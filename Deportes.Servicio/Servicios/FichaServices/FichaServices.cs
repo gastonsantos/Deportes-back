@@ -75,14 +75,14 @@ public class FichaServices : IFichaServices
         DtoFichaDeportista fichaDep = new DtoFichaDeportista();
         var deportista = _fichaRespoitory.DevolverFichaDeportistaPorId(usuario.Id);
 
-        fichaDep.Altura = deportista.Altura;
-        fichaDep.Avatar = deportista.Avatar;
-        fichaDep.Edad= deportista.Edad;
-        fichaDep.Peso = deportista.Peso;
-        fichaDep.IdUsuario= deportista.IdUsuario;
-        fichaDep.ManoHabil = deportista.ManoHabil;
-        fichaDep.PieHabil = deportista.PieHabil;
-        fichaDep.Posicion= deportista.Posicion;
+        fichaDep.IdUsuario = deportista.IdUsuario;
+        fichaDep.Altura = deportista.Altura ?? null;
+        fichaDep.Avatar = deportista.Avatar ?? null;
+        fichaDep.Edad = deportista.Edad ?? null;
+        fichaDep.Peso = deportista.Peso ?? null;
+        fichaDep.ManoHabil = deportista.ManoHabil ?? null;
+        fichaDep.PieHabil = deportista.PieHabil ?? null;
+        fichaDep.Posicion = deportista.Posicion ?? null;
         return fichaDep;
     }
 

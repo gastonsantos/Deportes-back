@@ -36,10 +36,11 @@ public class UsuarioRepository : IUsuarioRepository
         return _context.Usuario.FirstOrDefault(u => u.Email == email);
 
     }
-    public void GuardarUsuarioEnBd(Usuario usuario)
+    public int GuardarUsuarioEnBd(Usuario usuario)
     {
         _context.Usuario.Add(usuario);
         _context.SaveChanges();
+        return usuario.Id;
     }
 
     public Usuario? ObtenerUsuarioPorId(int id)

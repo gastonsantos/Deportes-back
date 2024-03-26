@@ -18,7 +18,7 @@ public interface IUsuarioRepository
 
     public void GuardarHistorialRefreshToken(HistorialRefreshToken historial);
     public HistorialRefreshToken? DevolverRefreshToken(RefreshTokenRequest refreshTokenRequest, int idUsuario);
-    public void GuardarUsuarioEnBd(Usuario usuario);
+    public int GuardarUsuarioEnBd(Usuario usuario);
     public Usuario ObtenerUsuarioPorEmail(string email);
 
     public Usuario ObtenerUsuarioPorToken(string token);

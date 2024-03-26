@@ -1,7 +1,11 @@
 ﻿using Deportes.Modelo.CorreoModel;
+using Deportes.Modelo.FichaDeportistaModel;
 using Deportes.Modelo.UsuarioModel;
 using Deportes.Servicio.Interfaces.ICorreo;
+using Deportes.Servicio.Interfaces.IFichas;
 using Deportes.Servicio.Interfaces.IUsuario;
+using Deportes.Servicio.Servicios.FichaServices;
+using Deportes.Servicio.Servicios.FichaServices.Dto;
 using Deportes.Servicio.Servicios.UsuarioServices.Errores;
 using Microsoft.Extensions.Primitives;
 using System;
@@ -19,11 +23,12 @@ public class UsuarioService : IUsuarioService
 {
     private readonly ICorreoServices _correoServices;
     private readonly IUsuarioRepository _usuarioRepository;
-
-    public UsuarioService (IUsuarioRepository usuarioRepository, ICorreoServices correoServices)
+    private readonly IFichaRepository _fichaRepository;
+    public UsuarioService (IUsuarioRepository usuarioRepository, ICorreoServices correoServices, IFichaRepository fichaRepository)
     {
         _usuarioRepository = usuarioRepository;
         _correoServices = correoServices;
+        _fichaRepository = fichaRepository;
     }
 
     public IList<Usuario> GetAll()
@@ -55,6 +60,7 @@ public class UsuarioService : IUsuarioService
     public void GuardarUsuarioEnBd(string nombre, string apellido, string email, string contrasenia, string provincia, string localidad, string direccion, string numero)
     {
         Usuario usuario = new Usuario();
+       
         usuario.Nombre = nombre;
         usuario.Apellido = apellido;
         usuario.Email = email;
@@ -81,8 +87,12 @@ public class UsuarioService : IUsuarioService
             throw new FormatoEmailInvalidoException();
         }
 
-        _usuarioRepository.GuardarUsuarioEnBd(usuario);
+        var idUsuario =  _usuarioRepository.GuardarUsuarioEnBd(usuario);
+        
         EnviarCorreoConfirmacion(usuario);
+
+        AgregoFichaDeportistaBasica(idUsuario);
+
     }
 
     private bool EmailConForamtoValido(string email)
@@ -191,7 +201,13 @@ public class UsuarioService : IUsuarioService
     }
 
         
-    
-   
+    private void AgregoFichaDeportistaBasica(int idUsuario)
+    {
+        FichaDeportistum fichaDeportista = new FichaDeportistum();
+        fichaDeportista.IdUsuario= idUsuario;
+        _fichaRepository.AgregarFichaDeportista(fichaDeportista);
+    }
+
+
 
 }
