@@ -57,12 +57,13 @@ public class UsuarioService : IUsuarioService
        
     }
 
-    public void GuardarUsuarioEnBd(string nombre, string apellido, string email, string contrasenia, string provincia, string localidad, string direccion, string numero)
+    public void GuardarUsuarioEnBd(string nombre, string apellido,string apodo, string email, string contrasenia, string provincia, string localidad, string direccion, string numero)
     {
         Usuario usuario = new Usuario();
        
         usuario.Nombre = nombre;
         usuario.Apellido = apellido;
+        usuario.Apodo = apodo;
         usuario.Email = email;
         usuario.Contrasenia = contrasenia;
         usuario.Provincia= provincia;
@@ -92,6 +93,8 @@ public class UsuarioService : IUsuarioService
         EnviarCorreoConfirmacion(usuario);
 
         AgregoFichaDeportistaBasica(idUsuario);
+
+
 
     }
 

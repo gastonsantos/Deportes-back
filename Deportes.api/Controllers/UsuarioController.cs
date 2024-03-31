@@ -135,7 +135,7 @@ public class UsuarioController : Controller
   
 
 
-    [Authorize] 
+    //[Authorize] 
     [HttpGet("AllDeportes", Name = "AllDeportes")]
     [Produces("application/json")]
     [SwaggerOperation(Summary = "Permite devolver todos los Deportes")]
@@ -169,7 +169,7 @@ public class UsuarioController : Controller
     [SwaggerResponse(200, "Se ah registrado un usuario de forma satisfactoria")]
     public ActionResult RegistrarUsuario([FromBody] DtoUsuarioRegistrar usuarioDto)
     {
-        _usuarioSerive.GuardarUsuarioEnBd(usuarioDto.Nombre, usuarioDto.Apellido, usuarioDto.Email, usuarioDto.Contrasenia, usuarioDto.Provincia, usuarioDto.Localidad, usuarioDto.Direccion, usuarioDto.Numero);
+        _usuarioSerive.GuardarUsuarioEnBd(usuarioDto.Nombre, usuarioDto.Apellido, usuarioDto.Apodo, usuarioDto.Email, usuarioDto.Contrasenia, usuarioDto.Provincia, usuarioDto.Localidad, usuarioDto.Direccion, usuarioDto.Numero);
         return Ok();
     }
 

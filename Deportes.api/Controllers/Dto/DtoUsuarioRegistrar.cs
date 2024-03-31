@@ -6,6 +6,7 @@
 
         public string Apellido { get; set; } = null!;
 
+        public string Apodo { get; set; } = null!;
         public string Provincia { get; set; } = null!;
 
         public string Localidad { get; set; } = null!;  

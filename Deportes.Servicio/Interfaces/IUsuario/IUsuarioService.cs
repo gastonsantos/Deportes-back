@@ -13,7 +13,7 @@ namespace Deportes.Servicio.Interfaces.IUsuario
         public IList<Usuario> GetAll();
         public Usuario? ObtenerUsuarioMailContraseña(string email, string contra);
         public Usuario? ObtenerUsuarioPorId(int id);
-        public void GuardarUsuarioEnBd(string nombre, string apellido, string email, string contrasenia, string provincia, string localidad, string direccion, string numero);
+        public void GuardarUsuarioEnBd(string nombre, string apellido,string apodo,string email, string contrasenia, string provincia, string localidad, string direccion, string numero);
         public Usuario ObtenerUsuarioPorEmail(string email);
         public Usuario ObtenerUsuarioPorToken(string token);
         public bool ConfirmarEmailUsuario(string token);
