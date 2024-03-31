@@ -59,6 +59,10 @@ public class DeportesContext : DbContext
             entity.Property(e => e.Direccion)
                 .HasMaxLength(200)
                 .IsUnicode(false);
+            entity.Property(e => e.Localidad).HasMaxLength(255);
+            entity.Property(e => e.Numero).HasMaxLength(100);
+            entity.Property(e => e.Provincia).HasMaxLength(255);
+            entity.Property(e => e.Hora).HasMaxLength(255);
             entity.Property(e => e.Fecha).HasColumnType("date");
             entity.Property(e => e.Nombre)
                 .HasMaxLength(200)
@@ -73,6 +77,9 @@ public class DeportesContext : DbContext
                 .HasForeignKey(d => d.IdUsuarioCreador)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_Evento_IdUsuarioCreador");
+
+
+
         });
 
         modelBuilder.Entity<FichaBasquet>(entity =>
