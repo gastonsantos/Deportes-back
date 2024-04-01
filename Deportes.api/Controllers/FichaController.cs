@@ -66,5 +66,21 @@ public class FichaController : Controller
     }
 
 
+    /*Agregar eliminar leer y buscar una ficha de estadisticas de futbol*/
+    [HttpPost("AgregarFichaFutbol", Name = "AgregarFichaFutbol")]
+    [Produces("application/json")]
+    [SwaggerOperation(Summary = "Permite agregar la ficha de futbol basica")]
+    [SwaggerResponse(400, "El objeto request es invalido.")]
+    [SwaggerResponse(200, "Se ha agregado la ficha de futbol clasica")]
+    public ActionResult AgregarFichaFutbol([FromBody] DtoFutbolServices dtoFutbol)
+    {
+
+        _fichaServices.AgregarFichaFutbol(dtoFutbol);
+        return Ok();
+
+    }
+
+
+
 }
 

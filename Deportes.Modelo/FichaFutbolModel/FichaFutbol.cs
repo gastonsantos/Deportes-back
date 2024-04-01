@@ -26,5 +26,7 @@ namespace Deportes.Modelo.FichaFutbolModel
         public int? Defensa { get; set; }
 
         public virtual Usuario IdUsuarioNavigation { get; set; } = null!;
+
+     
     }
 }

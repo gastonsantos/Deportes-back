@@ -16,7 +16,6 @@ public interface IFichaRepository
     public void AgregarFichaDeportista(FichaDeportistum fichaDeportista);
     public FichaFutbol DevolverFichaFutbol(int id);
     public void AgregarFichaFutbol(FichaFutbol fichaFutbol);
-
     public void ActualizarFichaDeportista(DtoFichaDeportista fichaDeportista);
 
     public void ActualizarFichaFutbol(FichaFutbol fichaFutbol);

@@ -74,4 +74,6 @@ public class FichaRepository : IFichaRepository
         _context.SaveChanges(); 
 
     }
+
+   
 }
