@@ -60,9 +60,20 @@ public class FichaServices : IFichaServices
         _fichaRespoitory.AgregarFichaDeportista(fichaDep);
     }
 
-    public void AgregarFichaFutbol(FichaFutbol fichaFutbol)
+    public void AgregarFichaFutbol(DtoFutbolServices fichaFutbol)
     {
-        _fichaRespoitory.AgregarFichaFutbol(fichaFutbol);
+        var fichaDeFutbol = new FichaFutbol();
+        fichaDeFutbol.Disparo = fichaFutbol.Disparo;
+        fichaDeFutbol.Fuerza= fichaFutbol.Fuerza;
+        fichaDeFutbol.Velocidad=fichaFutbol.Velocidad;
+        fichaDeFutbol.Defensa=fichaFutbol.Defensa;
+        fichaDeFutbol.Regate=fichaFutbol.Regate;
+        fichaDeFutbol.IdUsuario=fichaFutbol.IdUsuario;
+
+ 
+
+
+        _fichaRespoitory.AgregarFichaFutbol(fichaDeFutbol);
     }
 
     public DtoFichaDeportista DevolverFichaDeportistaPorId(int id)
