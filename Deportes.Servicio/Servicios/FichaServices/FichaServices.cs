@@ -1,5 +1,6 @@
 ﻿using Deportes.Modelo.FichaDeportistaModel;
 using Deportes.Modelo.FichaFutbolModel;
+using Deportes.Modelo.FichaTenisModel;
 using Deportes.Servicio.Interfaces.IDeporte;
 using Deportes.Servicio.Interfaces.IFichas;
 using Deportes.Servicio.Interfaces.IUsuario;
@@ -101,4 +102,35 @@ public class FichaServices : IFichaServices
     {
         return _fichaRespoitory.DevolverFichaFutbol(id);
     }
+
+    public List<FichaFutbol> DevolverFichasDeFutbol(){
+
+            return _fichaRespoitory.DevolverFichasDeFutbol();
+        }
+
+     public void EliminarFichaFutbol(int id)
+     {
+
+        var ficha =  _fichaRespoitory.DevolverFichaFutbol(id);
+        if(ficha != null)
+        {
+        _fichaRespoitory.EliminarFichaFutbol(ficha);
+        }
+
+
+     }
+    
+
+    //agregar ficha de tenis, leer, buscar, y eliminar 
+            public void AgregarFichaTenis(DtoFichaTenis dtoTenis){
+                var FichaTenis = new FichaTeni();
+                FichaTenis.Velocidad = dtoTenis.Velocidad;
+                FichaTenis.Drive = dtoTenis.Drive;
+                FichaTenis.Servicio= dtoTenis.Servicio;
+                FichaTenis.Fuerza=dtoTenis.Fuerza;
+                FichaTenis.IdUsuario= dtoTenis.IdUsuario;
+                _fichaRespoitory.AgregarFichaTenis(FichaTenis);
+            }
+
 }
+

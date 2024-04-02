@@ -1,5 +1,6 @@
 ﻿using Deportes.Modelo.FichaDeportistaModel;
 using Deportes.Modelo.FichaFutbolModel;
+using Deportes.Modelo.FichaTenisModel;
 using Deportes.Servicio.Servicios.FichaServices.Dto;
 using System;
 using System.Collections.Generic;
@@ -19,4 +20,8 @@ public interface IFichaRepository
     public void ActualizarFichaDeportista(DtoFichaDeportista fichaDeportista);
 
     public void ActualizarFichaFutbol(FichaFutbol fichaFutbol);
+
+    public List<FichaFutbol> DevolverFichasDeFutbol();
+   public void EliminarFichaFutbol(FichaFutbol ficha);
+    public void AgregarFichaTenis(FichaTeni fichaTenis);
 }

@@ -17,5 +17,9 @@ namespace Deportes.Servicio.Interfaces.IFichas
         public void AgregarFichaFutbol(DtoFutbolServices fichaFutbol);
         public void ActualizarFichaDeportista(DtoFichaDeportista fichaDeportista);
         public void ActualizarFichaFutbol(FichaFutbol fichaFutbol);
+        public void EliminarFichaFutbol(int id);
+
+        public List<FichaFutbol> DevolverFichasDeFutbol();
+        public void AgregarFichaTenis(DtoFichaTenis dtoTenis);
     }
 }
