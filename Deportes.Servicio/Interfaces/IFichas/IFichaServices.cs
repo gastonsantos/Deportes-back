@@ -1,5 +1,6 @@
 ﻿using Deportes.Modelo.FichaDeportistaModel;
 using Deportes.Modelo.FichaFutbolModel;
+using Deportes.Modelo.FichaTenisModel;
 using Deportes.Servicio.Servicios.FichaServices.Dto;
 using System;
 using System.Collections.Generic;
@@ -20,6 +21,9 @@ namespace Deportes.Servicio.Interfaces.IFichas
         public void EliminarFichaFutbol(int id);
 
         public List<FichaFutbol> DevolverFichasDeFutbol();
-        public void AgregarFichaTenis(DtoFichaTenis dtoTenis);
+        public void AgregarFichaTenis(FichaTeni dtoTenis);
+        public void EliminarFichaTenis(int id);
+        public FichaTeni DevolverFichaTenis(int id);
+        public List<FichaTeni> DevolverFichasDeTenis();
     }
 }

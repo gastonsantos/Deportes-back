@@ -24,4 +24,8 @@ public interface IFichaRepository
     public List<FichaFutbol> DevolverFichasDeFutbol();
    public void EliminarFichaFutbol(FichaFutbol ficha);
     public void AgregarFichaTenis(FichaTeni fichaTenis);
+    public void EliminarFichaTenis(FichaTeni fichaTeni);
+
+    public FichaTeni DevolverFichaTenis(int id );
+    public List<FichaTeni> DevolverFichasTenis();
 }

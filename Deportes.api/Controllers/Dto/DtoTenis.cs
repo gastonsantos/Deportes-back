@@ -1,7 +1,7 @@
 
 namespace Deportes.api.Controllers.Dto;
 
-public class DtoFichaTenis
+public class DtoFichaTenisController
 {
 
     public int IdUsuario { get; set; }

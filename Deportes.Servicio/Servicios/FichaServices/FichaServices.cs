@@ -122,15 +122,34 @@ public class FichaServices : IFichaServices
     
 
     //agregar ficha de tenis, leer, buscar, y eliminar 
-            public void AgregarFichaTenis(DtoFichaTenis dtoTenis){
-                var FichaTenis = new FichaTeni();
-                FichaTenis.Velocidad = dtoTenis.Velocidad;
-                FichaTenis.Drive = dtoTenis.Drive;
-                FichaTenis.Servicio= dtoTenis.Servicio;
-                FichaTenis.Fuerza=dtoTenis.Fuerza;
-                FichaTenis.IdUsuario= dtoTenis.IdUsuario;
-                _fichaRespoitory.AgregarFichaTenis(FichaTenis);
+            public void AgregarFichaTenis(FichaTeni dtoTenis){
+               
+                _fichaRespoitory.AgregarFichaTenis(dtoTenis);
             }
 
+
+        public void EliminarFichaTenis(int id){
+
+            var ficha = _fichaRespoitory.DevolverFichaTenis(id);
+                if(ficha != null)
+                {
+                     _fichaRespoitory.EliminarFichaTenis(ficha);
+
+                }
+
+        }
+
+        public FichaTeni DevolverFichaTenis(int id){
+            return _fichaRespoitory.DevolverFichaTenis(id);
+        }
+
+        public List<FichaTeni> DevolverFichasDeTenis(){
+            return _fichaRespoitory.DevolverFichasTenis();
+        }
+
+
+
 }
+
+
 

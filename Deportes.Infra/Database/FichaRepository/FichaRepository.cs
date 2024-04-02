@@ -93,5 +93,22 @@ public class FichaRepository : IFichaRepository
         
     }
    
+    public void EliminarFichaTenis(FichaTeni fichaTenis){
+        _context.FichaTeni.Remove(fichaTenis);
+        _context.SaveChanges();
+    }
+
+    public FichaTeni DevolverFichaTenis(int id ){
+
+        var ficha = _context.FichaTeni.FirstOrDefault(f => f.Id == id);
+
+        return ficha;
+    }
+
+        public List<FichaTeni> DevolverFichasTenis(){
+
+            return _context.FichaTeni.ToList();
+        }
+
 
 }

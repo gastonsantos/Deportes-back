@@ -6,6 +6,7 @@ using Deportes.Servicio.Interfaces.IToken;
 using Deportes.Servicio.Interfaces.IUsuario;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
+using Deportes.Modelo.FichaTenisModel;
 
 namespace Deportes.api.Controllers;
 
@@ -123,48 +124,58 @@ public class FichaController : Controller
     [SwaggerOperation(Summary = "Permite agregar la ficha de tenis basica")]
     [SwaggerResponse(400, "El objeto request es invalido.")]
     [SwaggerResponse(200, "Se ha agregado la ficha de tenis clasica")]
-    public ActionResult AgregarFichaTenis([FromBody] DtoFichaTenis dtoTenis)
+    public ActionResult AgregarFichaTenis([FromBody] DtoFichaTenisController dtoTenis)
     {
+        var FichaTenis = new FichaTeni
+        {
+            IdUsuario = dtoTenis.IdUsuario,
+            Servicio = dtoTenis.Servicio,
+            Drive = dtoTenis.Drive,
+            Reves = dtoTenis.Reves,
+            Volea = dtoTenis.Volea,
+            Fuerza = dtoTenis.Fuerza,
+            Velocidad = dtoTenis.Velocidad
+        };
 
-        _fichaServices.AgregarFichaTenis(dtoTenis);
+        _fichaServices.AgregarFichaTenis(FichaTenis);
         return Ok();
 
     }
 
-        [HttpDelete("EliminarFichaFutbol/{id}", Name = "EliminarFichaFutbol")]
+        [HttpDelete("EliminarFichaTenis/{id}", Name = "EliminarFichaTenis")]
        [Produces("application/json")]
-       [SwaggerOperation(Summary = "Permite eliminar la ficha de futbol basica")]
+       [SwaggerOperation(Summary = "Permite eliminar la ficha de tenis basica")]
     [SwaggerResponse(400, "El objeto request es invalido.")]
-    [SwaggerResponse(200, "Se ha eliminado la ficha de futbol clasica")]
-        public ActionResult EliminarFichaFutbol(int id)
+    [SwaggerResponse(200, "Se ha eliminado la ficha de tenis clasica")]
+        public ActionResult EliminarFichaTenis(int id)
         {
             
 
-            _fichaServices.EliminarFichaFutbol(id);
+            _fichaServices.EliminarFichaTenis(id);
             return Ok();
         }
 
-        [HttpGet("ObtenerFichaFutbol/{id}", Name = "ObtenerFichaFutbol")]
+        [HttpGet("ObtenerFichaTenis/{id}", Name = "ObtenerFichaTenis")]
         [Produces("application/json")]
-        [SwaggerOperation(Summary = "Permite buscar por id la ficha de futbol basica")]
+        [SwaggerOperation(Summary = "Permite buscar por id la ficha de tenis basica")]
     [SwaggerResponse(400, "El objeto request es invalido.")]
-    [SwaggerResponse(200, "Se ha encontrado la ficha de futbol clasica")]
-        public ActionResult ObtenerFichaFutbol(int id)
+    [SwaggerResponse(200, "Se ha encontrado la ficha de tenis clasica")]
+        public ActionResult ObtenerFichaTenis(int id)
         {
-            var fichaFutbol = _fichaServices.DevolverFichaFutbol(id);
+            var fichaFutbol = _fichaServices.DevolverFichaTenis(id);
            
 
             return Ok(fichaFutbol);
         }
 
-        [HttpGet("BuscarFichaFutbol", Name = "BuscarFichaFutbol")]
+        [HttpGet("BuscarFichasTenis", Name = "BuscarFichasTenis")]
         [Produces("application/json")]
-        [SwaggerOperation(Summary = "Permite buscar todas  las ficha de futbol basica")]
+        [SwaggerOperation(Summary = "Permite buscar todas  las ficha de tenis basica")]
     [SwaggerResponse(400, "El objeto request es invalido.")]
-    [SwaggerResponse(200, "Se han traido todas las  fichas de futbol clasica")]
-        public ActionResult BuscarFichaFutbol()
+    [SwaggerResponse(200, "Se han traido todas las  fichas de tenis clasica")]
+        public ActionResult BuscarFichaTenis()
         {
-            var fichasFutbol = _fichaServices.DevolverFichasDeFutbol();
+            var fichasFutbol = _fichaServices.DevolverFichasDeTenis();
             return Ok(fichasFutbol);
         }
 
