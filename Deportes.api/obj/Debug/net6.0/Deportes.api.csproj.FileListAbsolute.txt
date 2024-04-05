@@ -243,3 +243,12 @@ C:/Users/Gaston Mica y juan/Desktop/Deportes.api/Deportes.api/bin/Debug/net6.0/r
 /home/oeckerdt/Escritorio/Deportes-back/Deportes.api/obj/Debug/net6.0/Deportes.api.pdb
 /home/oeckerdt/Escritorio/Deportes-back/Deportes.api/obj/Debug/net6.0/Deportes.api.genruntimeconfig.cache
 /home/oeckerdt/Escritorio/Deportes-back/Deportes.api/obj/Debug/net6.0/ref/Deportes.api.dll
+C:\Users\Gaston Mica y juan\Desktop\Deportes.api\Deportes.api\obj\Debug\net6.0\Deportes.api.csproj.AssemblyReference.cache
+C:\Users\Gaston Mica y juan\Desktop\Deportes.api\Deportes.api\obj\Debug\net6.0\Deportes.api.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Gaston Mica y juan\Desktop\Deportes.api\Deportes.api\obj\Debug\net6.0\Deportes.api.AssemblyInfoInputs.cache
+C:\Users\Gaston Mica y juan\Desktop\Deportes.api\Deportes.api\obj\Debug\net6.0\Deportes.api.AssemblyInfo.cs
+C:\Users\Gaston Mica y juan\Desktop\Deportes.api\Deportes.api\obj\Debug\net6.0\Deportes.api.csproj.CoreCompileInputs.cache
+C:\Users\Gaston Mica y juan\Desktop\Deportes.api\Deportes.api\obj\Debug\net6.0\Deportes.api.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Gaston Mica y juan\Desktop\Deportes.api\Deportes.api\obj\Debug\net6.0\Deportes.api.dll
+C:\Users\Gaston Mica y juan\Desktop\Deportes.api\Deportes.api\obj\Debug\net6.0\refint\Deportes.api.dll
+C:\Users\Gaston Mica y juan\Desktop\Deportes.api\Deportes.api\obj\Debug\net6.0\Deportes.api.pdb

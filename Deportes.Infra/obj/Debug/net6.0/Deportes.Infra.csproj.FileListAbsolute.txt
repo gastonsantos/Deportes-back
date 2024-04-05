@@ -37,3 +37,11 @@ C:/Users/Gaston Mica y juan/Desktop/Deportes.api/Deportes.Infra/obj/Debug/net6.0
 /home/oeckerdt/Escritorio/Deportes-back/Deportes.Infra/obj/Debug/net6.0/Deportes.Infra.pdb
 /home/oeckerdt/Escritorio/Deportes-back/Deportes.Infra/obj/Debug/net6.0/Deportes.Infra.genruntimeconfig.cache
 /home/oeckerdt/Escritorio/Deportes-back/Deportes.Infra/obj/Debug/net6.0/ref/Deportes.Infra.dll
+C:\Users\Gaston Mica y juan\Desktop\Deportes.api\Deportes.Infra\obj\Debug\net6.0\Deportes.Infra.csproj.AssemblyReference.cache
+C:\Users\Gaston Mica y juan\Desktop\Deportes.api\Deportes.Infra\obj\Debug\net6.0\Deportes.Infra.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Gaston Mica y juan\Desktop\Deportes.api\Deportes.Infra\obj\Debug\net6.0\Deportes.Infra.AssemblyInfoInputs.cache
+C:\Users\Gaston Mica y juan\Desktop\Deportes.api\Deportes.Infra\obj\Debug\net6.0\Deportes.Infra.AssemblyInfo.cs
+C:\Users\Gaston Mica y juan\Desktop\Deportes.api\Deportes.Infra\obj\Debug\net6.0\Deportes.Infra.csproj.CoreCompileInputs.cache
+C:\Users\Gaston Mica y juan\Desktop\Deportes.api\Deportes.Infra\obj\Debug\net6.0\Deportes.Infra.dll
+C:\Users\Gaston Mica y juan\Desktop\Deportes.api\Deportes.Infra\obj\Debug\net6.0\refint\Deportes.Infra.dll
+C:\Users\Gaston Mica y juan\Desktop\Deportes.api\Deportes.Infra\obj\Debug\net6.0\Deportes.Infra.pdb
