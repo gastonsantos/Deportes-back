@@ -68,6 +68,7 @@ public class FichaServices : IFichaServices
         fichaDeFutbol.Fuerza= fichaFutbol.Fuerza;
         fichaDeFutbol.Velocidad=fichaFutbol.Velocidad;
         fichaDeFutbol.Defensa=fichaFutbol.Defensa;
+        fichaDeFutbol.Pase= fichaFutbol.Pase;
         fichaDeFutbol.Regate=fichaFutbol.Regate;
         fichaDeFutbol.IdUsuario=fichaFutbol.IdUsuario;
 
