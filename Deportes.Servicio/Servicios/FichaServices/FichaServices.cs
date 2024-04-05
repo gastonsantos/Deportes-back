@@ -1,5 +1,6 @@
 ﻿using Deportes.Modelo.FichaDeportistaModel;
 using Deportes.Modelo.FichaFutbolModel;
+using Deportes.Modelo.FichaTenisModel;
 using Deportes.Servicio.Interfaces.IDeporte;
 using Deportes.Servicio.Interfaces.IFichas;
 using Deportes.Servicio.Interfaces.IUsuario;
@@ -60,9 +61,21 @@ public class FichaServices : IFichaServices
         _fichaRespoitory.AgregarFichaDeportista(fichaDep);
     }
 
-    public void AgregarFichaFutbol(FichaFutbol fichaFutbol)
+    public void AgregarFichaFutbol(DtoFutbolServices fichaFutbol)
     {
-        _fichaRespoitory.AgregarFichaFutbol(fichaFutbol);
+        var fichaDeFutbol = new FichaFutbol();
+        fichaDeFutbol.Disparo = fichaFutbol.Disparo;
+        fichaDeFutbol.Fuerza= fichaFutbol.Fuerza;
+        fichaDeFutbol.Velocidad=fichaFutbol.Velocidad;
+        fichaDeFutbol.Defensa=fichaFutbol.Defensa;
+        fichaDeFutbol.Pase= fichaFutbol.Pase;
+        fichaDeFutbol.Regate=fichaFutbol.Regate;
+        fichaDeFutbol.IdUsuario=fichaFutbol.IdUsuario;
+
+ 
+
+
+        _fichaRespoitory.AgregarFichaFutbol(fichaDeFutbol);
     }
 
     public DtoFichaDeportista DevolverFichaDeportistaPorId(int id)
@@ -90,4 +103,54 @@ public class FichaServices : IFichaServices
     {
         return _fichaRespoitory.DevolverFichaFutbol(id);
     }
+
+    public List<FichaFutbol> DevolverFichasDeFutbol(){
+
+            return _fichaRespoitory.DevolverFichasDeFutbol();
+        }
+
+     public void EliminarFichaFutbol(int id)
+     {
+
+        var ficha =  _fichaRespoitory.DevolverFichaFutbol(id);
+        if(ficha != null)
+        {
+        _fichaRespoitory.EliminarFichaFutbol(ficha);
+        }
+
+
+     }
+    
+
+    //agregar ficha de tenis, leer, buscar, y eliminar 
+            public void AgregarFichaTenis(FichaTeni dtoTenis){
+               
+                _fichaRespoitory.AgregarFichaTenis(dtoTenis);
+            }
+
+
+        public void EliminarFichaTenis(int id){
+
+            var ficha = _fichaRespoitory.DevolverFichaTenis(id);
+                if(ficha != null)
+                {
+                     _fichaRespoitory.EliminarFichaTenis(ficha);
+
+                }
+
+        }
+
+        public FichaTeni DevolverFichaTenis(int id){
+            return _fichaRespoitory.DevolverFichaTenis(id);
+        }
+
+        public List<FichaTeni> DevolverFichasDeTenis(){
+            return _fichaRespoitory.DevolverFichasTenis();
+        }
+
+
+
 }
+
+
+

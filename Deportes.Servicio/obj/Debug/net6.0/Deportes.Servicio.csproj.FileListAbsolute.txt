@@ -1,15 +1,31 @@
-C:\Users\Gaston Mica y juan\Desktop\Deportes.api\Deportes.Servicio\bin\Debug\net6.0\Deportes.Servicio.deps.json
-C:\Users\Gaston Mica y juan\Desktop\Deportes.api\Deportes.Servicio\bin\Debug\net6.0\Deportes.Servicio.dll
-C:\Users\Gaston Mica y juan\Desktop\Deportes.api\Deportes.Servicio\bin\Debug\net6.0\Deportes.Servicio.pdb
-C:\Users\Gaston Mica y juan\Desktop\Deportes.api\Deportes.Servicio\bin\Debug\net6.0\Deportes.Modelo.dll
-C:\Users\Gaston Mica y juan\Desktop\Deportes.api\Deportes.Servicio\bin\Debug\net6.0\Deportes.Modelo.pdb
+/home/oeckerdt/Escritorio/Deportes-back/Deportes.Servicio/bin/Debug/net6.0/Deportes.Servicio.deps.json
+/home/oeckerdt/Escritorio/Deportes-back/Deportes.Servicio/bin/Debug/net6.0/Deportes.Servicio.dll
+/home/oeckerdt/Escritorio/Deportes-back/Deportes.Servicio/bin/Debug/net6.0/Deportes.Servicio.pdb
+/home/oeckerdt/Escritorio/Deportes-back/Deportes.Servicio/bin/Debug/net6.0/Deportes.Modelo.dll
+/home/oeckerdt/Escritorio/Deportes-back/Deportes.Servicio/bin/Debug/net6.0/Deportes.Modelo.pdb
+/home/oeckerdt/Escritorio/Deportes-back/Deportes.Servicio/obj/Debug/net6.0/Deportes.Servicio.csproj.AssemblyReference.cache
+/home/oeckerdt/Escritorio/Deportes-back/Deportes.Servicio/obj/Debug/net6.0/Deportes.Servicio.GeneratedMSBuildEditorConfig.editorconfig
+/home/oeckerdt/Escritorio/Deportes-back/Deportes.Servicio/obj/Debug/net6.0/Deportes.Servicio.AssemblyInfoInputs.cache
+/home/oeckerdt/Escritorio/Deportes-back/Deportes.Servicio/obj/Debug/net6.0/Deportes.Servicio.AssemblyInfo.cs
+/home/oeckerdt/Escritorio/Deportes-back/Deportes.Servicio/obj/Debug/net6.0/Deportes.Servicio.csproj.CoreCompileInputs.cache
+/home/oeckerdt/Escritorio/Deportes-back/Deportes.Servicio/obj/Debug/net6.0/Deportes.Servicio.sourcelink.json
+/home/oeckerdt/Escritorio/Deportes-back/Deportes.Servicio/obj/Debug/net6.0/Deportes.Servicio.csproj.CopyComplete
+/home/oeckerdt/Escritorio/Deportes-back/Deportes.Servicio/obj/Debug/net6.0/Deportes.Servicio.dll
+/home/oeckerdt/Escritorio/Deportes-back/Deportes.Servicio/obj/Debug/net6.0/refint/Deportes.Servicio.dll
+/home/oeckerdt/Escritorio/Deportes-back/Deportes.Servicio/obj/Debug/net6.0/Deportes.Servicio.pdb
+/home/oeckerdt/Escritorio/Deportes-back/Deportes.Servicio/obj/Debug/net6.0/ref/Deportes.Servicio.dll
 C:\Users\Gaston Mica y juan\Desktop\Deportes.api\Deportes.Servicio\obj\Debug\net6.0\Deportes.Servicio.csproj.AssemblyReference.cache
 C:\Users\Gaston Mica y juan\Desktop\Deportes.api\Deportes.Servicio\obj\Debug\net6.0\Deportes.Servicio.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\Gaston Mica y juan\Desktop\Deportes.api\Deportes.Servicio\obj\Debug\net6.0\Deportes.Servicio.AssemblyInfoInputs.cache
 C:\Users\Gaston Mica y juan\Desktop\Deportes.api\Deportes.Servicio\obj\Debug\net6.0\Deportes.Servicio.AssemblyInfo.cs
 C:\Users\Gaston Mica y juan\Desktop\Deportes.api\Deportes.Servicio\obj\Debug\net6.0\Deportes.Servicio.csproj.CoreCompileInputs.cache
-C:\Users\Gaston Mica y juan\Desktop\Deportes.api\Deportes.Servicio\obj\Debug\net6.0\Deportes.Servicio.csproj.CopyComplete
 C:\Users\Gaston Mica y juan\Desktop\Deportes.api\Deportes.Servicio\obj\Debug\net6.0\Deportes.Servicio.dll
 C:\Users\Gaston Mica y juan\Desktop\Deportes.api\Deportes.Servicio\obj\Debug\net6.0\refint\Deportes.Servicio.dll
 C:\Users\Gaston Mica y juan\Desktop\Deportes.api\Deportes.Servicio\obj\Debug\net6.0\Deportes.Servicio.pdb
+C:\Users\Gaston Mica y juan\Desktop\Deportes.api\Deportes.Servicio\bin\Debug\net6.0\Deportes.Servicio.deps.json
+C:\Users\Gaston Mica y juan\Desktop\Deportes.api\Deportes.Servicio\bin\Debug\net6.0\Deportes.Servicio.dll
+C:\Users\Gaston Mica y juan\Desktop\Deportes.api\Deportes.Servicio\bin\Debug\net6.0\Deportes.Servicio.pdb
+C:\Users\Gaston Mica y juan\Desktop\Deportes.api\Deportes.Servicio\bin\Debug\net6.0\Deportes.Modelo.dll
+C:\Users\Gaston Mica y juan\Desktop\Deportes.api\Deportes.Servicio\bin\Debug\net6.0\Deportes.Modelo.pdb
+C:\Users\Gaston Mica y juan\Desktop\Deportes.api\Deportes.Servicio\obj\Debug\net6.0\Deportes.Servicio.csproj.CopyComplete
 C:\Users\Gaston Mica y juan\Desktop\Deportes.api\Deportes.Servicio\obj\Debug\net6.0\ref\Deportes.Servicio.dll

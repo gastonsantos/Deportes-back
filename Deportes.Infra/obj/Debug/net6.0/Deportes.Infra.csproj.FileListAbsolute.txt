@@ -1,3 +1,31 @@
+/home/oeckerdt/Escritorio/Deportes-back/Deportes.Infra/bin/Debug/net6.0/Deportes.Infra.deps.json
+/home/oeckerdt/Escritorio/Deportes-back/Deportes.Infra/bin/Debug/net6.0/Deportes.Infra.runtimeconfig.json
+/home/oeckerdt/Escritorio/Deportes-back/Deportes.Infra/bin/Debug/net6.0/Deportes.Infra.dll
+/home/oeckerdt/Escritorio/Deportes-back/Deportes.Infra/bin/Debug/net6.0/Deportes.Infra.pdb
+/home/oeckerdt/Escritorio/Deportes-back/Deportes.Infra/bin/Debug/net6.0/Deportes.Modelo.dll
+/home/oeckerdt/Escritorio/Deportes-back/Deportes.Infra/bin/Debug/net6.0/Deportes.Servicio.dll
+/home/oeckerdt/Escritorio/Deportes-back/Deportes.Infra/bin/Debug/net6.0/Deportes.Modelo.pdb
+/home/oeckerdt/Escritorio/Deportes-back/Deportes.Infra/bin/Debug/net6.0/Deportes.Servicio.pdb
+/home/oeckerdt/Escritorio/Deportes-back/Deportes.Infra/obj/Debug/net6.0/Deportes.Infra.csproj.AssemblyReference.cache
+/home/oeckerdt/Escritorio/Deportes-back/Deportes.Infra/obj/Debug/net6.0/Deportes.Infra.GeneratedMSBuildEditorConfig.editorconfig
+/home/oeckerdt/Escritorio/Deportes-back/Deportes.Infra/obj/Debug/net6.0/Deportes.Infra.AssemblyInfoInputs.cache
+/home/oeckerdt/Escritorio/Deportes-back/Deportes.Infra/obj/Debug/net6.0/Deportes.Infra.AssemblyInfo.cs
+/home/oeckerdt/Escritorio/Deportes-back/Deportes.Infra/obj/Debug/net6.0/Deportes.Infra.csproj.CoreCompileInputs.cache
+/home/oeckerdt/Escritorio/Deportes-back/Deportes.Infra/obj/Debug/net6.0/Deportes.Infra.sourcelink.json
+/home/oeckerdt/Escritorio/Deportes-back/Deportes.Infra/obj/Debug/net6.0/Deportes.Infra.csproj.CopyComplete
+/home/oeckerdt/Escritorio/Deportes-back/Deportes.Infra/obj/Debug/net6.0/Deportes.Infra.dll
+/home/oeckerdt/Escritorio/Deportes-back/Deportes.Infra/obj/Debug/net6.0/refint/Deportes.Infra.dll
+/home/oeckerdt/Escritorio/Deportes-back/Deportes.Infra/obj/Debug/net6.0/Deportes.Infra.pdb
+/home/oeckerdt/Escritorio/Deportes-back/Deportes.Infra/obj/Debug/net6.0/Deportes.Infra.genruntimeconfig.cache
+/home/oeckerdt/Escritorio/Deportes-back/Deportes.Infra/obj/Debug/net6.0/ref/Deportes.Infra.dll
+C:\Users\Gaston Mica y juan\Desktop\Deportes.api\Deportes.Infra\obj\Debug\net6.0\Deportes.Infra.csproj.AssemblyReference.cache
+C:\Users\Gaston Mica y juan\Desktop\Deportes.api\Deportes.Infra\obj\Debug\net6.0\Deportes.Infra.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Gaston Mica y juan\Desktop\Deportes.api\Deportes.Infra\obj\Debug\net6.0\Deportes.Infra.AssemblyInfoInputs.cache
+C:\Users\Gaston Mica y juan\Desktop\Deportes.api\Deportes.Infra\obj\Debug\net6.0\Deportes.Infra.AssemblyInfo.cs
+C:\Users\Gaston Mica y juan\Desktop\Deportes.api\Deportes.Infra\obj\Debug\net6.0\Deportes.Infra.csproj.CoreCompileInputs.cache
+C:\Users\Gaston Mica y juan\Desktop\Deportes.api\Deportes.Infra\obj\Debug\net6.0\Deportes.Infra.dll
+C:\Users\Gaston Mica y juan\Desktop\Deportes.api\Deportes.Infra\obj\Debug\net6.0\refint\Deportes.Infra.dll
+C:\Users\Gaston Mica y juan\Desktop\Deportes.api\Deportes.Infra\obj\Debug\net6.0\Deportes.Infra.pdb
 C:\Users\Gaston Mica y juan\Desktop\Deportes.api\Deportes.Infra\bin\Debug\net6.0\Deportes.Infra.deps.json
 C:\Users\Gaston Mica y juan\Desktop\Deportes.api\Deportes.Infra\bin\Debug\net6.0\Deportes.Infra.runtimeconfig.json
 C:\Users\Gaston Mica y juan\Desktop\Deportes.api\Deportes.Infra\bin\Debug\net6.0\Deportes.Infra.dll
@@ -6,14 +34,6 @@ C:\Users\Gaston Mica y juan\Desktop\Deportes.api\Deportes.Infra\bin\Debug\net6.0
 C:\Users\Gaston Mica y juan\Desktop\Deportes.api\Deportes.Infra\bin\Debug\net6.0\Deportes.Servicio.dll
 C:\Users\Gaston Mica y juan\Desktop\Deportes.api\Deportes.Infra\bin\Debug\net6.0\Deportes.Modelo.pdb
 C:\Users\Gaston Mica y juan\Desktop\Deportes.api\Deportes.Infra\bin\Debug\net6.0\Deportes.Servicio.pdb
-C:\Users\Gaston Mica y juan\Desktop\Deportes.api\Deportes.Infra\obj\Debug\net6.0\Deportes.Infra.csproj.AssemblyReference.cache
-C:\Users\Gaston Mica y juan\Desktop\Deportes.api\Deportes.Infra\obj\Debug\net6.0\Deportes.Infra.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\Gaston Mica y juan\Desktop\Deportes.api\Deportes.Infra\obj\Debug\net6.0\Deportes.Infra.AssemblyInfoInputs.cache
-C:\Users\Gaston Mica y juan\Desktop\Deportes.api\Deportes.Infra\obj\Debug\net6.0\Deportes.Infra.AssemblyInfo.cs
-C:\Users\Gaston Mica y juan\Desktop\Deportes.api\Deportes.Infra\obj\Debug\net6.0\Deportes.Infra.csproj.CoreCompileInputs.cache
 C:\Users\Gaston Mica y juan\Desktop\Deportes.api\Deportes.Infra\obj\Debug\net6.0\Deportes.Infra.csproj.CopyComplete
-C:\Users\Gaston Mica y juan\Desktop\Deportes.api\Deportes.Infra\obj\Debug\net6.0\Deportes.Infra.dll
-C:\Users\Gaston Mica y juan\Desktop\Deportes.api\Deportes.Infra\obj\Debug\net6.0\refint\Deportes.Infra.dll
-C:\Users\Gaston Mica y juan\Desktop\Deportes.api\Deportes.Infra\obj\Debug\net6.0\Deportes.Infra.pdb
 C:\Users\Gaston Mica y juan\Desktop\Deportes.api\Deportes.Infra\obj\Debug\net6.0\Deportes.Infra.genruntimeconfig.cache
 C:\Users\Gaston Mica y juan\Desktop\Deportes.api\Deportes.Infra\obj\Debug\net6.0\ref\Deportes.Infra.dll

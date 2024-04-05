@@ -1,5 +1,6 @@
 ﻿using Deportes.Modelo.FichaDeportistaModel;
 using Deportes.Modelo.FichaFutbolModel;
+using Deportes.Modelo.FichaTenisModel;
 using Deportes.Servicio.Interfaces.IFichas;
 using Deportes.Servicio.Servicios.FichaServices.Dto;
 using System;
@@ -74,4 +75,40 @@ public class FichaRepository : IFichaRepository
         _context.SaveChanges(); 
 
     }
+
+
+    public List<FichaFutbol> DevolverFichasDeFutbol(){
+             return _context.FichaFutbols.ToList();
+    }
+
+      public void EliminarFichaFutbol(FichaFutbol ficha){
+
+        _context.FichaFutbols.Remove(ficha);
+        _context.SaveChanges();      }
+
+    public void AgregarFichaTenis(FichaTeni fichaTenis){
+        _context.FichaTeni.Add(fichaTenis);
+                _context.SaveChanges();
+
+        
+    }
+   
+    public void EliminarFichaTenis(FichaTeni fichaTenis){
+        _context.FichaTeni.Remove(fichaTenis);
+        _context.SaveChanges();
+    }
+
+    public FichaTeni DevolverFichaTenis(int id ){
+
+        var ficha = _context.FichaTeni.FirstOrDefault(f => f.Id == id);
+
+        return ficha;
+    }
+
+        public List<FichaTeni> DevolverFichasTenis(){
+
+            return _context.FichaTeni.ToList();
+        }
+
+
 }
