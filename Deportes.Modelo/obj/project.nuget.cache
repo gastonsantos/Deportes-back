@@ -1,8 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "LahdMQRyeOGebuPaTqeb0RwQKikbajVR+jH5mOOri0Dr3onkZSoPyMzAMJsy0GA8mHP78iNuztyI/HBcWDKG1A==",
+  "dgSpecHash": "brVKnjImPVy0gUhKWE3E1RQabssgEfBOVcUc0YFQNUvBOZktoMXuup/umoN+iQ2lmsEZzg5eVYrMYFyKEsiGxg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Gaston Mica y juan\\Desktop\\Deportes.api\\Deportes.Modelo\\Deportes.Modelo.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "/home/oeckerdt/Escritorio/Deportes-back/Deportes.Modelo/Deportes.Modelo.csproj",
+  "expectedPackageFiles": [
+    "/home/oeckerdt/.nuget/packages/microsoft.netcore.app.ref/6.0.27/microsoft.netcore.app.ref.6.0.27.nupkg.sha512",
+    "/home/oeckerdt/.nuget/packages/microsoft.aspnetcore.app.ref/6.0.27/microsoft.aspnetcore.app.ref.6.0.27.nupkg.sha512"
+  ],
   "logs": []
 }
