@@ -82,11 +82,11 @@ public class FichaController : Controller
 
     }
 
-        [HttpDelete("EliminarFichaFutbol/{id}", Name = "EliminarFichaFutbol")]
+       [HttpDelete("EliminarFichaFutbol/{id}", Name = "EliminarFichaFutbol")]
        [Produces("application/json")]
        [SwaggerOperation(Summary = "Permite eliminar la ficha de futbol basica")]
-    [SwaggerResponse(400, "El objeto request es invalido.")]
-    [SwaggerResponse(200, "Se ha eliminado la ficha de futbol clasica")]
+       [SwaggerResponse(400, "El objeto request es invalido.")]
+       [SwaggerResponse(200, "Se ha eliminado la ficha de futbol clasica")]
         public ActionResult EliminarFichaFutbol(int id)
         {
             
@@ -95,24 +95,22 @@ public class FichaController : Controller
             return Ok();
         }
 
-        [HttpGet("ObtenerFichaFutbol/{id}", Name = "ObtenerFichaFutbol")]
+        [HttpPost("ObtenerFichaFutbol", Name = "ObtenerFichaFutbol")]
         [Produces("application/json")]
         [SwaggerOperation(Summary = "Permite buscar por id la ficha de futbol basica")]
-    [SwaggerResponse(400, "El objeto request es invalido.")]
-    [SwaggerResponse(200, "Se ha encontrado la ficha de futbol clasica")]
-        public ActionResult ObtenerFichaFutbol(int id)
+        [SwaggerResponse(400, "El objeto request es invalido.")]
+        [SwaggerResponse(200, "Se ha encontrado la ficha de futbol clasica")]
+        public ActionResult ObtenerFichaFutbol([FromBody] DtoUsuarioPerfil usuario)
         {
-            var fichaFutbol = _fichaServices.DevolverFichaFutbol(id);
-           
-
+            var fichaFutbol = _fichaServices.DevolverFichaFutbol(usuario.Id); 
             return Ok(fichaFutbol);
         }
 
         [HttpGet("BuscarFichaFutbol", Name = "BuscarFichaFutbol")]
         [Produces("application/json")]
         [SwaggerOperation(Summary = "Permite buscar todas  las ficha de futbol basica")]
-    [SwaggerResponse(400, "El objeto request es invalido.")]
-    [SwaggerResponse(200, "Se han traido todas las  fichas de futbol clasica")]
+        [SwaggerResponse(400, "El objeto request es invalido.")]
+        [SwaggerResponse(200, "Se han traido todas las  fichas de futbol clasica")]
         public ActionResult BuscarFichaFutbol()
         {
             var fichasFutbol = _fichaServices.DevolverFichasDeFutbol();
@@ -120,7 +118,7 @@ public class FichaController : Controller
         }
 
     /*Agregar, buscar, eliminar y actualizar fichas de tenis*/ 
-[HttpPost("AgregarFichaTenis", Name = "AgregarFichaTenis")]
+    [HttpPost("AgregarFichaTenis", Name = "AgregarFichaTenis")]
     [Produces("application/json")]
     [SwaggerOperation(Summary = "Permite agregar la ficha de tenis basica")]
     [SwaggerResponse(400, "El objeto request es invalido.")]
