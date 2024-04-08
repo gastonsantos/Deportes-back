@@ -12,6 +12,7 @@ using Deportes.Modelo.FichaDeportistaModel;
 using Deportes.Modelo.FichaFutbolModel;
 using Deportes.Modelo.FichaTenisModel;
 
+
 namespace Deportes.Infra;
 
 public class DeportesContext : DbContext
