@@ -246,3 +246,5 @@ C:\Users\Gaston Mica y juan\Desktop\Deportes.api\Deportes.api\obj\Debug\net6.0\D
 C:\Users\Gaston Mica y juan\Desktop\Deportes.api\Deportes.api\obj\Debug\net6.0\Deportes.api.genruntimeconfig.cache
 C:\Users\Gaston Mica y juan\Desktop\Deportes.api\Deportes.api\obj\Debug\net6.0\ref\Deportes.api.dll
 C:\Users\Gaston Mica y juan\Desktop\Deportes.api\Deportes.api\obj\Debug\net6.0\Deportes.api.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\Gaston Mica y juan\Desktop\Deportes.api\Deportes.api\bin\Debug\net6.0\EntityFramework.SqlServer.dll
+C:\Users\Gaston Mica y juan\Desktop\Deportes.api\Deportes.api\bin\Debug\net6.0\EntityFramework.dll

@@ -7,50 +7,49 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Deportes.Infra.Database.EventoRepository
+namespace Deportes.Infra.Database.EventoRepository;
+
+public class EventoRepository : IEventoRepository
 {
-    public class EventoRepository : IEventoRepository
+    private readonly DeportesContext _context;
+
+    public EventoRepository(DeportesContext context)
     {
-        private readonly DeportesContext _context;
+        _context = context;
+    }
 
-        public EventoRepository(DeportesContext context)
-        {
-            _context = context;
-        }
+    public IList<Evento> GetAllEventos()
+    {
 
-        public IList<Evento> GetAllEventos()
-        {
-
-            return _context.Evento.ToList();
-
-        }
-        public IList<Evento> GetEventosCreadosPorUsuario(int idUsuario)
-        {
-            return _context.Evento.Where(c => c.IdUsuarioCreador == idUsuario && c.Finalizado != true).ToList();
-        }
-
-        public void AgregarEvento(Evento evento)
-        {
-            _context.Evento.Add(evento);
-            _context.SaveChanges();
-
-        }
-
-        public void CambiarEstadoEvento(int idEvento)
-        {
-            var evento = _context.Evento.FirstOrDefault(c => c.IdEvento == idEvento);
-            evento.Finalizado = true;
-            _context.SaveChanges();
-        }
-
-
-
-
-
-
-
-
-
+        return _context.Evento.ToList();
 
     }
+    public IList<Evento> GetEventosCreadosPorUsuario(int idUsuario)
+    {
+        return _context.Evento.Where(c => c.IdUsuarioCreador == idUsuario && c.Finalizado != true).ToList();
+    }
+
+    public void AgregarEvento(Evento evento)
+    {
+        _context.Evento.Add(evento);
+        _context.SaveChanges();
+
+    }
+
+    public void CambiarEstadoEvento(int idEvento)
+    {
+        var evento = _context.Evento.FirstOrDefault(c => c.IdEvento == idEvento);
+        evento.Finalizado = true;
+        _context.SaveChanges();
+    }
+
+
+
+
+
+
+
+
+
+
 }
