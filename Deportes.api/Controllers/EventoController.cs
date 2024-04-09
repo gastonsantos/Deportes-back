@@ -34,5 +34,41 @@ public class EventoController : Controller
         return Ok();
 
     }
+    [HttpGet("ObtenerEventos", Name = "ObtenerEventos")]
+    [Produces("application/json")]
+    [SwaggerOperation(Summary = "Devuelve todos los eventos")]
+    [SwaggerResponse(400, "El objeto request es invalido.")]
+    [SwaggerResponse(200, "Se ha devuelto todos los eventos")]
+    public ActionResult ObtenerEventos()
+    {
+        var eventos = _eventoServices.GetAllEventosConDeportes().ToArray();
+        return Ok(eventos);
+
+    }
+    [HttpPost("ObtenerEventosPorUsuario", Name = "ObtenerEventosPorUsuario")]
+    [Produces("application/json")]
+    [SwaggerOperation(Summary = "Permite obtener los Eventos por Usuario")]
+    [SwaggerResponse(400, "El objeto request es invalido.")]
+    [SwaggerResponse(200, "Se pudo traer los Eventos")]
+    public ActionResult TraerEventosPorUsuario([FromBody] DtoEventoId eventoDto)
+    {
+
+        var eventos = _eventoServices.GetEventosCreadosPorUsuario(eventoDto.Id);
+        return Ok(eventos);
+
+    }
+    [HttpGet("EventoDetalle/{id}", Name = "EventoDetalle")]
+    [Produces("application/json")]
+    [SwaggerOperation(Summary = "Permite obtener el detalle de Evento")]
+    [SwaggerResponse(400, "El objeto request es invalido.")]
+    [SwaggerResponse(200, "Se pudo traer el Evento")]
+    public ActionResult TraerEventoDetalle(int id)
+    {
+
+        var eventos = _eventoServices.GetEventoConDeporte(id);
+        return Ok(eventos);
+
+    }
+
 
 }
