@@ -1,7 +1,9 @@
 ﻿using Deportes.Modelo.EventoModel;
+using Deportes.Modelo.EventoModel.Dto;
 using Deportes.Servicio.Interfaces.IEvento;
 using Deportes.Servicio.Interfaces.IFichas;
 using Deportes.Servicio.Interfaces.IUsuario;
+using Deportes.Servicio.Servicios.EventoServices.Errores;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -21,7 +23,7 @@ public class EventoServices: IEventoServices
    
     }
 
-    public void AgregarEvento(string nombre, string direccion, string provincia, string localidad, string numero, string hora, int idUsuarioCreador, int idDeporte, DateTime fecha)
+    public void AgregarEvento(string nombre, string provincia, string localidad, string direccion, string numero, string hora, int idUsuarioCreador, int idDeporte, DateTime fecha)
     {
        Evento evento= new Evento();
         evento.Nombre=nombre;
@@ -35,5 +37,29 @@ public class EventoServices: IEventoServices
         evento.Fecha = new DateTime(fecha.Year, fecha.Month, fecha.Day);
         evento.Finalizado = false;
         _eventoRepository.AgregarEvento(evento);
+    }
+
+    public IList<DtoEventoDeporte> GetAllEventosConDeportes()
+    {
+       return _eventoRepository.GetAllEventosConDeportes();
+    }
+
+    public DtoEventoDeporte GetEventoConDeporte(int idEvento)
+    {
+        var evento = GetEvento(idEvento);
+        if(evento == null)
+        {
+            throw new EventoNoEncontradoException();
+        }
+        return _eventoRepository.GetEventoConDeporte(idEvento);
+    }
+
+    public IList<DtoEventoDeporte> GetEventosCreadosPorUsuario(int idUsuario)
+    {
+        return _eventoRepository.GetEventosCreadosPorUsuario(idUsuario);
+    }
+    public Evento GetEvento(int idEvento)
+    {
+        return _eventoRepository.GetEvento(idEvento);
     }
 }
