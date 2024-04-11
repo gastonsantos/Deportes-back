@@ -481,4 +481,8 @@ $RECYCLE.BIN/
 Deportes.Infra/obj/
 Deportes.Modelo/obj/
 Deportes.Servicio/obj/
-Deportes.api/obj/
+Deportes.api/bin/
+Deportes.Infra/bin/
+Deportes.Modelo/bin/
+Deportes.Servicio/bin/
+Deportes.api/bin/
