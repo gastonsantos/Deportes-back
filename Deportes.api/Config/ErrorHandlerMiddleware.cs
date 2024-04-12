@@ -1,5 +1,9 @@
 ﻿using Deportes.Modelo.ComunModel;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Logging;
+using System;
 using System.Text.Json;
+using System.Threading.Tasks;
 
 namespace Deportes.api.Config
 {
