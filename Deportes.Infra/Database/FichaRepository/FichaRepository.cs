@@ -1,4 +1,5 @@
-﻿using Deportes.Modelo.FichaDeportistaModel;
+﻿using Deportes.Modelo.FichaBasquetModel;
+using Deportes.Modelo.FichaDeportistaModel;
 using Deportes.Modelo.FichaFutbolModel;
 using Deportes.Modelo.FichaTenisModel;
 using Deportes.Servicio.Interfaces.IFichas;
@@ -142,6 +143,28 @@ public class FichaRepository : IFichaRepository
 
      }
 
+        /*repositorios de ficha de basquet actualizar, crear, eliminar y buscar */
+         public void AgregarFichaBasquet(FichaBasquet fichaBasquet){
+                _context.FichaBasquet.Add(fichaBasquet);
+                _context.SaveChanges();
+
+         }
+        public  FichaBasquet ObtenerFichaBasquet(int id){
+        var fichaBasquet = _context.FichaBasquet.First(f => f.Id  == id);
+        return fichaBasquet;
+        }
+   public void EliminarFichaBasquet(FichaBasquet ficha){
+    _context.FichaBasquet.Remove(ficha);
+     _context.SaveChanges();
+
+   }
+   public  List<FichaBasquet> BuscarFichaBasquet(){
+            return _context.FichaBasquet.ToList();
+
+   }
+    public void ActualizarFichaBasquet(FichaBasquet fichaBasquet){
+        _context.FichaBasquet.Update(fichaBasquet);
+    }
 
 
 }
