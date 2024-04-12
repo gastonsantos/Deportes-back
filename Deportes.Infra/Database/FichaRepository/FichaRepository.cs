@@ -86,6 +86,21 @@ public class FichaRepository : IFichaRepository
         _context.FichaFutbols.Remove(ficha);
         _context.SaveChanges();      }
 
+     public bool ActaulizarFichaFutbol(FichaFutbol ficha){
+        try
+                {
+                    _context.FichaFutbols.Update(ficha);
+                    _context.SaveChanges();
+                    return true; // Actualización exitosa
+                }
+                catch (Exception ex)
+                {
+                    // Manejar cualquier excepción aquí
+                    Console.WriteLine($"Error al actualizar la ficha de tenis: {ex.Message}");
+                    return false; // Actualización fallida
+                }
+     }   
+
     public void AgregarFichaTenis(FichaTeni fichaTenis){
         _context.FichaTeni.Add(fichaTenis);
                 _context.SaveChanges();
@@ -105,10 +120,28 @@ public class FichaRepository : IFichaRepository
         return ficha;
     }
 
-        public List<FichaTeni> DevolverFichasTenis(){
+    public List<FichaTeni> DevolverFichasTenis(){
 
             return _context.FichaTeni.ToList();
-        }
+    }
+
+     public bool ActualizarFichaTenis(FichaTeni fichaDeTenis)
+     {
+              try
+                {
+                    _context.FichaTeni.Update(fichaDeTenis);
+                    _context.SaveChanges();
+                    return true; // Actualización exitosa
+                }
+                catch (Exception ex)
+                {
+                    // Manejar cualquier excepción aquí
+                    Console.WriteLine($"Error al actualizar la ficha de tenis: {ex.Message}");
+                    return false; // Actualización fallida
+                }
+
+     }
+
 
 
 }

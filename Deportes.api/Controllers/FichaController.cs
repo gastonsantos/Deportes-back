@@ -117,6 +117,20 @@ public class FichaController : Controller
             return Ok(fichasFutbol);
         }
 
+         [HttpPut("ActualizarFichaFutbol", Name = "ActualizarFichaFutbol")]
+        [Produces("application/json")]
+        [SwaggerOperation(Summary = "Permite actaulizar una ficha  las ficha de futbol basica")]
+        [SwaggerResponse(400, "El objeto request es invalido.")]
+        [SwaggerResponse(200, "Se han actualizado una ficha de id las  fichas de futbol clasica")]
+        public ActionResult ActualizarFichaFutbol(int id, [FromBody] DtoFutbolServices dtoFutbolServices)
+        {
+
+            _fichaServices.ActaulizarFichaFutbol(id,dtoFutbolServices);
+            return Ok();
+        }
+
+
+
     /*Agregar, buscar, eliminar y actualizar fichas de tenis*/ 
     [HttpPost("AgregarFichaTenis", Name = "AgregarFichaTenis")]
     [Produces("application/json")]
@@ -178,6 +192,18 @@ public class FichaController : Controller
             return Ok(fichasFutbol);
         }
 
+
+     [HttpPut("ActualizarFichaTenis", Name = "ActualizarFichaTenis")]
+        [Produces("application/json")]
+        [SwaggerOperation(Summary = "Permite actaulizar una ficha  las ficha de tenis basica")]
+    [SwaggerResponse(400, "El objeto request es invalido.")]
+    [SwaggerResponse(200, "Se han actualizado una ficha de id las  fichas de tenis clasica")]
+        public ActionResult ActualizarFichaTenis(int id, [FromBody] DtoFichaTenis dtoFichaTenisController)
+        {
+
+            _fichaServices.ActaulizarFichaTenis(id,dtoFichaTenisController);
+            return Ok();
+        }
 
 }
 

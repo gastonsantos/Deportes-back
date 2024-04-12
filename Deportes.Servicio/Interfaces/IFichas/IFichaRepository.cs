@@ -28,4 +28,6 @@ public interface IFichaRepository
 
     public FichaTeni DevolverFichaTenis(int id );
     public List<FichaTeni> DevolverFichasTenis();
+   public bool ActualizarFichaTenis(FichaTeni fichaDeTenis);
+   public bool ActaulizarFichaFutbol(FichaFutbol ficha);
 }
