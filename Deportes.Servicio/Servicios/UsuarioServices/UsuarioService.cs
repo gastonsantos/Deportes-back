@@ -6,6 +6,7 @@ using Deportes.Servicio.Interfaces.IFichas;
 using Deportes.Servicio.Interfaces.IUsuario;
 using Deportes.Servicio.Servicios.FichaServices;
 using Deportes.Servicio.Servicios.FichaServices.Dto;
+using Deportes.Servicio.Servicios.UsuarioServices.Dto;
 using Deportes.Servicio.Servicios.UsuarioServices.Errores;
 using Microsoft.Extensions.Primitives;
 using System;
@@ -31,9 +32,9 @@ public class UsuarioService : IUsuarioService
         _fichaRepository = fichaRepository;
     }
 
-    public IList<Usuario> GetAll()
+    public IList<DtoUsuario> GetAll()
     {
-       return _usuarioRepository.GetAll();
+        return _usuarioRepository.GetAll();         
     }
 
     
@@ -174,6 +175,8 @@ public class UsuarioService : IUsuarioService
         _correoServices.Enviar(correo);
 
     }
+
+    
     public bool EnvioCambiarContrasenia(string email)
     {
         var usuario = ObtenerUsuarioPorEmail(email);

@@ -16,5 +16,7 @@ namespace Deportes.Servicio.Interfaces.IEvento
         public IList<DtoEventoDeporte> GetEventosCreadosPorUsuario(int idUsuario);
         public DtoEventoDeporte GetEventoConDeporte(int idEvento);
         public Evento GetEvento(int idEvento);
+        public void ModificarEvento(int idEvento, string nombre, string provincia, string localidad, string direccion, string numero, string hora, int idUsuarioCreador, int idDeporte, DateTime fecha);
+        public void CambiarEstadoEvento(int idEvento);
     }
 }

@@ -62,4 +62,48 @@ public class EventoServices: IEventoServices
     {
         return _eventoRepository.GetEvento(idEvento);
     }
+
+    public void ModificarEvento(int idEvento, string nombre, string provincia, string localidad, string direccion, string numero, string hora, int idUsuarioCreador, int idDeporte, DateTime fecha)
+    {
+        var eventoEncontrado = _eventoRepository.GetEvento(idEvento);
+
+        if(eventoEncontrado!= null)
+        {
+            Evento evento = new Evento();
+            evento.IdEvento = idEvento;
+            evento.Nombre = nombre;
+            evento.Direccion = direccion;
+            evento.Provincia = provincia;
+            evento.Localidad = localidad;
+            evento.Numero = numero;
+            evento.Hora = hora;
+            evento.IdDeporte = idDeporte;
+            evento.IdUsuarioCreador = idUsuarioCreador;
+            evento.Fecha = new DateTime(fecha.Year, fecha.Month, fecha.Day);
+            evento.Finalizado = false;
+            _eventoRepository.ModificarEvento(evento);
+
+        }
+        else
+        {
+            throw new EventoNoEncontradoException();
+        }
+
+
+    }
+
+    public void CambiarEstadoEvento(int idEvento)
+    {
+        var evento = _eventoRepository.GetEvento(idEvento);
+
+        if(evento != null)
+        {
+            _eventoRepository.CambiarEstadoEvento(idEvento);
+        }
+        else
+        {
+            throw new EventoNoEncontradoException();
+        }
+       
+    }
 }

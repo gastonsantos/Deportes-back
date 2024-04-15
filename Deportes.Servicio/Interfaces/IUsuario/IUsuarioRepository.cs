@@ -1,6 +1,7 @@
 ﻿using Deportes.Modelo.Custom;
 using Deportes.Modelo.HistorialRefreshModel;
 using Deportes.Modelo.UsuarioModel;
+using Deportes.Servicio.Servicios.UsuarioServices.Dto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,7 @@ namespace Deportes.Servicio.Interfaces.IUsuario;
 
 public interface IUsuarioRepository
 {
-    public IList<Usuario> GetAll();
+    public IList<DtoUsuario> GetAll();
     public Usuario? ObtenerUsuarioMailContraseña(string email, string contra);
 
     public Usuario? ObtenerUsuarioPorId(int id);

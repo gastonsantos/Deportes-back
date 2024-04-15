@@ -6,6 +6,7 @@ using Deportes.Modelo.UsuarioModel;
 using Deportes.Servicio.Interfaces.IDeporte;
 using Deportes.Servicio.Interfaces.IToken;
 using Deportes.Servicio.Interfaces.IUsuario;
+using Deportes.Servicio.Servicios.UsuarioServices.Dto;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -40,13 +41,13 @@ public class UsuarioController : Controller
         _deportesService = deporteService;
     }
 
-    [Authorize] // Autorize es un decorador que se le ponen a todos los endPoint que necesiten tener un Token Valido
-    [HttpGet("AllUsers", Name = "AllUsers")]
+    //[Authorize] // Autorize es un decorador que se le ponen a todos los endPoint que necesiten tener un Token Valido
+    [HttpGet("ObtenerUsuariosParaInvitacion", Name = "ObtenerUsuariosParaInvitacion")]
     [Produces("application/json")]
-    [SwaggerOperation(Summary = "Permite devolver todos los usuarios")]
+    [SwaggerOperation(Summary = "Permite devolver todos los usuarios para invitacion")]
     [SwaggerResponse(400, "El objeto request es invalido.")]
-    [SwaggerResponse(200, "Se devuelven los usuarios.")]
-    public IEnumerable<Usuario> GetAll()
+    [SwaggerResponse(200, "Se devuelven los usuarios para invitacion.")]
+    public IEnumerable<DtoUsuario> GetAll()
     {
         var usuarios = _usuarioSerive.GetAll()
             .ToArray();
@@ -208,5 +209,19 @@ public class UsuarioController : Controller
 
         return Ok(resultado);
     }
+
+    [HttpPost("obtengoUsuarioPorEmail", Name = "obtengoUsuarioPorEmail")]
+    [Produces("application/json")]
+    [SwaggerOperation(Summary = "Permite traer un usuario por Email")]
+    [SwaggerResponse(400, "El objeto request es invalido.")]
+    [SwaggerResponse(200, "Se trajo satisfactoriamente el usuario")]
+    public ActionResult ObtenerUsuarioPorEmail([FromBody] string email)
+    {
+        var resultado = _usuarioSerive.ObtenerUsuarioPorEmail(email);
+
+        return Ok(resultado);
+    }
+
+
 
 }

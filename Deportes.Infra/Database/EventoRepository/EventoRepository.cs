@@ -100,6 +100,25 @@ public class EventoRepository : IEventoRepository
 
     }
 
+    public void ModificarEvento(Evento evento)
+    {
+        var eventosEntontrado = _context.Evento.FirstOrDefault(c => c.IdEvento == evento.IdEvento);
+        if (eventosEntontrado != null)
+        {
+            eventosEntontrado.Provincia = evento.Provincia;
+            eventosEntontrado.Localidad = evento.Localidad;
+            eventosEntontrado.Direccion = evento.Direccion;
+            eventosEntontrado.Numero= evento.Numero;
+            eventosEntontrado.Fecha = evento.Fecha;
+            eventosEntontrado.Hora = evento.Hora;
+            eventosEntontrado.IdDeporte = evento.IdDeporte;
+            eventosEntontrado.Nombre= evento.Nombre;
+        }
+        _context.SaveChanges();
+    }
+
+
+
     public void CambiarEstadoEvento(int idEvento)
     {
         var evento = _context.Evento.FirstOrDefault(c => c.IdEvento == idEvento);

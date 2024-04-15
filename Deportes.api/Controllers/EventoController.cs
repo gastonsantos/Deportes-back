@@ -70,5 +70,32 @@ public class EventoController : Controller
 
     }
 
+    [HttpPost("ModificarEvento", Name = "ModificarEvento")]
+    [Produces("application/json")]
+    [SwaggerOperation(Summary = "Permite un modificar Evento")]
+    [SwaggerResponse(400, "El objeto request es invalido.")]
+    [SwaggerResponse(200, "Se ha modificado un Evento")]
+    public ActionResult ModificarEvento([FromBody] DtoEventoModificar eventoDto)
+    {
+
+        _eventoServices.ModificarEvento(eventoDto.IdEvento, eventoDto.Nombre, eventoDto.Provincia, eventoDto.Localidad, eventoDto.Direccion, eventoDto.Numero, eventoDto.Hora, eventoDto.IdUsuarioCreador, eventoDto.IdDeporte, eventoDto.Fecha);
+        return Ok();
+
+    }
+
+    [HttpPost("CancelarEvento", Name = "CancelarEvento")]
+    [Produces("application/json")]
+    [SwaggerOperation(Summary = "Permite cancelar un evento")]
+    [SwaggerResponse(400, "El objeto request es invalido.")]
+    [SwaggerResponse(200, "Se pudo cancelar el evento")]
+    public ActionResult CancelarEvento([FromBody] DtoEventoId eventoDto)
+    {
+
+         _eventoServices.CambiarEstadoEvento(eventoDto.Id);
+        return Ok();
+
+    }
+
+
 
 }
