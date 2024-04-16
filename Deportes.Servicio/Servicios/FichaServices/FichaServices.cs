@@ -1,6 +1,7 @@
 ﻿using Deportes.Modelo.FichaDeportistaModel;
 using Deportes.Modelo.FichaFutbolModel;
 using Deportes.Modelo.FichaTenisModel;
+using Deportes.Modelo.FichaBasquetModel;
 using Deportes.Servicio.Interfaces.IDeporte;
 using Deportes.Servicio.Interfaces.IFichas;
 using Deportes.Servicio.Interfaces.IUsuario;
@@ -120,6 +121,24 @@ public class FichaServices : IFichaServices
 
 
      }
+
+     public void ActaulizarFichaFutbol(int id, DtoFutbolServices dtoFutbolServices){
+
+        var ficha = _fichaRespoitory.DevolverFichaFutbol(id);
+            if(ficha != null)
+            {
+                  ficha.Disparo = dtoFutbolServices.Disparo;
+        ficha.Fuerza= dtoFutbolServices.Fuerza;
+        ficha.Velocidad=dtoFutbolServices.Velocidad;
+        ficha.Defensa=dtoFutbolServices.Defensa;
+        ficha.Pase= dtoFutbolServices.Pase;
+        ficha.Regate=dtoFutbolServices.Regate;
+        ficha.IdUsuario=dtoFutbolServices.IdUsuario;
+        _fichaRespoitory.ActaulizarFichaFutbol(ficha);
+
+            }
+     }
+
     
 
     //agregar ficha de tenis, leer, buscar, y eliminar 
@@ -148,6 +167,53 @@ public class FichaServices : IFichaServices
             return _fichaRespoitory.DevolverFichasTenis();
         }
 
+        public void ActaulizarFichaTenis(int id,DtoFichaTenis dtoFichaTenisController){
+                
+               var fichaDeTenis = _fichaRespoitory.DevolverFichaTenis(id);
+               if(fichaDeTenis != null){
+                    fichaDeTenis.Fuerza = dtoFichaTenisController.Fuerza;
+                    fichaDeTenis.Drive= dtoFichaTenisController.Drive;
+                    fichaDeTenis.Servicio= dtoFichaTenisController.Servicio;
+                    fichaDeTenis.Reves= dtoFichaTenisController.Reves;
+                    fichaDeTenis.Velocidad = dtoFichaTenisController.Velocidad;
+                    fichaDeTenis.Volea = dtoFichaTenisController.Volea;
+                    _fichaRespoitory.ActualizarFichaTenis(fichaDeTenis);  
+               }
+
+        }
+
+
+        /*fichas de basquet */
+        public void AgregarFichaBasquet(FichaBasquet fichaBasquet){
+            _fichaRespoitory.AgregarFichaBasquet(fichaBasquet);
+         }
+        public void EliminarFichaBasquet(int id)
+        {
+            var ficha = _fichaRespoitory.ObtenerFichaBasquet(id);
+                if(ficha != null)
+                {
+                    _fichaRespoitory.EliminarFichaBasquet(ficha);
+                }
+        }
+        public FichaBasquet ObtenerFichaBasquet(int id){
+          return  _fichaRespoitory.ObtenerFichaBasquet( id);
+        }
+        public List<FichaBasquet> BuscarFichaBasquet(){
+            return _fichaRespoitory.BuscarFichaBasquet();
+        }
+        public  void ActualizarFichaBasquet(int id, DtoFichaBasquet dtoFichaBasquet){
+                var fichaBasquet = _fichaRespoitory.ObtenerFichaBasquet(id);
+                if(fichaBasquet != null){
+                    fichaBasquet.Finalizacion= dtoFichaBasquet.Finalizacion;
+                    fichaBasquet.Organizacion= dtoFichaBasquet.Organizacion;
+                    fichaBasquet.Fuerza= dtoFichaBasquet.Fuerza;
+                    fichaBasquet.Velocidad= dtoFichaBasquet.Velocidad;
+                    fichaBasquet.Tiro= dtoFichaBasquet.Tiro;
+                    fichaBasquet.Defensa= dtoFichaBasquet.Defensa;
+                    _fichaRespoitory.ActualizarFichaBasquet(fichaBasquet);
+                    
+                }
+        }
 
 
 }

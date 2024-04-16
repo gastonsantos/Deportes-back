@@ -1,4 +1,5 @@
-﻿using Deportes.Modelo.FichaDeportistaModel;
+﻿using Deportes.Modelo.FichaBasquetModel;
+using Deportes.Modelo.FichaDeportistaModel;
 using Deportes.Modelo.FichaFutbolModel;
 using Deportes.Modelo.FichaTenisModel;
 using Deportes.Servicio.Interfaces.IFichas;
@@ -86,6 +87,21 @@ public class FichaRepository : IFichaRepository
         _context.FichaFutbols.Remove(ficha);
         _context.SaveChanges();      }
 
+     public bool ActaulizarFichaFutbol(FichaFutbol ficha){
+        try
+                {
+                    _context.FichaFutbols.Update(ficha);
+                    _context.SaveChanges();
+                    return true; // Actualización exitosa
+                }
+                catch (Exception ex)
+                {
+                    // Manejar cualquier excepción aquí
+                    Console.WriteLine($"Error al actualizar la ficha de tenis: {ex.Message}");
+                    return false; // Actualización fallida
+                }
+     }   
+
     public void AgregarFichaTenis(FichaTeni fichaTenis){
         _context.FichaTeni.Add(fichaTenis);
                 _context.SaveChanges();
@@ -105,10 +121,50 @@ public class FichaRepository : IFichaRepository
         return ficha;
     }
 
-        public List<FichaTeni> DevolverFichasTenis(){
+    public List<FichaTeni> DevolverFichasTenis(){
 
             return _context.FichaTeni.ToList();
+    }
+
+     public bool ActualizarFichaTenis(FichaTeni fichaDeTenis)
+     {
+              try
+                {
+                    _context.FichaTeni.Update(fichaDeTenis);
+                    _context.SaveChanges();
+                    return true; // Actualización exitosa
+                }
+                catch (Exception ex)
+                {
+                    // Manejar cualquier excepción aquí
+                    Console.WriteLine($"Error al actualizar la ficha de tenis: {ex.Message}");
+                    return false; // Actualización fallida
+                }
+
+     }
+
+        /*repositorios de ficha de basquet actualizar, crear, eliminar y buscar */
+         public void AgregarFichaBasquet(FichaBasquet fichaBasquet){
+                _context.FichaBasquet.Add(fichaBasquet);
+                _context.SaveChanges();
+
+         }
+        public  FichaBasquet ObtenerFichaBasquet(int id){
+        var fichaBasquet = _context.FichaBasquet.First(f => f.Id  == id);
+        return fichaBasquet;
         }
+   public void EliminarFichaBasquet(FichaBasquet ficha){
+    _context.FichaBasquet.Remove(ficha);
+     _context.SaveChanges();
+
+   }
+   public  List<FichaBasquet> BuscarFichaBasquet(){
+            return _context.FichaBasquet.ToList();
+
+   }
+    public void ActualizarFichaBasquet(FichaBasquet fichaBasquet){
+        _context.FichaBasquet.Update(fichaBasquet);
+    }
 
 
 }

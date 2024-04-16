@@ -1,4 +1,5 @@
-﻿using Deportes.Modelo.FichaDeportistaModel;
+﻿using Deportes.Modelo.FichaBasquetModel;
+using Deportes.Modelo.FichaDeportistaModel;
 using Deportes.Modelo.FichaFutbolModel;
 using Deportes.Modelo.FichaTenisModel;
 using Deportes.Servicio.Servicios.FichaServices.Dto;
@@ -28,4 +29,11 @@ public interface IFichaRepository
 
     public FichaTeni DevolverFichaTenis(int id );
     public List<FichaTeni> DevolverFichasTenis();
+   public bool ActualizarFichaTenis(FichaTeni fichaDeTenis);
+   public bool ActaulizarFichaFutbol(FichaFutbol ficha);
+    public void AgregarFichaBasquet(FichaBasquet fichaBasquet);
+   public  FichaBasquet ObtenerFichaBasquet(int id);
+   public void EliminarFichaBasquet(FichaBasquet ficha);
+   public  List<FichaBasquet> BuscarFichaBasquet();
+    public void ActualizarFichaBasquet(FichaBasquet fichaBasquet);
 }
