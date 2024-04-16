@@ -1,5 +1,6 @@
 ﻿using Deportes.Modelo.Custom;
 using Deportes.Modelo.UsuarioModel;
+using Deportes.Servicio.Servicios.UsuarioServices.Dto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,7 @@ namespace Deportes.Servicio.Interfaces.IUsuario
 {
     public interface IUsuarioService
     {
-        public IList<Usuario> GetAll();
+        public IList<DtoUsuario> GetAll();
         public Usuario? ObtenerUsuarioMailContraseña(string email, string contra);
         public Usuario? ObtenerUsuarioPorId(int id);
         public void GuardarUsuarioEnBd(string nombre, string apellido,string apodo,string email, string contrasenia, string provincia, string localidad, string direccion, string numero);

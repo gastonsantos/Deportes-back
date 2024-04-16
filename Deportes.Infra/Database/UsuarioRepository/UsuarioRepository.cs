@@ -9,6 +9,8 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using Deportes.Modelo.Custom;
+using Deportes.Servicio.Servicios.UsuarioServices.Dto;
+using Deportes.Modelo.EventoModel.Dto;
 
 namespace Deportes.Infra.Database.UsuarioRepository;
 
@@ -21,11 +23,23 @@ public class UsuarioRepository : IUsuarioRepository
         _context = context;
     }
 
-    public IList<Usuario> GetAll() //Todos los usuarios
+    public IList<DtoUsuario> GetAll() //Todos los usuarios
     {
-        return _context.Usuario.ToList();
+        return _context.Usuario
+          .Where(e => e.Activo == true)
+          .Select(e => new DtoUsuario
+          {
+              Id =e.Id,
+              Nombre = e.Nombre,
+              Apellido = e.Apellido,
+              Email= e.Email,
+
+          })
+          .ToList();
+       
     }
 
+    
     public Usuario ObtenerUsuarioMailContraseña(string email, string contra)
     {
         return _context.Usuario.FirstOrDefault(u => u.Email == email && u.Contrasenia == contra);
@@ -33,7 +47,7 @@ public class UsuarioRepository : IUsuarioRepository
 
     public Usuario ObtenerUsuarioPorEmail(string email)
     {
-        return _context.Usuario.FirstOrDefault(u => u.Email == email);
+        return _context.Usuario.FirstOrDefault(u => u.Email == email && u.Activo == true);
 
     }
     public int GuardarUsuarioEnBd(Usuario usuario)
