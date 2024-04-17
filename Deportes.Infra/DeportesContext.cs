@@ -60,6 +60,7 @@ public class DeportesContext : DbContext
             entity.Property(e => e.Direccion)
                 .HasMaxLength(200)
                 .IsUnicode(false);
+            entity.Property(e => e.Finalizado).HasComputedColumnSql("(case when [Fecha] IS NULL then NULL else case when CONVERT([date],[Fecha])<CONVERT([date],getdate()) then CONVERT([bit],(1)) else CONVERT([bit],(0)) end end)", false);
             entity.Property(e => e.Localidad).HasMaxLength(255);
             entity.Property(e => e.Numero).HasMaxLength(100);
             entity.Property(e => e.Provincia).HasMaxLength(255);

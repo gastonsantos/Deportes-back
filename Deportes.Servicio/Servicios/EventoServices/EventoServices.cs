@@ -98,6 +98,7 @@ public class EventoServices: IEventoServices
 
         if(evento != null)
         {
+           
             _eventoRepository.CambiarEstadoEvento(idEvento);
         }
         else
