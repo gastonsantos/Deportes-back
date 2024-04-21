@@ -3,6 +3,7 @@ using Deportes.Modelo.EventoModel;
 using Deportes.Modelo.EventoModel.Dto;
 using Deportes.Servicio.Interfaces.IEvento;
 using Microsoft.EntityFrameworkCore;
+using MimeKit.Tnef;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -132,6 +133,11 @@ public class EventoRepository : IEventoRepository
     }
 
 
+    public int IdUsuarioCreadorPorIdEvento(int idEvento)
+    {
+        var evento =  _context.Evento.FirstOrDefault(e => e.IdEvento == idEvento);
+        return evento.IdUsuarioCreador;
+    }
 
 
 

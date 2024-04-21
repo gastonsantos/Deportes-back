@@ -32,6 +32,7 @@ public class UsuarioRepository : IUsuarioRepository
               Id =e.Id,
               Nombre = e.Nombre,
               Apellido = e.Apellido,
+              Apodo = e.Apodo,
               Email= e.Email,
 
           })

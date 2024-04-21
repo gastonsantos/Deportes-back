@@ -1,4 +1,6 @@
 ﻿using Deportes.Modelo.ParticipanteModel;
+using Deportes.Modelo.ParticipanteModel.Dto;
+using Deportes.Servicio.Interfaces.IEvento;
 using Deportes.Servicio.Interfaces.IParticipantes;
 using System;
 using System.Collections.Generic;
@@ -11,25 +13,33 @@ namespace Deportes.Servicio.Servicios.ParticipantesServices;
 public class ParticipantesServices : IParticipantesServices
 {
     private readonly IParticipantesRepository _participantesRepository;
-
-    public ParticipantesServices(IParticipantesRepository participantesRepository)
+    private readonly IEventoRepository _eventoRepository;
+    public ParticipantesServices(IParticipantesRepository participantesRepository, IEventoRepository eventoRepository)
     {
         _participantesRepository= participantesRepository;
+        _eventoRepository= eventoRepository;
     }
 
-    public void AceptarParticipante(int idEvento, int idUserPart)
+    public void AceptarParticipante(int idParticipante)
     {
-        _participantesRepository.AceptarParticipante(idEvento, idUserPart);
+        _participantesRepository.AceptarParticipante(idParticipante);
     }
 
-    public void EliminarParticipante(int idEvento, int idUserPart)
+    public void EliminarParticipante(int idParticipante)
     {
-        _participantesRepository.EliminarParticipante(idEvento, idUserPart);
+        _participantesRepository.EliminarParticipante(idParticipante);
     }
 
     public void EnviarNotificacionParticipante(int idEvento, int idUserPart)
     {
-        _participantesRepository.EnviarNotificacionParticipante(idEvento, idUserPart);
+        int idUsuarioCreadorEvento = _eventoRepository.IdUsuarioCreadorPorIdEvento(idEvento);
+
+        _participantesRepository.EnviarNotificacionParticipante(idEvento, idUserPart, idUsuarioCreadorEvento);
+    }
+
+    public List<DtoNotificacion> ObtenerNotificacionesPorUsuario(int idUsuario)
+    {
+        return _participantesRepository.ObtenerNotificacionesPorUsuario(idUsuario);
     }
 
     public IList<Participante> ObtengoNotificacionParticipante(int idUsuario)

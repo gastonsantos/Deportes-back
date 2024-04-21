@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.SignalR;
+﻿using Deportes.Servicio.Interfaces.IParticipantes;
+using Microsoft.AspNetCore.SignalR;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -11,7 +12,7 @@ namespace Deportes.Servicio.Servicios.MiClaseSignalR;
 
 public class EscuchandoCambiosQuery
 {
-
+    
     // de forma que se pueda identificar al cliente que está haciendo la llamada
     public HubCallerContext? callerContext { get; set; }
     public IHubCallerClients<IClientProxy>? hubCallerClients { get; set; }
@@ -23,6 +24,9 @@ public class EscuchandoCambiosQuery
     public string _query { get; set; }
     public string _nombreMensaje { get; set; }
 
+    public int _idUsuario { get; set; }
+    //public event Action<string> ResultadoRecibido;
+
     public delegate void MensajeRecibido(object sender, string nombreMensaje);
     public event MensajeRecibido? OnMensajeRecibido = null;
 
@@ -30,10 +34,13 @@ public class EscuchandoCambiosQuery
     ServiceBrokerSQL sb;
 
     
+
+
     /// Necesitamos que no se inicialice de inicio, ya que será usado por el Hub en diferentes llamadas que establecerán los parámetros de la query
    
     public EscuchandoCambiosQuery()
     {
+       
     }
 
     
@@ -55,14 +62,19 @@ public class EscuchandoCambiosQuery
     {
         sb.DetenerEscucha();
     }
-
-
+    public void ReciboIdUsuario(int idUsuario)
+    {
+        _idUsuario =  idUsuario;
+    }
     // Evento de cambio
     private void sb_InformacionRecibida(object sender, string nombreMensaje)
     {
         if (OnMensajeRecibido != null)
         {
-            OnMensajeRecibido.Invoke(this, new string("Se ah recibido una notificación"));
+
+            //string resultadoConsulta = sb.ObtenerResultadoConsulta(_idUsuario);
+             //OnMensajeRecibido.Invoke(this, new string(resultadoConsulta));
+            OnMensajeRecibido.Invoke(this, new string("Recibiste una notificacion"));
             this.IniciarEscucha();
         }
     }
