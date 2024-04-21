@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Deportes.Modelo.UsuarioModel;
 
 namespace Deportes.Servicio.Servicios.MiClaseSignalR
 {
@@ -87,6 +88,48 @@ namespace Deportes.Servicio.Servicios.MiClaseSignalR
                     OnMensajeRecibido(this, new string(nombreMensaje));
                 }
             }
+            public string ObtenerResultadoConsulta(int idUsuario)
+            {
+                try
+                {
+                    StringBuilder resultadoConsulta = new StringBuilder();
+
+                    using (var connection = new SqlConnection(cadenaConexion))
+                    {
+                        connection.Open();
+                        // Modificar la consulta aquí
+                        string nuevaConsulta = $"SELECT * FROM dbo.Participante WHERE IdUsuarioParticipante={idUsuario}";
+                        using (var command = new SqlCommand(nuevaConsulta, connection))
+                        {
+                            using (var reader = command.ExecuteReader())
+                            {
+                                while (reader.Read())
+                                {
+                                    for (int i = 0; i < reader.FieldCount; i++)
+                                    {
+                                        // Agregar el valor de cada columna al StringBuilder
+                                        resultadoConsulta.Append(reader[i].ToString());
+                                        if (i < reader.FieldCount - 1)
+                                        {
+                                            resultadoConsulta.Append(", ");
+                                        }
+                                    }
+                                    resultadoConsulta.AppendLine(); // Nueva línea para cada fila
+                                }
+                            }
+                        }
+                    }
+                    //return "LALALAL";
+                    return resultadoConsulta.ToString();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error al obtener resultado de la consulta: {ex.Message}");
+                    return string.Empty; // Manejar el error según tus necesidades
+                }
+            }
+
+
         }
     }
 }

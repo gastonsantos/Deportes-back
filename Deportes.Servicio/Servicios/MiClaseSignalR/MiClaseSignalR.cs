@@ -12,13 +12,13 @@ public class MiClaseSignalR : Hub
 {
     public EscuchandoCambiosQuery sbAlertas = new EscuchandoCambiosQuery();
 
-    
+
     public async Task EnviarMensaje(string user, string message)
     {
         await Clients.Caller.SendAsync("RespuestaDeSignalR", user, message);
     }
 
-   
+
     public async Task IniciarEscuchaAlertas(int idUsuario)
     {
         // Agregar/Seleccionar cliente a nuestra clase a utilizar
@@ -31,12 +31,13 @@ public class MiClaseSignalR : Hub
           @"Data Source=DESKTOP-TS9IBN4;Initial Catalog=Deportes;Integrated Security=True; TrustServerCertificate=True;",
            $"SELECT IdParticipantes FROM dbo.Participante WHERE IdUsuarioParticipante={idUsuario}",
            "ALERTAS_ESCUCHA");
+        sbAlertas.ReciboIdUsuario(idUsuario);
         sbAlertas.OnMensajeRecibido += new EscuchandoCambiosQuery.MensajeRecibido(sbAlertas_InformacionRecibida);
         sbAlertas.IniciarEscucha();
         await Clients.Caller.SendAsync("escuchaDeAlertasIniciada");
     }
 
-   
+
     public async Task DetenerEscuchaAlertas(int idUsuario)
     {
         // Seleccionar cliente que va a detener la escucha
@@ -47,17 +48,18 @@ public class MiClaseSignalR : Hub
         await Clients.Caller.SendAsync("Escucha de alertas detenida");
     }
 
-   
+
     private static void sbAlertas_InformacionRecibida(object sender, string mensaje)
     {
         var sb = (EscuchandoCambiosQuery)sender;
         HubCallerContext hcallerContext = sb.callerContext;
         IHubCallerClients<IClientProxy> hubClients = sb.hubCallerClients;
+
         hubClients.Caller.SendAsync("AlertaDeNotificacion", mensaje);
     }
 
 
-  
+
 
 
     public async Task Send(string cuentoId, string user, string message)
@@ -85,13 +87,13 @@ public class MiClaseSignalR : Hub
     {
         try
         {
-           
+
             await Clients.Group(cuentoId).SendAsync("ReceiveMessage", cuentoId, user, message);
 
         }
         catch (Exception ex)
         {
-            
+
             Console.WriteLine($"Error al enviar notificación: {ex.Message}");
         }
 
@@ -100,8 +102,8 @@ public class MiClaseSignalR : Hub
     {
         try
         {
-            
-            await Clients.Client(targetUserId).SendAsync("ReceiveMessage", cuentoId, user, message);       
+
+            await Clients.Client(targetUserId).SendAsync("ReceiveMessage", cuentoId, user, message);
         }
         catch (Exception ex)
         {

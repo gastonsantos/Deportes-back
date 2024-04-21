@@ -3,6 +3,7 @@ using Deportes.Modelo.EventoModel;
 using Deportes.Modelo.EventoModel.Dto;
 using Deportes.Servicio.Interfaces.IEvento;
 using Microsoft.EntityFrameworkCore;
+using MimeKit.Tnef;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -51,7 +52,7 @@ public class EventoRepository : IEventoRepository
     public IList<DtoEventoDeporte> GetEventosCreadosPorUsuario(int idUsuario)
     {
 
-        return _context.Evento.Where(c => c.IdUsuarioCreador == idUsuario && c.Finalizado != true).Select
+        return _context.Evento.Where(c => c.IdUsuarioCreador == idUsuario && c.Finalizado == false).Select
             (e => new DtoEventoDeporte
             {
                 IdEvento = e.IdEvento,
@@ -122,11 +123,21 @@ public class EventoRepository : IEventoRepository
     public void CambiarEstadoEvento(int idEvento)
     {
         var evento = _context.Evento.FirstOrDefault(c => c.IdEvento == idEvento);
-        evento.Finalizado = true;
+        if (evento != null) {
+            evento.Fecha = null;
+            evento.Finalizado = true;
+        }
+       
+        //evento.Finalizado = null;
         _context.SaveChanges();
     }
 
 
+    public int IdUsuarioCreadorPorIdEvento(int idEvento)
+    {
+        var evento =  _context.Evento.FirstOrDefault(e => e.IdEvento == idEvento);
+        return evento.IdUsuarioCreador;
+    }
 
 
 
