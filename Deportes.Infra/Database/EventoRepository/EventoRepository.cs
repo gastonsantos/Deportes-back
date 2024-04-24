@@ -30,6 +30,7 @@ public class EventoRepository : IEventoRepository
     {
         return _context.Evento
             .Include(e => e.IdDeporteNavigation) 
+            .Include(e => e.IdUsuarioCreadorNavigation)
             .Where(e => e.Finalizado == false)
             .Select(e => new DtoEventoDeporte
             {
@@ -44,9 +45,10 @@ public class EventoRepository : IEventoRepository
                 Fecha= e.Fecha,
                 NombreDep = e.IdDeporteNavigation.Nombre,
                 CantJugadores =e.IdDeporteNavigation.CantJugadores,
-                Imagen =e.IdDeporteNavigation.Imagen 
-
-})
+                Imagen =e.IdDeporteNavigation.Imagen ,
+                IdUsuarioDuenio = e.IdUsuarioCreadorNavigation.Id,
+                NombreDuenio = e.IdUsuarioCreadorNavigation.Nombre +" "+ e.IdUsuarioCreadorNavigation.Apellido
+            })
             .ToList();
     }
     public IList<DtoEventoDeporte> GetEventosCreadosPorUsuario(int idUsuario)
@@ -66,7 +68,8 @@ public class EventoRepository : IEventoRepository
                 Fecha = e.Fecha,
                 NombreDep = e.IdDeporteNavigation.Nombre,
                 CantJugadores = e.IdDeporteNavigation.CantJugadores,
-                Imagen = e.IdDeporteNavigation.Imagen
+                Imagen = e.IdDeporteNavigation.Imagen,
+                NombreDuenio = e.IdUsuarioCreadorNavigation.Nombre + " " + e.IdUsuarioCreadorNavigation.Apellido
             })
             .ToList();
     }
@@ -88,8 +91,11 @@ public class EventoRepository : IEventoRepository
                 Fecha = e.Fecha,
                 NombreDep = e.IdDeporteNavigation.Nombre,
                 CantJugadores = e.IdDeporteNavigation.CantJugadores,
-                Imagen = e.IdDeporteNavigation.Imagen
+                Imagen = e.IdDeporteNavigation.Imagen,
+                IdUsuarioDuenio =e.IdUsuarioCreadorNavigation.Id,
+                NombreDuenio = e.IdUsuarioCreadorNavigation.Nombre + " " + e.IdUsuarioCreadorNavigation.Apellido
             })
+
             .FirstOrDefault();
     }
 

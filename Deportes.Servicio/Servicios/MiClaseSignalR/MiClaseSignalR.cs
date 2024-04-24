@@ -29,7 +29,7 @@ public class MiClaseSignalR : Hub
         // Utilizar la clase
         sbAlertas.SetData(
           @"Data Source=DESKTOP-TS9IBN4;Initial Catalog=Deportes;Integrated Security=True; TrustServerCertificate=True;",
-           $"SELECT IdParticipantes FROM dbo.Participante WHERE IdUsuarioParticipante={idUsuario}",
+           $"SELECT IdParticipantes FROM dbo.Participante WHERE IdUsuarioParticipante={idUsuario} AND NotificacionVista= 0 ",
            "ALERTAS_ESCUCHA");
         sbAlertas.ReciboIdUsuario(idUsuario);
         sbAlertas.OnMensajeRecibido += new EscuchandoCambiosQuery.MensajeRecibido(sbAlertas_InformacionRecibida);

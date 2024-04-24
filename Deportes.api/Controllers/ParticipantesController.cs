@@ -32,9 +32,7 @@ public class ParticipantesController : Controller
     [SwaggerResponse(200, "Se Envio la notificacion de forma correcta")]
     public ActionResult AgregarParticipantes([FromBody] DtoNotificacionesEnviar dto)
     {
-        int eventoId2 = dto.idEvento;
-        int userId = dto.idUsuario;
-        _participantesServices.EnviarNotificacionParticipante(eventoId2, userId);
+        _participantesServices.EnviarNotificacionParticipante(dto.idEvento, dto.idUsuarioQueInvita, dto.idUsuarioInvitado);
         return Ok();
     }
 

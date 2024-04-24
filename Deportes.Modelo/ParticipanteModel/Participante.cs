@@ -21,6 +21,7 @@ public class Participante
     public bool? Aceptado { get; set; }
 
     public bool? NotificacionVista { get; set; }
+    public bool? InvitaEsDuenio { get; set; }
     public virtual Evento IdEventoNavigation { get; set; } = null!;
 
     public virtual Usuario IdUsuarioCreadorEventoNavigation { get; set; } = null!;

@@ -14,7 +14,8 @@ public enum CategoriaError : short
     NoAutenticado,
     ReglaNegocioNoCumplida,
     SinEspecificar,
-    NoActivoMail
+    NoActivoMail,
+    NoSpamNotificacion
 
 
 }

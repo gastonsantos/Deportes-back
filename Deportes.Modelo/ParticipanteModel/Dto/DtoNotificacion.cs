@@ -14,6 +14,7 @@ public class DtoNotificacion
 
     public bool? Aceptado { get; set; }
 
+    public bool? InvitaEsDuenio { get; set; }
     public string? NombreUsuarioInvito { get; set; }
 
     public string ApellidoUsuarioInvito { get; set; }

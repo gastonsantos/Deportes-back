@@ -11,7 +11,7 @@ namespace Deportes.Servicio.Interfaces.IParticipantes
     public interface IParticipantesServices
     {
         public IList<Participante> ObtengoNotificacionParticipante(int idUsuario);
-        public void EnviarNotificacionParticipante(int idEvento, int idUserPart);
+        public void EnviarNotificacionParticipante(int idEvento, int idUsuarioQueInvita, int idUsuarioInvitado);
 
         public void EliminarParticipante(int idParticipante);
 

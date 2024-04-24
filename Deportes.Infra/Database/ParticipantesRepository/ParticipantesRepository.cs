@@ -3,6 +3,7 @@ using Deportes.Modelo.ParticipanteModel;
 using Deportes.Modelo.ParticipanteModel.Dto;
 using Deportes.Servicio.Interfaces.IParticipantes;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,21 +24,23 @@ public class ParticipantesRepository: IParticipantesRepository
     {
 
         return _context.Participante
-            .Where(c => c.IdUsuarioParticipante == idUsuario)
+            .Where(c => c.IdUsuarioParticipante == idUsuario && c.NotificacionVista == false)
             .ToList();
 
     }
 
-    public void EnviarNotificacionParticipante(int idEvento,int idUserPart, int idUsuarioCreador)
+
+    public void EnviarNotificacionParticipante(int idEvento,int idUsusarioQueInvita, int idUsuarioInvitado, bool esCreador)
     {
 
         var nuevoParticipante = new Participante
         {
             IdEvento = idEvento,
-            IdUsuarioCreadorEvento = idUsuarioCreador,
-            IdUsuarioParticipante = idUserPart,
+            IdUsuarioCreadorEvento = idUsusarioQueInvita,
+            IdUsuarioParticipante = idUsuarioInvitado,
             Aceptado = false,
-            NotificacionVista= false
+            NotificacionVista= false,
+            InvitaEsDuenio = esCreador
         };
         _context.Participante.Add(nuevoParticipante);
         _context.SaveChanges();
@@ -81,14 +84,15 @@ public class ParticipantesRepository: IParticipantesRepository
     public List<DtoNotificacion> ObtenerNotificacionesPorUsuario(int idUsuario)
     {
         var notificaciones = _context.Participante
-            .Where(p => p.IdUsuarioParticipante == idUsuario)
+            .Where(p => p.IdUsuarioParticipante == idUsuario && p.Aceptado == false)
             .Select(p => new DtoNotificacion
             {
                 IdParticipantes = p.IdParticipantes,
                 IdEvento = p.IdEvento,
                 Aceptado = p.Aceptado,
-                NombreUsuarioInvito = p.IdUsuarioParticipanteNavigation.Nombre,
-                ApellidoUsuarioInvito = p.IdUsuarioParticipanteNavigation.Apellido,
+                InvitaEsDuenio = p.InvitaEsDuenio,
+                NombreUsuarioInvito = p.IdUsuarioCreadorEventoNavigation.Nombre,
+                ApellidoUsuarioInvito = p.IdUsuarioCreadorEventoNavigation.Apellido,
                 NombreDeporte = p.IdEventoNavigation.IdDeporteNavigation.Nombre,
                 Fecha = p.IdEventoNavigation.Fecha,
                 Hora = p.IdEventoNavigation.Hora,
@@ -100,6 +104,16 @@ public class ParticipantesRepository: IParticipantesRepository
             .ToList();
 
         return notificaciones;
+    }
+
+    public bool YaHayNotificacion(int idEvento, int idUsusarioQueInvita, int idUsuarioInvitado)
+    {
+        var participante = _context.Participante.FirstOrDefault(p =>
+           p.IdEvento == idEvento &&
+           p.IdUsuarioParticipante == idUsuarioInvitado &&
+           p.IdUsuarioCreadorEvento == idUsusarioQueInvita);
+
+        return participante != null;
     }
 
 }

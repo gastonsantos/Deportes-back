@@ -2,6 +2,8 @@
 using Deportes.Modelo.ParticipanteModel.Dto;
 using Deportes.Servicio.Interfaces.IEvento;
 using Deportes.Servicio.Interfaces.IParticipantes;
+using Deportes.Servicio.Servicios.ParticipantesServices.Errores;
+using MimeKit.Tnef;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,15 +32,25 @@ public class ParticipantesServices : IParticipantesServices
         _participantesRepository.EliminarParticipante(idParticipante);
     }
 
-    public void EnviarNotificacionParticipante(int idEvento, int idUserPart)
+    public void EnviarNotificacionParticipante(int idEvento, int idUsusarioQueInvita, int idUsuarioInvitado)
     {
-        int idUsuarioCreadorEvento = _eventoRepository.IdUsuarioCreadorPorIdEvento(idEvento);
+        bool hayNotif =  YaHayNotificacion(idEvento, idUsusarioQueInvita, idUsuarioInvitado);
+        if (hayNotif == true)
+        {
+            throw new NoSePuedeEnviarMasDeUnaInvitacionException();
+        }
+        if (idUsusarioQueInvita == idUsuarioInvitado)
+        {
+            throw new NoSePuedenEnviarInvitacionesAlMismoUsuario();
+        }
 
-        _participantesRepository.EnviarNotificacionParticipante(idEvento, idUserPart, idUsuarioCreadorEvento);
+        var esCreador = ElQueInvitaEsDuenio(idUsusarioQueInvita ,idEvento);
+        _participantesRepository.EnviarNotificacionParticipante(idEvento, idUsusarioQueInvita, idUsuarioInvitado, esCreador);
     }
 
     public List<DtoNotificacion> ObtenerNotificacionesPorUsuario(int idUsuario)
     {
+
         return _participantesRepository.ObtenerNotificacionesPorUsuario(idUsuario);
     }
 
@@ -46,4 +58,30 @@ public class ParticipantesServices : IParticipantesServices
     {
         return _participantesRepository.ObtengoNotificacionParticipante(idUsuario);
     }
+
+    public bool ElQueInvitaEsDuenio(int idUsuarioInvita, int idEvento)
+    {
+
+        var evento = _eventoRepository.GetEvento(idEvento);
+
+        if(evento.IdUsuarioCreador == idUsuarioInvita)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+
+    }
+
+
+
+    public bool YaHayNotificacion(int idEvento, int idUsusarioQueInvita, int idUsuarioInvitado)
+    {
+
+        return  _participantesRepository.YaHayNotificacion(idEvento, idUsusarioQueInvita, idUsuarioInvitado);
+    
+    }
+
 }

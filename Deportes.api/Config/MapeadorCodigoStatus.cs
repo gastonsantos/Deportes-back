@@ -16,7 +16,7 @@ namespace Deportes.api.Config
                 CategoriaError.ReglaNegocioNoCumplida => HttpStatusCode.BadRequest,
                 CategoriaError.SinEspecificar => HttpStatusCode.InternalServerError,
                 CategoriaError.NoActivoMail => HttpStatusCode.Conflict,
-               
+                CategoriaError.NoSpamNotificacion => HttpStatusCode.Locked,
                 _ => HttpStatusCode.InternalServerError,
             };
         }

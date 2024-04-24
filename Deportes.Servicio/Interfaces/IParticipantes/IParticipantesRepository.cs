@@ -11,12 +11,13 @@ namespace Deportes.Servicio.Interfaces.IParticipantes
     public interface IParticipantesRepository
     {
         public IList<Participante> ObtengoNotificacionParticipante(int idUsuario);
-        public void EnviarNotificacionParticipante(int idEvento, int idUserPart, int idUsuarioCreador);
+        public void EnviarNotificacionParticipante(int idEvento, int idUsuarioQueInvita, int idUsuarioInvitado, bool esCreador);
 
         public void EliminarParticipante(int idParticipante);
 
         public void AceptarParticipante(int idParticipante);
         public List<DtoNotificacion> ObtenerNotificacionesPorUsuario(int idUsuario);
+        public bool YaHayNotificacion(int idEvento, int idUsusarioQueInvita, int idUsuarioInvitado);
 
     }
 }
