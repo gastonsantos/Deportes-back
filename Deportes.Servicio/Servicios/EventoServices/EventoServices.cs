@@ -107,4 +107,9 @@ public class EventoServices: IEventoServices
         }
        
     }
+
+    public IList<DtoEventoDeporte> GetEventosEnLosQueParticipo(int idUsuario)
+    {
+        return _eventoRepository.GetEventosEnLosQueParticipo(idUsuario);
+    }
 }

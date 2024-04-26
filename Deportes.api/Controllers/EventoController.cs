@@ -97,5 +97,16 @@ public class EventoController : Controller
     }
 
 
+    [HttpPost("ObtenerEventosQueParticipo", Name = "ObtenerEventosQueParticipo")]
+    [Produces("application/json")]
+    [SwaggerOperation(Summary = "Permite obtener los Eventos por Usuario que participo")]
+    [SwaggerResponse(400, "El objeto request es invalido.")]
+    [SwaggerResponse(200, "Se pudo traer los Eventos en los cuales participo")]
+    public ActionResult ObtenerEventosQueParticipo([FromBody] DtoEventoId eventoDto)
+    {
 
+        var eventos = _eventoServices.GetEventosEnLosQueParticipo(eventoDto.Id);
+        return Ok(eventos);
+
+    }
 }

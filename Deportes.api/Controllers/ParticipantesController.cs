@@ -60,4 +60,26 @@ public class ParticipantesController : Controller
         var notificaciones = _participantesServices.ObtenerNotificacionesPorUsuario(notificacion.idUsuario);
         return Ok(notificaciones);
     }
+    [HttpPost("AceptarInvitacion", Name = "AceptarInvitacion")]
+    [Produces("application/json")]
+    [SwaggerOperation(Summary = "Permite obtener las notificaciones")]
+    [SwaggerResponse(400, "El objeto request es invalido.")]
+    [SwaggerResponse(200, "Se acepto la notificacion satisfactoriamente")]
+    public ActionResult AceptoLaInvitacion([FromBody] DtoNotificaciones notificacion)
+    {
+
+         _participantesServices.AceptarParticipante(notificacion.idUsuario);
+        return Ok();
+    }
+    [HttpPost("RechazarInvitacion", Name = "RechazarInvitacion")]
+    [Produces("application/json")]
+    [SwaggerOperation(Summary = "Permite obtener las notificaciones")]
+    [SwaggerResponse(400, "El objeto request es invalido.")]
+    [SwaggerResponse(200, "Se rechazo la invitacion satisfactoriamente")]
+    public ActionResult RechazoLaInvitacion([FromBody] DtoNotificaciones notificacion)
+    {
+
+        _participantesServices.EliminarParticipante(notificacion.idUsuario);
+        return Ok();
+    }
 }

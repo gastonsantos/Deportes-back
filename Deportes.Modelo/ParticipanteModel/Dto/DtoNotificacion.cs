@@ -11,7 +11,7 @@ public class DtoNotificacion
     public int IdParticipantes { get; set; }
 
     public int IdEvento { get; set; }
-
+    public int IdElQueInvita { get; set; }
     public bool? Aceptado { get; set; }
 
     public bool? InvitaEsDuenio { get; set; }

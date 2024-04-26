@@ -73,6 +73,37 @@ public class EventoRepository : IEventoRepository
             })
             .ToList();
     }
+    public IList<DtoEventoDeporte> GetEventosEnLosQueParticipo(int idUsuario)
+    {
+        var eventosEnLosQueParticipo = _context.Participante
+            .Where(p => p.IdUsuarioParticipante == idUsuario  && p.Aceptado == true && p.InvitaEsDuenio == true 
+            || p.IdUsuarioCreadorEvento == idUsuario && p.Aceptado == true && p.InvitaEsDuenio == false )
+            .Select(p => p.IdEvento);
+
+      
+
+        var eventos = _context.Evento
+            .Where(e => eventosEnLosQueParticipo.Contains(e.IdEvento) && e.Finalizado == false)
+            .Select(e => new DtoEventoDeporte
+            {
+                IdEvento = e.IdEvento,
+                Nombre = e.Nombre,
+                Provincia = e.Provincia,
+                Localidad = e.Localidad,
+                Direccion = e.Direccion,
+                Numero = e.Numero,
+                Hora = e.Hora,
+                IdDeporte = e.IdDeporte,
+                Fecha = e.Fecha,
+                NombreDep = e.IdDeporteNavigation.Nombre,
+                CantJugadores = e.IdDeporteNavigation.CantJugadores,
+                Imagen = e.IdDeporteNavigation.Imagen,
+                NombreDuenio = e.IdUsuarioCreadorNavigation.Nombre + " " + e.IdUsuarioCreadorNavigation.Apellido
+            })
+            .ToList();
+
+        return eventos;
+    }
 
     public DtoEventoDeporte GetEventoConDeporte(int idEvento)
     {

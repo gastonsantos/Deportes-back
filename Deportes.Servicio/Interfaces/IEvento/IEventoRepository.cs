@@ -18,6 +18,7 @@ namespace Deportes.Servicio.Interfaces.IEvento
         public void ModificarEvento(Evento evento);
         public void CambiarEstadoEvento(int idEvento);
         public int IdUsuarioCreadorPorIdEvento(int idEvento);
+        public IList<DtoEventoDeporte> GetEventosEnLosQueParticipo(int idUsuario);
     }
 
 }

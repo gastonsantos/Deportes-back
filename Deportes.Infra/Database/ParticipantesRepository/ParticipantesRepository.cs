@@ -89,6 +89,7 @@ public class ParticipantesRepository: IParticipantesRepository
             {
                 IdParticipantes = p.IdParticipantes,
                 IdEvento = p.IdEvento,
+                IdElQueInvita = p.IdUsuarioCreadorEvento,
                 Aceptado = p.Aceptado,
                 InvitaEsDuenio = p.InvitaEsDuenio,
                 NombreUsuarioInvito = p.IdUsuarioCreadorEventoNavigation.Nombre,
@@ -111,7 +112,11 @@ public class ParticipantesRepository: IParticipantesRepository
         var participante = _context.Participante.FirstOrDefault(p =>
            p.IdEvento == idEvento &&
            p.IdUsuarioParticipante == idUsuarioInvitado &&
-           p.IdUsuarioCreadorEvento == idUsusarioQueInvita);
+           p.IdUsuarioCreadorEvento == idUsusarioQueInvita ||
+
+           p.IdEvento == idEvento &&
+           p.IdUsuarioParticipante == idUsusarioQueInvita && 
+           p.IdUsuarioCreadorEvento == idUsuarioInvitado);
 
         return participante != null;
     }
