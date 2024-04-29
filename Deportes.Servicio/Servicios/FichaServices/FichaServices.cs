@@ -62,20 +62,22 @@ public class FichaServices : IFichaServices
         _fichaRespoitory.AgregarFichaDeportista(fichaDep);
     }
 
-    public void AgregarFichaFutbol(DtoFutbolServices fichaFutbol)
+    public void AgregarFichaFutbol(DtoFutbolServices dtoFutbolServices)
     {
+        var media = CalcularMedia(dtoFutbolServices.Posicion, dtoFutbolServices.Disparo, dtoFutbolServices.Fuerza, dtoFutbolServices.Velocidad, dtoFutbolServices.Defensa,
+           dtoFutbolServices.Pase, dtoFutbolServices.Regate
+           );
+
         var fichaDeFutbol = new FichaFutbol();
-        fichaDeFutbol.Disparo = fichaFutbol.Disparo;
-        fichaDeFutbol.Fuerza= fichaFutbol.Fuerza;
-        fichaDeFutbol.Velocidad=fichaFutbol.Velocidad;
-        fichaDeFutbol.Defensa=fichaFutbol.Defensa;
-        fichaDeFutbol.Pase= fichaFutbol.Pase;
-        fichaDeFutbol.Regate=fichaFutbol.Regate;
-        fichaDeFutbol.IdUsuario=fichaFutbol.IdUsuario;
-
- 
-
-
+        fichaDeFutbol.Disparo = dtoFutbolServices.Disparo;
+        fichaDeFutbol.Fuerza= dtoFutbolServices.Fuerza;
+        fichaDeFutbol.Velocidad= dtoFutbolServices.Velocidad;
+        fichaDeFutbol.Defensa= dtoFutbolServices.Defensa;
+        fichaDeFutbol.Pase= dtoFutbolServices.Pase;
+        fichaDeFutbol.Regate= dtoFutbolServices.Regate;
+        fichaDeFutbol.IdUsuario= dtoFutbolServices.IdUsuario;
+        fichaDeFutbol.Posicion = dtoFutbolServices.Posicion;
+        fichaDeFutbol.Media = media;
         _fichaRespoitory.AgregarFichaFutbol(fichaDeFutbol);
     }
 
@@ -122,24 +124,53 @@ public class FichaServices : IFichaServices
 
      }
 
-     public void ActaulizarFichaFutbol(int id, DtoFutbolServices dtoFutbolServices){
+     public void ActaulizarFichaFutbol( DtoFutbolServices dtoFutbolServices){
+        var media = CalcularMedia(dtoFutbolServices.Posicion, dtoFutbolServices.Disparo, dtoFutbolServices.Fuerza, dtoFutbolServices.Velocidad, dtoFutbolServices.Defensa,
+            dtoFutbolServices.Pase, dtoFutbolServices.Regate
+            );
 
-        var ficha = _fichaRespoitory.DevolverFichaFutbol(id);
+        var ficha = _fichaRespoitory.DevolverFichaFutbol(dtoFutbolServices.IdUsuario);
             if(ficha != null)
             {
-                  ficha.Disparo = dtoFutbolServices.Disparo;
+        ficha.Disparo = dtoFutbolServices.Disparo;
         ficha.Fuerza= dtoFutbolServices.Fuerza;
         ficha.Velocidad=dtoFutbolServices.Velocidad;
         ficha.Defensa=dtoFutbolServices.Defensa;
         ficha.Pase= dtoFutbolServices.Pase;
         ficha.Regate=dtoFutbolServices.Regate;
-        ficha.IdUsuario=dtoFutbolServices.IdUsuario;
+        ficha.Posicion = dtoFutbolServices.Posicion;
+        ficha.Media = media;
         _fichaRespoitory.ActaulizarFichaFutbol(ficha);
 
             }
      }
 
-    
+    private int CalcularMedia(string posicion, int disparo, int fuerza, int velocidad, int defensa, int pase, int regate)
+    {
+        int media = 0;
+        switch (posicion)
+        {
+            case "Arquero":
+
+                media = (defensa * 3 + disparo + fuerza + velocidad) / 6;
+                return media;
+
+            case "Defensor":
+                media = (defensa * 2 + disparo + fuerza * 2 + velocidad) / 6;
+                return media;
+            case "Mediocampista":
+                media = (disparo + fuerza + velocidad + defensa + pase + regate) / 6;
+                return media;
+            case "Delantero":
+                media = (disparo * 2 + fuerza + velocidad + pase + regate)/6;
+                return media;
+
+            default:
+                break;
+        }
+                 throw new ArgumentException("Posición no válida");
+        
+    }
 
     //agregar ficha de tenis, leer, buscar, y eliminar 
             public void AgregarFichaTenis(FichaTeni dtoTenis){

@@ -118,15 +118,15 @@ public class FichaController : Controller
             return Ok(fichasFutbol);
         }
 
-         [HttpPut("ActualizarFichaFutbol", Name = "ActualizarFichaFutbol")]
+        [HttpPut("ActualizarFichaFutbol", Name = "ActualizarFichaFutbol")]
         [Produces("application/json")]
         [SwaggerOperation(Summary = "Permite actaulizar una ficha  las ficha de futbol basica")]
         [SwaggerResponse(400, "El objeto request es invalido.")]
         [SwaggerResponse(200, "Se han actualizado una ficha de id las  fichas de futbol clasica")]
-        public ActionResult ActualizarFichaFutbol(int id, [FromBody] DtoFutbolServices dtoFutbolServices)
+        public ActionResult ActualizarFichaFutbol( [FromBody] DtoFutbolServices dtoFutbolServices)
         {
 
-            _fichaServices.ActaulizarFichaFutbol(id,dtoFutbolServices);
+            _fichaServices.ActaulizarFichaFutbol(dtoFutbolServices);
             return Ok();
         }
 

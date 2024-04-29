@@ -17,7 +17,9 @@ namespace Deportes.Servicio.Servicios.FichaServices.Dto
 
         public int Defensa { get; set; }
 
-        
+        public string? Posicion { get; set; }
+
+        public int Media { get; set; }
 
     }
 }

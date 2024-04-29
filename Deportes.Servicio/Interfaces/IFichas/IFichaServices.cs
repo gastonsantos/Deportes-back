@@ -27,7 +27,7 @@ namespace Deportes.Servicio.Interfaces.IFichas
         public FichaTeni DevolverFichaTenis(int id);
         public List<FichaTeni> DevolverFichasDeTenis();
         public void ActaulizarFichaTenis(int id, DtoFichaTenis dtoFichaTenisController);
-        public void ActaulizarFichaFutbol(int id, DtoFutbolServices dtoFutbolServices);
+        public void ActaulizarFichaFutbol(DtoFutbolServices dtoFutbolServices);
         public void AgregarFichaBasquet(FichaBasquet fichaBasquet);
         public void EliminarFichaBasquet(int id);
         public FichaBasquet ObtenerFichaBasquet(int id);

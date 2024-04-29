@@ -54,6 +54,18 @@ public class UsuarioController : Controller
 
         return usuarios;
     }
+    [HttpPost("ObtenerUsuarioParaPerfilInvitacion", Name = "ObtenerUsuariosParaPerfilInvitacion")]
+    [Produces("application/json")]
+    [SwaggerOperation(Summary = "Permite devolver el usuario para el perfil de invitacion")]
+    [SwaggerResponse(400, "El objeto request es invalido.")]
+    [SwaggerResponse(200, "Se devuelven el usuario para la invitacion.")]
+    public DtoUsuario GetUsuarioParaPerfilInvitacion([FromBody] DtoUsuarioPerfil usuarioDto)
+    {
+        var usuario = _usuarioSerive.GetUsuarioParaPerfilInvitacion(usuarioDto.Id);
+        return usuario;
+    }
+
+
 
     [Produces("application/json")]
     [SwaggerOperation(Summary = "Permite Devolver un Usuario Por Email y Contraseña")]

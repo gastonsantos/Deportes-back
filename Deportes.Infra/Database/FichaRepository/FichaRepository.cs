@@ -72,7 +72,8 @@ public class FichaRepository : IFichaRepository
         fichaFulbo.Defensa  = fichaFutbol?.Defensa;
         fichaFulbo.Pase = fichaFutbol?.Pase;
         fichaFulbo.Regate = fichaFutbol?.Regate;
-
+        fichaFulbo.Posicion = fichaFutbol?.Posicion;
+        fichaFulbo.Media = fichaFutbol?.Media;
         _context.SaveChanges(); 
 
     }

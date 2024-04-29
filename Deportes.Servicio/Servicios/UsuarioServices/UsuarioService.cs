@@ -37,7 +37,20 @@ public class UsuarioService : IUsuarioService
         return _usuarioRepository.GetAll();         
     }
 
-    
+    public DtoUsuario GetUsuarioParaPerfilInvitacion(int id)
+    {
+        var usuario = _usuarioRepository.ObtenerUsuarioPorId(id);
+
+        DtoUsuario dtoUsuario = new DtoUsuario();
+        dtoUsuario.Id = usuario.Id;
+        dtoUsuario.Nombre = usuario.Nombre;
+        dtoUsuario.Apellido= usuario.Apellido;
+        dtoUsuario.Apodo  = usuario.Apodo;
+        dtoUsuario.Email = usuario.Email;
+        return dtoUsuario;
+    }
+
+
     public Usuario? ObtenerUsuarioMailContraseña(string email, string contra)
     {   
 
