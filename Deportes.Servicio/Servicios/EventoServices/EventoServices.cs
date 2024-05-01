@@ -2,6 +2,7 @@
 using Deportes.Modelo.EventoModel.Dto;
 using Deportes.Servicio.Interfaces.IEvento;
 using Deportes.Servicio.Interfaces.IFichas;
+using Deportes.Servicio.Interfaces.IParticipantes;
 using Deportes.Servicio.Interfaces.IUsuario;
 using Deportes.Servicio.Servicios.EventoServices.Errores;
 using Microsoft.Extensions.Logging;
@@ -17,9 +18,11 @@ public class EventoServices: IEventoServices
 {
     
     private readonly IEventoRepository _eventoRepository;
-    public EventoServices(IEventoRepository eventoRepository)
+    private readonly IParticipantesRepository _participantesRepository;
+    public EventoServices(IEventoRepository eventoRepository, IParticipantesRepository participantesRepository)
     {
         _eventoRepository = eventoRepository;
+        _participantesRepository = participantesRepository;
    
     }
 
@@ -51,7 +54,12 @@ public class EventoServices: IEventoServices
         {
             throw new EventoNoEncontradoException();
         }
-        return _eventoRepository.GetEventoConDeporte(idEvento);
+       // DtoEventoDeporte eventoDep = new DtoEventoDeporte();
+         var eventoDep = _eventoRepository.GetEventoConDeporte(idEvento);
+
+        eventoDep.CantJugadoresAnotados = _participantesRepository.CantidadDeUsuarioQueEstanAnotadosEnEvento(idEvento);
+
+        return eventoDep;
     }
 
     public IList<DtoEventoDeporte> GetEventosCreadosPorUsuario(int idUsuario)

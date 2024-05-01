@@ -28,6 +28,8 @@ public class EventoRepository : IEventoRepository
 
     public IList<DtoEventoDeporte> GetAllEventosConDeportes()
     {
+       
+
         return _context.Evento
             .Include(e => e.IdDeporteNavigation) 
             .Include(e => e.IdUsuarioCreadorNavigation)
@@ -45,6 +47,7 @@ public class EventoRepository : IEventoRepository
                 Fecha= e.Fecha,
                 NombreDep = e.IdDeporteNavigation.Nombre,
                 CantJugadores =e.IdDeporteNavigation.CantJugadores,
+                CantJugadoresAnotados = _context.Participante.Where(p => p.IdEvento == e.IdEvento && p.Aceptado == true).Count()+1,
                 Imagen =e.IdDeporteNavigation.Imagen ,
                 IdUsuarioDuenio = e.IdUsuarioCreadorNavigation.Id,
                 NombreDuenio = e.IdUsuarioCreadorNavigation.Nombre +" "+ e.IdUsuarioCreadorNavigation.Apellido
@@ -68,6 +71,8 @@ public class EventoRepository : IEventoRepository
                 Fecha = e.Fecha,
                 NombreDep = e.IdDeporteNavigation.Nombre,
                 CantJugadores = e.IdDeporteNavigation.CantJugadores,
+                CantJugadoresAnotados = _context.Participante.Where(p => p.IdEvento == e.IdEvento && p.Aceptado == true).Count() + 1,
+
                 Imagen = e.IdDeporteNavigation.Imagen,
                 NombreDuenio = e.IdUsuarioCreadorNavigation.Nombre + " " + e.IdUsuarioCreadorNavigation.Apellido
             })
@@ -97,6 +102,7 @@ public class EventoRepository : IEventoRepository
                 Fecha = e.Fecha,
                 NombreDep = e.IdDeporteNavigation.Nombre,
                 CantJugadores = e.IdDeporteNavigation.CantJugadores,
+                CantJugadoresAnotados = _context.Participante.Where(p => p.IdEvento == e.IdEvento && p.Aceptado == true).Count() + 1,
                 Imagen = e.IdDeporteNavigation.Imagen,
                 NombreDuenio = e.IdUsuarioCreadorNavigation.Nombre + " " + e.IdUsuarioCreadorNavigation.Apellido
             })
@@ -122,6 +128,7 @@ public class EventoRepository : IEventoRepository
                 Fecha = e.Fecha,
                 NombreDep = e.IdDeporteNavigation.Nombre,
                 CantJugadores = e.IdDeporteNavigation.CantJugadores,
+                CantJugadoresAnotados = _context.Participante.Where(p => p.IdEvento == e.IdEvento && p.Aceptado == true).Count() + 1,
                 Imagen = e.IdDeporteNavigation.Imagen,
                 IdUsuarioDuenio =e.IdUsuarioCreadorNavigation.Id,
                 NombreDuenio = e.IdUsuarioCreadorNavigation.Nombre + " " + e.IdUsuarioCreadorNavigation.Apellido
@@ -175,8 +182,6 @@ public class EventoRepository : IEventoRepository
         var evento =  _context.Evento.FirstOrDefault(e => e.IdEvento == idEvento);
         return evento.IdUsuarioCreador;
     }
-
-
 
 
 

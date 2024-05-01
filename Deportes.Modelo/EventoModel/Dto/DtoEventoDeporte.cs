@@ -22,13 +22,10 @@ namespace Deportes.Modelo.EventoModel.Dto
         public string Hora { get; set; } = null!;
      
         public int IdDeporte { get; set; }
-
         public DateTime? Fecha { get; set; }
-
         public string NombreDep { get; set; } = null!;
-
         public int? CantJugadores { get; set; }
-
+        public int? CantJugadoresAnotados { get; set; }
         public string? Imagen { get; set; }
 
        public int  IdUsuarioDuenio { get; set; }

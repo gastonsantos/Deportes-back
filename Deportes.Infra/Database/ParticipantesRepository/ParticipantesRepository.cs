@@ -120,5 +120,9 @@ public class ParticipantesRepository: IParticipantesRepository
 
         return participante != null;
     }
-
+    public int CantidadDeUsuarioQueEstanAnotadosEnEvento(int idEvento)
+    {
+        var cantidad = _context.Participante.Where(e => e.IdEvento == idEvento && e.Aceptado==true).Count();
+        return cantidad + 1;
+    }
 }
