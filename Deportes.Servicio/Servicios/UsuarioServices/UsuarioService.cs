@@ -1,5 +1,6 @@
 ﻿using Deportes.Modelo.CorreoModel;
 using Deportes.Modelo.FichaDeportistaModel;
+using Deportes.Modelo.FichaFutbolModel;
 using Deportes.Modelo.UsuarioModel;
 using Deportes.Servicio.Interfaces.ICorreo;
 using Deportes.Servicio.Interfaces.IFichas;
@@ -108,6 +109,7 @@ public class UsuarioService : IUsuarioService
 
         AgregoFichaDeportistaBasica(idUsuario);
 
+        AgregarFichaFutbolBasica(idUsuario);
 
 
     }
@@ -224,9 +226,32 @@ public class UsuarioService : IUsuarioService
     {
         FichaDeportistum fichaDeportista = new FichaDeportistum();
         fichaDeportista.IdUsuario= idUsuario;
+        fichaDeportista.Avatar = "";
+        fichaDeportista.Altura = "0";
+        fichaDeportista.Edad = "0";
+        fichaDeportista.Peso="0";
+        fichaDeportista.ManoHabil = "Derecha";
+        fichaDeportista.PieHabil = "Derecho";
+       
+
         _fichaRepository.AgregarFichaDeportista(fichaDeportista);
     }
 
+    private void AgregarFichaFutbolBasica(int idUsuario)
+    {
+        FichaFutbol fichaFutbol = new FichaFutbol();
+        fichaFutbol.IdUsuario= idUsuario;
+        fichaFutbol.Posicion = "Nada";
+        fichaFutbol.Disparo = 0;
+        fichaFutbol.Fuerza = 0;
+        fichaFutbol.Velocidad = 0;
+        fichaFutbol.Media = 0;
+        fichaFutbol.Defensa = 0;
+        fichaFutbol.Pase = 0;
+        fichaFutbol.Regate = 0;
+
+        _fichaRepository.AgregarFichaFutbol(fichaFutbol);
+    }
 
 
 }
