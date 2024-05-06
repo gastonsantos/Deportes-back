@@ -19,6 +19,7 @@ public class FichaServices : IFichaServices
 {
     private readonly IFichaRepository _fichaRespoitory;
     private readonly IUsuarioService _usuarioService;
+    private static Random random = new Random();
     public FichaServices(IFichaRepository fichaRespoitory, IUsuarioService usuarioService)
     {
         _fichaRespoitory = fichaRespoitory;
@@ -56,7 +57,7 @@ public class FichaServices : IFichaServices
         fichaDep.Peso = fichaDeportista.Peso;
         fichaDep.ManoHabil = fichaDeportista.ManoHabil;
         fichaDep.PieHabil = fichaDeportista.PieHabil;
-        fichaDep.Posicion = fichaDeportista.Posicion;
+       
 
 
         _fichaRespoitory.AgregarFichaDeportista(fichaDep);
@@ -64,19 +65,19 @@ public class FichaServices : IFichaServices
 
     public void AgregarFichaFutbol(DtoFutbolServices dtoFutbolServices)
     {
-        var media = CalcularMedia(dtoFutbolServices.Posicion, dtoFutbolServices.Disparo, dtoFutbolServices.Fuerza, dtoFutbolServices.Velocidad, dtoFutbolServices.Defensa,
-           dtoFutbolServices.Pase, dtoFutbolServices.Regate
+        var media = CalcularMedia( dtoFutbolServices.Velocidad, dtoFutbolServices.Resistencia, dtoFutbolServices.Precision, dtoFutbolServices.Fuerza,  
+           dtoFutbolServices.Tecnica, dtoFutbolServices.Agilidad
            );
 
         var fichaDeFutbol = new FichaFutbol();
-        fichaDeFutbol.Disparo = dtoFutbolServices.Disparo;
+        fichaDeFutbol.Velocidad = dtoFutbolServices.Velocidad;
+        fichaDeFutbol.Resistencia = dtoFutbolServices.Resistencia;
         fichaDeFutbol.Fuerza= dtoFutbolServices.Fuerza;
-        fichaDeFutbol.Velocidad= dtoFutbolServices.Velocidad;
-        fichaDeFutbol.Defensa= dtoFutbolServices.Defensa;
-        fichaDeFutbol.Pase= dtoFutbolServices.Pase;
-        fichaDeFutbol.Regate= dtoFutbolServices.Regate;
+        fichaDeFutbol.Precision= dtoFutbolServices.Precision;
+        fichaDeFutbol.Tecnica= dtoFutbolServices.Tecnica;
+        fichaDeFutbol.Agilidad= dtoFutbolServices.Agilidad;
         fichaDeFutbol.IdUsuario= dtoFutbolServices.IdUsuario;
-        fichaDeFutbol.Posicion = dtoFutbolServices.Posicion;
+       
         fichaDeFutbol.Media = media;
         _fichaRespoitory.AgregarFichaFutbol(fichaDeFutbol);
     }
@@ -98,7 +99,7 @@ public class FichaServices : IFichaServices
         fichaDep.Peso = deportista.Peso ?? null;
         fichaDep.ManoHabil = deportista.ManoHabil ?? null;
         fichaDep.PieHabil = deportista.PieHabil ?? null;
-        fichaDep.Posicion = deportista.Posicion ?? null;
+        
         return fichaDep;
     }
 
@@ -125,43 +126,45 @@ public class FichaServices : IFichaServices
      }
 
      public void ActaulizarFichaFutbol( DtoFutbolServices dtoFutbolServices){
-        var media = CalcularMedia(dtoFutbolServices.Posicion, dtoFutbolServices.Disparo, dtoFutbolServices.Fuerza, dtoFutbolServices.Velocidad, dtoFutbolServices.Defensa,
-            dtoFutbolServices.Pase, dtoFutbolServices.Regate
+        var media = CalcularMedia( dtoFutbolServices.Velocidad, dtoFutbolServices.Resistencia, dtoFutbolServices.Precision, dtoFutbolServices.Fuerza,
+           dtoFutbolServices.Tecnica, dtoFutbolServices.Agilidad
             );
 
         var ficha = _fichaRespoitory.DevolverFichaFutbol(dtoFutbolServices.IdUsuario);
             if(ficha != null)
             {
-        ficha.Disparo = dtoFutbolServices.Disparo;
-        ficha.Fuerza= dtoFutbolServices.Fuerza;
-        ficha.Velocidad=dtoFutbolServices.Velocidad;
-        ficha.Defensa=dtoFutbolServices.Defensa;
-        ficha.Pase= dtoFutbolServices.Pase;
-        ficha.Regate=dtoFutbolServices.Regate;
-        ficha.Posicion = dtoFutbolServices.Posicion;
-        ficha.Media = media;
+            ficha.Resistencia = dtoFutbolServices.Resistencia;
+            ficha.Fuerza= dtoFutbolServices.Fuerza;
+            ficha.Velocidad=dtoFutbolServices.Velocidad;
+            ficha.Precision =dtoFutbolServices.Precision;
+            ficha.Tecnica= dtoFutbolServices.Tecnica;
+            ficha.Agilidad=dtoFutbolServices.Agilidad;
+            
+            ficha.Media = media;
         _fichaRespoitory.ActaulizarFichaFutbol(ficha);
 
             }
      }
 
-    private int CalcularMedia(string posicion, int disparo, int fuerza, int velocidad, int defensa, int pase, int regate)
+    private int CalcularMedia(int disparo, int fuerza, int velocidad, int defensa, int pase, int regate)
     {
         int media = 0;
-        switch (posicion)
+        
+        int randomCase = random.Next(1, 5);
+        switch (randomCase)
         {
-            case "Arquero":
+            case 1:
 
                 media = (defensa * 3 + disparo + fuerza + velocidad) / 6;
                 return media;
 
-            case "Defensor":
+            case 2:
                 media = (defensa * 2 + disparo + fuerza * 2 + velocidad) / 6;
                 return media;
-            case "Mediocampista":
+            case 3:
                 media = (disparo + fuerza + velocidad + defensa + pase + regate) / 6;
                 return media;
-            case "Delantero":
+            case 4:
                 media = (disparo * 2 + fuerza + velocidad + pase + regate)/6;
                 return media;
 

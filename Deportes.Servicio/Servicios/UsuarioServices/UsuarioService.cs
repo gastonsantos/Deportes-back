@@ -241,14 +241,16 @@ public class UsuarioService : IUsuarioService
     {
         FichaFutbol fichaFutbol = new FichaFutbol();
         fichaFutbol.IdUsuario= idUsuario;
-        fichaFutbol.Posicion = "Nada";
-        fichaFutbol.Disparo = 0;
-        fichaFutbol.Fuerza = 0;
+        
         fichaFutbol.Velocidad = 0;
+        fichaFutbol.Resistencia = 0;
+        fichaFutbol.Precision = 0;
+        fichaFutbol.Fuerza = 0;
+        fichaFutbol.Tecnica = 0;
+        fichaFutbol.Agilidad = 0;
         fichaFutbol.Media = 0;
-        fichaFutbol.Defensa = 0;
-        fichaFutbol.Pase = 0;
-        fichaFutbol.Regate = 0;
+       
+       
 
         _fichaRepository.AgregarFichaFutbol(fichaFutbol);
     }

@@ -56,7 +56,7 @@ public class FichaRepository : IFichaRepository
         ficha.ManoHabil = fichaDeportista?.ManoHabil;
         ficha.PieHabil = fichaDeportista?.PieHabil;
         ficha.Peso = fichaDeportista?.Peso;
-        ficha.Posicion = fichaDeportista?.Posicion;
+        
 
         _context.SaveChanges();
         
@@ -66,13 +66,13 @@ public class FichaRepository : IFichaRepository
     {
         var fichaFulbo = DevolverFichaFutbol(fichaFutbol.IdUsuario);
 
-        fichaFulbo.Disparo = fichaFutbol?.Disparo;
+        fichaFulbo.Agilidad = fichaFutbol?.Agilidad;
         fichaFulbo.Fuerza = fichaFutbol?.Fuerza;
         fichaFulbo.Velocidad = fichaFutbol?.Velocidad;
-        fichaFulbo.Defensa  = fichaFutbol?.Defensa;
-        fichaFulbo.Pase = fichaFutbol?.Pase;
-        fichaFulbo.Regate = fichaFutbol?.Regate;
-        fichaFulbo.Posicion = fichaFutbol?.Posicion;
+        fichaFulbo.Tecnica  = fichaFutbol?.Tecnica;
+        fichaFulbo.Precision = fichaFutbol?.Precision;
+        fichaFulbo.Resistencia = fichaFutbol?.Resistencia;
+        
         fichaFulbo.Media = fichaFutbol?.Media;
         _context.SaveChanges(); 
 

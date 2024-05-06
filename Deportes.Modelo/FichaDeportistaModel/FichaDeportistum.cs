@@ -25,8 +25,7 @@ public class FichaDeportistum
 
     public string? ManoHabil { get; set; }
 
-    public string? Posicion { get; set; }
-
+   
     public virtual Usuario IdUsuarioNavigation { get; set; } = null!;
 
 }

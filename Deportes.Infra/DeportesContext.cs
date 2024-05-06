@@ -118,9 +118,7 @@ public class DeportesContext : DbContext
             entity.Property(e => e.PieHabil)
                 .HasMaxLength(50)
                 .IsUnicode(false);
-            entity.Property(e => e.Posicion)
-                .HasMaxLength(50)
-                .IsUnicode(false);
+            
 
             entity.HasOne(d => d.IdUsuarioNavigation).WithMany(p => p.FichaDeportista)
                 .HasForeignKey(d => d.IdUsuario)
@@ -133,9 +131,7 @@ public class DeportesContext : DbContext
             entity.HasKey(e => e.Id).HasName("PK__FichaFut__3214EC07E825038B");
 
             entity.ToTable("FichaFutbol");
-            entity.Property(e => e.Posicion)
-                .HasMaxLength(50)
-                .IsUnicode(false);
+            
             entity.HasOne(d => d.IdUsuarioNavigation).WithMany(p => p.FichaFutbols)
                 .HasForeignKey(d => d.IdUsuario)
                 .OnDelete(DeleteBehavior.ClientSetNull)
