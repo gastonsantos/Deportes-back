@@ -120,4 +120,14 @@ public class EventoServices: IEventoServices
     {
         return _eventoRepository.GetEventosEnLosQueParticipo(idUsuario);
     }
+
+    public IList<DtoEventoDeporte> GetEventosCreadosPorUsuarioFinalizado(int idUsuario)
+    {
+        return _eventoRepository.GetEventosCreadosPorUsuarioFinalizado(idUsuario);
+    }
+
+    public IList<DtoEventoDeporte> GetEventosEnLosQueParticipoFinalizado(int idUsuario)
+    {
+        return _eventoRepository.GetEventosEnLosQueParticipoFinalizado(idUsuario);
+    }
 }

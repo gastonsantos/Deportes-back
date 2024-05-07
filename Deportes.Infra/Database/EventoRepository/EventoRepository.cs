@@ -92,7 +92,9 @@ public class EventoRepository : IEventoRepository
                                 Nombre = u.IdUsuarioParticipanteNavigation.Nombre ,
                                 Apellido = u.IdUsuarioParticipanteNavigation.Apellido,
                                 Apodo = u.IdUsuarioParticipanteNavigation.Apodo,
-                                Email = u.IdUsuarioParticipanteNavigation.Email
+                                Email = u.IdUsuarioParticipanteNavigation.Email,
+                                IdParticipante = _context.Participante.Where(p => p.IdEvento == e.IdEvento && p.Aceptado == true).Select(par => par.IdParticipantes).FirstOrDefault(),
+    
                             }).Union(_context.Participante
                     .Where(p => p.IdEvento == e.IdEvento && p.Aceptado == true && e.IdUsuarioCreador != p.IdUsuarioCreadorEvento)
                     .Select(u => new DtoUsuario
@@ -101,9 +103,12 @@ public class EventoRepository : IEventoRepository
                         Nombre = u.IdUsuarioCreadorEventoNavigation.Nombre,
                         Apellido = u.IdUsuarioCreadorEventoNavigation.Apellido,
                         Apodo = u.IdUsuarioCreadorEventoNavigation.Apodo,
-                        Email = u.IdUsuarioCreadorEventoNavigation.Email
+                        Email = u.IdUsuarioCreadorEventoNavigation.Email,
+                        IdParticipante = _context.Participante.Where(p => p.IdEvento == e.IdEvento && p.Aceptado == true).Select(par => par.IdParticipantes).FirstOrDefault(),
+
                     }))
                             .ToList(),
+                IdParticipante = _context.Participante.Where(p => p.IdEvento == e.IdEvento && p.Aceptado == true).Select(par => par.IdParticipantes).FirstOrDefault(),
                 Imagen = e.IdDeporteNavigation.Imagen,
                 NombreDuenio = e.IdUsuarioCreadorNavigation.Nombre + " " + e.IdUsuarioCreadorNavigation.Apellido
             })
@@ -115,8 +120,6 @@ public class EventoRepository : IEventoRepository
             .Where(p => p.IdUsuarioParticipante == idUsuario  && p.Aceptado == true && p.InvitaEsDuenio == true 
             || p.IdUsuarioCreadorEvento == idUsuario && p.Aceptado == true && p.InvitaEsDuenio == false )
             .Select(p => p.IdEvento);
-
-      
 
         var eventos = _context.Evento
             .Where(e => eventosEnLosQueParticipo.Contains(e.IdEvento) && e.Finalizado == false)
@@ -144,6 +147,7 @@ public class EventoRepository : IEventoRepository
                                 Apellido = u.IdUsuarioParticipanteNavigation.Apellido,
                                 Apodo = u.IdUsuarioParticipanteNavigation.Apodo,
                                 Email = u.IdUsuarioParticipanteNavigation.Email
+
                             }).Union(_context.Participante
                     .Where(p => p.IdEvento == e.IdEvento && p.Aceptado == true)
                     .Select(u => new DtoUsuario
@@ -155,13 +159,57 @@ public class EventoRepository : IEventoRepository
                         Email = u.IdUsuarioCreadorEventoNavigation.Email
                     }))
                             .ToList(),
-
+                IdParticipante = _context.Participante.Where(p => p.IdEvento == e.IdEvento && p.Aceptado == true).Select(par => par.IdParticipantes).FirstOrDefault(),
                 Imagen = e.IdDeporteNavigation.Imagen,
                 NombreDuenio = e.IdUsuarioCreadorNavigation.Nombre + " " + e.IdUsuarioCreadorNavigation.Apellido
             })
             .ToList();
 
         return eventos;
+    }
+
+    public IList<DtoEventoDeporte> GetEventosCreadosPorUsuarioFinalizado(int idUsuario)
+    {
+
+        return _context.Evento.Where(c => c.IdUsuarioCreador == idUsuario && c.Finalizado == true).Select
+            (e => new DtoEventoDeporte
+            {
+                IdEvento = e.IdEvento,
+                Nombre = e.Nombre,
+                Provincia = e.Provincia,
+                Localidad = e.Localidad,
+                Direccion = e.Direccion,
+                Numero = e.Numero,
+                Hora = e.Hora,
+                IdDeporte = e.IdDeporte,
+                Fecha = e.Fecha,
+                NombreDep = e.IdDeporteNavigation.Nombre,
+                CantJugadores = e.IdDeporteNavigation.CantJugadores,
+                CantJugadoresAnotados = _context.Participante.Where(p => p.IdEvento == e.IdEvento && p.Aceptado == true).Count() + 1,
+                DtoUsuarios = _context.Participante
+                            .Where(p => p.IdEvento == e.IdEvento && p.Aceptado == true && p.IdUsuarioParticipante != e.IdUsuarioCreador)
+                            .Select(u => new DtoUsuario
+                            {
+                                Id = u.IdUsuarioParticipante,
+                                Nombre = u.IdUsuarioParticipanteNavigation.Nombre,
+                                Apellido = u.IdUsuarioParticipanteNavigation.Apellido,
+                                Apodo = u.IdUsuarioParticipanteNavigation.Apodo,
+                                Email = u.IdUsuarioParticipanteNavigation.Email
+                            }).Union(_context.Participante
+                    .Where(p => p.IdEvento == e.IdEvento && p.Aceptado == true && e.IdUsuarioCreador != p.IdUsuarioCreadorEvento)
+                    .Select(u => new DtoUsuario
+                    {
+                        Id = u.IdUsuarioCreadorEvento,
+                        Nombre = u.IdUsuarioCreadorEventoNavigation.Nombre,
+                        Apellido = u.IdUsuarioCreadorEventoNavigation.Apellido,
+                        Apodo = u.IdUsuarioCreadorEventoNavigation.Apodo,
+                        Email = u.IdUsuarioCreadorEventoNavigation.Email
+                    }))
+                            .ToList(),
+                Imagen = e.IdDeporteNavigation.Imagen,
+                NombreDuenio = e.IdUsuarioCreadorNavigation.Nombre + " " + e.IdUsuarioCreadorNavigation.Apellido
+            })
+            .ToList();
     }
 
     public DtoEventoDeporte GetEventoConDeporte(int idEvento)
@@ -200,7 +248,8 @@ public class EventoRepository : IEventoRepository
                         Nombre = u.IdUsuarioCreadorEventoNavigation.Nombre,
                         Apellido = u.IdUsuarioCreadorEventoNavigation.Apellido,
                         Apodo = u.IdUsuarioCreadorEventoNavigation.Apodo,
-                        Email = u.IdUsuarioCreadorEventoNavigation.Email
+                        Email = u.IdUsuarioCreadorEventoNavigation.Email,
+
                     }))
                             .ToList(),
                 Imagen = e.IdDeporteNavigation.Imagen,
@@ -257,9 +306,57 @@ public class EventoRepository : IEventoRepository
         return evento.IdUsuarioCreador;
     }
 
+    public IList<DtoEventoDeporte> GetEventosEnLosQueParticipoFinalizado(int idUsuario)
+    {
+        var eventosEnLosQueParticipo = _context.Participante
+            .Where(p => p.IdUsuarioParticipante == idUsuario && p.Aceptado == true && p.InvitaEsDuenio == true
+            || p.IdUsuarioCreadorEvento == idUsuario && p.Aceptado == true && p.InvitaEsDuenio == false)
+            .Select(p => p.IdEvento);
 
+        var eventos = _context.Evento
+            .Where(e => eventosEnLosQueParticipo.Contains(e.IdEvento) && e.Finalizado == true)
+            .Select(e => new DtoEventoDeporte
+            {
+                IdEvento = e.IdEvento,
+                Nombre = e.Nombre,
+                Provincia = e.Provincia,
+                Localidad = e.Localidad,
+                Direccion = e.Direccion,
+                Numero = e.Numero,
+                Hora = e.Hora,
+                IdDeporte = e.IdDeporte,
+                Fecha = e.Fecha,
+                NombreDep = e.IdDeporteNavigation.Nombre,
+                CantJugadores = e.IdDeporteNavigation.CantJugadores,
+                CantJugadoresAnotados = _context.Participante.Where(p => p.IdEvento == e.IdEvento && p.Aceptado == true).Count() + 1,
+                DtoUsuarios = _context.Participante
+                            .Where(p => p.IdEvento == e.IdEvento && p.Aceptado == true
+                            )
+                            .Select(u => new DtoUsuario
+                            {
+                                Id = u.IdUsuarioParticipante,
+                                Nombre = u.IdUsuarioParticipanteNavigation.Nombre,
+                                Apellido = u.IdUsuarioParticipanteNavigation.Apellido,
+                                Apodo = u.IdUsuarioParticipanteNavigation.Apodo,
+                                Email = u.IdUsuarioParticipanteNavigation.Email
 
+                            }).Union(_context.Participante
+                    .Where(p => p.IdEvento == e.IdEvento && p.Aceptado == true)
+                    .Select(u => new DtoUsuario
+                    {
+                        Id = u.IdUsuarioCreadorEvento,
+                        Nombre = u.IdUsuarioCreadorEventoNavigation.Nombre,
+                        Apellido = u.IdUsuarioCreadorEventoNavigation.Apellido,
+                        Apodo = u.IdUsuarioCreadorEventoNavigation.Apodo,
+                        Email = u.IdUsuarioCreadorEventoNavigation.Email
+                    }))
+                            .ToList(),
+                IdParticipante = _context.Participante.Where(p => p.IdEvento == e.IdEvento && p.Aceptado == true).Select(par => par.IdParticipantes).FirstOrDefault(),
+                Imagen = e.IdDeporteNavigation.Imagen,
+                NombreDuenio = e.IdUsuarioCreadorNavigation.Nombre + " " + e.IdUsuarioCreadorNavigation.Apellido
+            })
+            .ToList();
 
-
-
+        return eventos;
+    }
 }

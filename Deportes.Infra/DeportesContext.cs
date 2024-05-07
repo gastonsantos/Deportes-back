@@ -11,13 +11,13 @@ using Deportes.Modelo.FichaBasquetModel;
 using Deportes.Modelo.FichaDeportistaModel;
 using Deportes.Modelo.FichaFutbolModel;
 using Deportes.Modelo.FichaTenisModel;
-
+using Deportes.Modelo.CalificacionModel;
 
 namespace Deportes.Infra;
 
 public class DeportesContext : DbContext
 {
-  
+    public  DbSet<Calificacion> Calificacions { get; set; }
     public DbSet<HistorialRefreshToken> HistorialRefreshTokens { get; set; }
     public  DbSet<Deporte> Deporte { get; set; }
     public  DbSet<Evento> Evento { get; set; }
@@ -37,6 +37,26 @@ public class DeportesContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<Calificacion>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__Califica__3214EC0786B70E49");
+
+            entity.ToTable("Calificacion");
+
+            entity.Property(e => e.Calificacion1).HasColumnName("calificacion");
+
+            entity.HasOne(d => d.IdEventoParticipoNavigation).WithMany(p => p.Calificacions)
+                .HasForeignKey(d => d.IdEventoParticipo)
+                .HasConstraintName("FK_Calificacion_evento");
+
+            entity.HasOne(d => d.IdUsuarioCalificadoNavigation).WithMany(p => p.CalificacionIdUsuarioCalificadoNavigations)
+                .HasForeignKey(d => d.IdUsuarioCalificado)
+                .HasConstraintName("FK_Calificacion_usuarioCalificado");
+
+            entity.HasOne(d => d.IdUsuarioCalificadorNavigation).WithMany(p => p.CalificacionIdUsuarioCalificadorNavigations)
+                .HasForeignKey(d => d.IdUsuarioCalificador)
+                .HasConstraintName("FK_Calificacion_usuario");
+        });
 
         modelBuilder.Entity<Deporte>(entity =>
         {

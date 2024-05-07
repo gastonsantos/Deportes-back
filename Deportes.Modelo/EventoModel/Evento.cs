@@ -1,4 +1,5 @@
-﻿using Deportes.Modelo.DeporteModel;
+﻿using Deportes.Modelo.CalificacionModel;
+using Deportes.Modelo.DeporteModel;
 using Deportes.Modelo.ParticipanteModel;
 using Deportes.Modelo.UsuarioModel;
 using System;
@@ -15,21 +16,25 @@ public  class Evento
 
     public string Nombre { get; set; } = null!;
 
-    public string Provincia { get; set; } = null!;
-
-    public string Localidad { get; set; } = null!;
-
     public string Direccion { get; set; } = null!;
 
-    public string Numero { get; set; } = null!;
-    public string Hora { get; set; } = null!;
     public int IdUsuarioCreador { get; set; }
 
     public int IdDeporte { get; set; }
 
     public DateTime? Fecha { get; set; }
 
+    public string? Provincia { get; set; }
+
+    public string? Localidad { get; set; }
+
+    public string? Numero { get; set; }
+
+    public string? Hora { get; set; }
+
     public bool? Finalizado { get; set; }
+
+    public virtual ICollection<Calificacion> Calificacions { get; set; } = new List<Calificacion>();
 
     public virtual Deporte IdDeporteNavigation { get; set; } = null!;
 
