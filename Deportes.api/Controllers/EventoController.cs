@@ -109,4 +109,29 @@ public class EventoController : Controller
         return Ok(eventos);
 
     }
+    [HttpPost("ObtenerEventosQueParticipoFinalizado", Name = "ObtenerEventosQueParticipoFinalizado")]
+    [Produces("application/json")]
+    [SwaggerOperation(Summary = "Permite obtener los Eventos por Usuario que participe")]
+    [SwaggerResponse(400, "El objeto request es invalido.")]
+    [SwaggerResponse(200, "Se pudo traer los Eventos en los cuales participe")]
+    public ActionResult ObtenerEventosQueParticipoFinalizado([FromBody] DtoEventoId eventoDto)
+    {
+
+        var eventos = _eventoServices.GetEventosEnLosQueParticipoFinalizado(eventoDto.Id);
+        return Ok(eventos);
+
+    }
+
+    [HttpPost("ObtenerEventosPorUsuarioFinalizado", Name = "ObtenerEventosPorUsuarioFinalizado")]
+    [Produces("application/json")]
+    [SwaggerOperation(Summary = "Permite obtener los Eventos por Usuario Finalizado")]
+    [SwaggerResponse(400, "El objeto request es invalido.")]
+    [SwaggerResponse(200, "Se pudo traer los Eventos Finalizados")]
+    public ActionResult TraerEventosPorUsuarioFinalizado([FromBody] DtoEventoId eventoDto)
+    {
+
+        var eventos = _eventoServices.GetEventosCreadosPorUsuarioFinalizado(eventoDto.Id);
+        return Ok(eventos);
+
+    }
 }

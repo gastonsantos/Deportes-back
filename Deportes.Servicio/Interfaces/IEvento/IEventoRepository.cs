@@ -19,6 +19,9 @@ namespace Deportes.Servicio.Interfaces.IEvento
         public void CambiarEstadoEvento(int idEvento);
         public int IdUsuarioCreadorPorIdEvento(int idEvento);
         public IList<DtoEventoDeporte> GetEventosEnLosQueParticipo(int idUsuario);
+        public IList<DtoEventoDeporte> GetEventosCreadosPorUsuarioFinalizado(int idUsuario);
+
+        public IList<DtoEventoDeporte> GetEventosEnLosQueParticipoFinalizado(int idUsuario);
     }
 
 }

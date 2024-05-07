@@ -1,4 +1,5 @@
-﻿using Deportes.Modelo.EventoModel;
+﻿using Deportes.Modelo.CalificacionModel;
+using Deportes.Modelo.EventoModel;
 using Deportes.Modelo.FichaBasquetModel;
 using Deportes.Modelo.FichaDeporteModel;
 using Deportes.Modelo.FichaDeportistaModel;
@@ -37,13 +38,18 @@ namespace Deportes.Modelo.UsuarioModel
         public string Direccion { get; set; } = null!;
 
         public string Numero { get; set; } = null!;
-        public string? TokenConfirmacion { get; set; }
-
-        public string? TokenCambioContrasenia { get; set; }
 
         public bool? VerifyEmail { get; set; }
 
         public bool? Activo { get; set; }
+
+        public string? TokenCambioContrasenia { get; set; }
+
+        public string? TokenConfirmacion { get; set; }
+
+        public virtual ICollection<Calificacion> CalificacionIdUsuarioCalificadoNavigations { get; set; } = new List<Calificacion>();
+
+        public virtual ICollection<Calificacion> CalificacionIdUsuarioCalificadorNavigations { get; set; } = new List<Calificacion>();
 
         public virtual ICollection<Evento> Eventos { get; set; } = new List<Evento>();
 

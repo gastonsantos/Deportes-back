@@ -26,5 +26,6 @@ namespace Deportes.Modelo.EventoModel.Dto
         public string? Imagen { get; set; }
         public int  IdUsuarioDuenio { get; set; }
         public string NombreDuenio { get; set; } = null!;
+        public int IdParticipante { get; set; }
     }
 }

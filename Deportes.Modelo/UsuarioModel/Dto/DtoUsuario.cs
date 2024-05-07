@@ -17,4 +17,5 @@ public class DtoUsuario
     public string? Apodo { get; set; }
 
     public string? Email { get; set; }
+    public int IdParticipante { get; set;} 
 }
