@@ -10,6 +10,7 @@ namespace Deportes.Servicio.Interfaces.IDeporte
     public interface IDeporteRepository
     {
         public IList<Deporte> GetAllDeportes();
+        public Deporte GetDeportePorId(int idDeporte);
 
     }
 }

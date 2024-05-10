@@ -1,5 +1,6 @@
 ﻿using Deportes.Modelo.ParticipanteModel;
 using Deportes.Modelo.ParticipanteModel.Dto;
+using Deportes.Servicio.Interfaces.IDeporte;
 using Deportes.Servicio.Interfaces.IEvento;
 using Deportes.Servicio.Interfaces.IParticipantes;
 using Deportes.Servicio.Servicios.ParticipantesServices.Errores;
@@ -16,16 +17,25 @@ public class ParticipantesServices : IParticipantesServices
 {
     private readonly IParticipantesRepository _participantesRepository;
     private readonly IEventoRepository _eventoRepository;
-    public ParticipantesServices(IParticipantesRepository participantesRepository, IEventoRepository eventoRepository)
+    private readonly IDeporteRepository _deporteRepository;
+    public ParticipantesServices(IParticipantesRepository participantesRepository, IEventoRepository eventoRepository, IDeporteRepository deporteRepository)
     {
         _participantesRepository= participantesRepository;
         _eventoRepository= eventoRepository;
+        _deporteRepository= deporteRepository;
     }
 
     public void AceptarParticipante(int idParticipante)
     {
+        if (!PuedeAceptarNotificacion(idParticipante))
+        {
+            EliminarParticipante(idParticipante);
+            throw new EventoLlenoException();
+        }
         _participantesRepository.AceptarParticipante(idParticipante);
     }
+
+    
 
     public void EliminarParticipante(int idParticipante)
     {
@@ -84,4 +94,28 @@ public class ParticipantesServices : IParticipantesServices
     
     }
 
+    public Participante ObtenerParticipantePorIdParticipante(int idParticipante)
+    {
+        return _participantesRepository.ObtenerParticipantePorIdParticipante(idParticipante);
+    }
+
+    private bool PuedeAceptarNotificacion(int idParticipante)
+    {
+        var participante = _participantesRepository.ObtenerParticipantePorIdParticipante(idParticipante);
+
+        var evento = _eventoRepository.GetEvento(participante.IdEvento);
+
+        var deporte = _deporteRepository.GetDeportePorId(evento.IdDeporte);
+       if(_eventoRepository.CantidadDeParticipantesEnUnEvento(evento.IdEvento)+1 >= deporte.CantJugadores)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+
+
+
+    }
 }

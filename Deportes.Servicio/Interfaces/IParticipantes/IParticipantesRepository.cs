@@ -19,6 +19,7 @@ namespace Deportes.Servicio.Interfaces.IParticipantes
         public List<DtoNotificacion> ObtenerNotificacionesPorUsuario(int idUsuario);
         public bool YaHayNotificacion(int idEvento, int idUsusarioQueInvita, int idUsuarioInvitado);
         public int CantidadDeUsuarioQueEstanAnotadosEnEvento(int idEvento);
+        public Participante ObtenerParticipantePorIdParticipante(int idParticipante);
 
     }
 }

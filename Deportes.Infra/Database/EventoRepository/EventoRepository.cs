@@ -1,6 +1,7 @@
 ﻿using Deportes.Modelo.DeporteModel;
 using Deportes.Modelo.EventoModel;
 using Deportes.Modelo.EventoModel.Dto;
+using Deportes.Modelo.UsuarioModel;
 using Deportes.Modelo.UsuarioModel.Dto;
 using Deportes.Servicio.Interfaces.IEvento;
 using Microsoft.EntityFrameworkCore;
@@ -10,6 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace Deportes.Infra.Database.EventoRepository;
 
@@ -25,6 +27,11 @@ public class EventoRepository : IEventoRepository
     public Evento GetEvento(int idEvento)
     {
         return _context.Evento.FirstOrDefault(e => e.IdEvento == idEvento);
+    }
+
+    public int CantidadDeParticipantesEnUnEvento(int idEvento)
+    {
+        return _context.Participante.Where(p => p.IdEvento == idEvento && p.Aceptado == true).Count();
     }
 
     public IList<DtoEventoDeporte> GetAllEventosConDeportes()
@@ -215,7 +222,7 @@ public class EventoRepository : IEventoRepository
     public DtoEventoDeporte GetEventoConDeporte(int idEvento)
     {
 
-        return _context.Evento.Where(c => c.IdEvento == idEvento && c.Finalizado != true).Select
+        return _context.Evento.Where(c => c.IdEvento == idEvento && c.Finalizado == false).Select
             (e => new DtoEventoDeporte
             {
                 IdEvento = e.IdEvento,
@@ -260,6 +267,57 @@ public class EventoRepository : IEventoRepository
             .FirstOrDefault();
     }
 
+    public  IList<DtoEventoDeporte> BuscadorDeEventosConDeporte(string? buscador)
+    {
+
+            var eventos =  _context.Evento.Where(c => c.Provincia == buscador && c.Finalizado == false || c.Localidad == buscador  && c.Finalizado== false || c.Nombre == buscador && c.Finalizado == false || c.IdDeporteNavigation.Nombre == buscador && c.Finalizado == false).Select
+            (e => new DtoEventoDeporte
+            {
+                IdEvento = e.IdEvento,
+                Nombre = e.Nombre,
+                Provincia = e.Provincia,
+                Localidad = e.Localidad,
+                Direccion = e.Direccion,
+                Numero = e.Numero,
+                Hora = e.Hora,
+                IdDeporte = e.IdDeporte,
+                Fecha = e.Fecha,
+                NombreDep = e.IdDeporteNavigation.Nombre,
+                CantJugadores = e.IdDeporteNavigation.CantJugadores,
+                CantJugadoresAnotados = _context.Participante.Where(p => p.IdEvento == e.IdEvento && p.Aceptado == true).Count() + 1,
+                DtoUsuarios = _context.Participante
+                            .Where(p => p.IdEvento == e.IdEvento && p.Aceptado == true && p.IdUsuarioParticipante != e.IdUsuarioCreador)
+                            .Select(u => new DtoUsuario
+                            {
+                                Id = u.IdUsuarioParticipante,
+                                Nombre = u.IdUsuarioParticipanteNavigation.Nombre,
+                                Apellido = u.IdUsuarioParticipanteNavigation.Apellido,
+                                Apodo = u.IdUsuarioParticipanteNavigation.Apodo,
+                                Email = u.IdUsuarioParticipanteNavigation.Email,
+                                IdParticipante = _context.Participante.Where(p => p.IdEvento == e.IdEvento && p.Aceptado == true).Select(par => par.IdParticipantes).FirstOrDefault(),
+
+                            }).Union(_context.Participante
+                    .Where(p => p.IdEvento == e.IdEvento && p.Aceptado == true && e.IdUsuarioCreador != p.IdUsuarioCreadorEvento)
+                    .Select(u => new DtoUsuario
+                    {
+                        Id = u.IdUsuarioCreadorEvento,
+                        Nombre = u.IdUsuarioCreadorEventoNavigation.Nombre,
+                        Apellido = u.IdUsuarioCreadorEventoNavigation.Apellido,
+                        Apodo = u.IdUsuarioCreadorEventoNavigation.Apodo,
+                        Email = u.IdUsuarioCreadorEventoNavigation.Email,
+                        IdParticipante = _context.Participante.Where(p => p.IdEvento == e.IdEvento && p.Aceptado == true).Select(par => par.IdParticipantes).FirstOrDefault(),
+
+                    }))
+                            .ToList(),
+                IdParticipante = _context.Participante.Where(p => p.IdEvento == e.IdEvento && p.Aceptado == true).Select(par => par.IdParticipantes).FirstOrDefault(),
+                Imagen = e.IdDeporteNavigation.Imagen,
+                NombreDuenio = e.IdUsuarioCreadorNavigation.Nombre + " " + e.IdUsuarioCreadorNavigation.Apellido
+            })
+            .ToList();
+        return eventos;
+    }
+
+
 
     public void AgregarEvento(Evento evento)
     {
@@ -298,6 +356,7 @@ public class EventoRepository : IEventoRepository
         //evento.Finalizado = null;
         _context.SaveChanges();
     }
+
 
 
     public int IdUsuarioCreadorPorIdEvento(int idEvento)
@@ -359,4 +418,7 @@ public class EventoRepository : IEventoRepository
 
         return eventos;
     }
+
+
+    
 }

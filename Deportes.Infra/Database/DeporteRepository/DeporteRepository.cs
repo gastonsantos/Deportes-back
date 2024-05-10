@@ -23,6 +23,10 @@ public class DeporteRepository : IDeporteRepository
         return _context.Deporte.ToList();
     }
 
+    public Deporte GetDeportePorId(int idDeporte)
+    {
+        return _context.Deporte.FirstOrDefault(d => d.Id == idDeporte);
+    }
 
 
 }
