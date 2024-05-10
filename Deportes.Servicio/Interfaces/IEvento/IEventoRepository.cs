@@ -22,6 +22,9 @@ namespace Deportes.Servicio.Interfaces.IEvento
         public IList<DtoEventoDeporte> GetEventosCreadosPorUsuarioFinalizado(int idUsuario);
 
         public IList<DtoEventoDeporte> GetEventosEnLosQueParticipoFinalizado(int idUsuario);
+        public IList<DtoEventoDeporte> BuscadorDeEventosConDeporte(string? buscador);
+        public int CantidadDeParticipantesEnUnEvento(int idEvento);
+
     }
 
 }

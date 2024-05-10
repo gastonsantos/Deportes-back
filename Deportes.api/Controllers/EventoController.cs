@@ -39,9 +39,10 @@ public class EventoController : Controller
     [SwaggerOperation(Summary = "Devuelve todos los eventos")]
     [SwaggerResponse(400, "El objeto request es invalido.")]
     [SwaggerResponse(200, "Se ha devuelto todos los eventos")]
-    public ActionResult ObtenerEventos()
+    public ActionResult ObtenerEventos([FromQuery] DtoGetTodosLosEventos dto)
     {
-        var eventos = _eventoServices.GetAllEventosConDeportes().ToArray();
+        var eventos = _eventoServices.GetAllEventosConDeportes(dto.Limit, dto.Offset)
+            .ToArray();
         return Ok(eventos);
 
     }
@@ -131,6 +132,19 @@ public class EventoController : Controller
     {
 
         var eventos = _eventoServices.GetEventosCreadosPorUsuarioFinalizado(eventoDto.Id);
+        return Ok(eventos);
+
+    }
+
+    [HttpPost("buscarEventoPorDeporteCiudad", Name = "buscarEventoPorDeporteCiudad")]
+    [Produces("application/json")]
+    [SwaggerOperation(Summary = "Buscador de evento por nombre, ciudad, deporte o provincia")]
+    [SwaggerResponse(400, "El objeto request es invalido.")]
+    [SwaggerResponse(200, "Se pudo traer los Eventos buscados")]
+    public ActionResult BuscarEventoPorDeporteCiudad([FromBody] DtoBuscador buscador)
+    {
+
+        var eventos = _eventoServices.BuscadorDeEventosConDeporte(buscador.Buscador);
         return Ok(eventos);
 
     }

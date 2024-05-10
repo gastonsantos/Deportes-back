@@ -22,5 +22,10 @@ namespace Deportes.Servicio.Servicios.DeporteServices
         {
             return _deporteRepository.GetAllDeportes();
         }
+
+        public Deporte GetDeportePorId(int idDeporte)
+        {
+            return _deporteRepository.GetDeportePorId(idDeporte);
+        }
     }
 }

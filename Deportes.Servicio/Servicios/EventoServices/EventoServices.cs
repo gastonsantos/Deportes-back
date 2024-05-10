@@ -42,9 +42,12 @@ public class EventoServices: IEventoServices
         _eventoRepository.AgregarEvento(evento);
     }
 
-    public IList<DtoEventoDeporte> GetAllEventosConDeportes()
+    public IList<DtoEventoDeporte> GetAllEventosConDeportes(int limit, int offset)
     {
-       return _eventoRepository.GetAllEventosConDeportes();
+       return _eventoRepository.GetAllEventosConDeportes()
+            .Skip(offset)
+            .Take(limit)
+            .ToList();
     }
 
     public DtoEventoDeporte GetEventoConDeporte(int idEvento)
@@ -129,5 +132,16 @@ public class EventoServices: IEventoServices
     public IList<DtoEventoDeporte> GetEventosEnLosQueParticipoFinalizado(int idUsuario)
     {
         return _eventoRepository.GetEventosEnLosQueParticipoFinalizado(idUsuario);
+    }
+
+    public IList<DtoEventoDeporte> BuscadorDeEventosConDeporte(string? buscador)
+
+    {
+        return _eventoRepository.BuscadorDeEventosConDeporte(buscador);
+    }
+
+    public int CantidadDeParticipantesEnUnEvento(int idEvento)
+    {
+        return _eventoRepository.CantidadDeParticipantesEnUnEvento(idEvento);
     }
 }

@@ -12,7 +12,7 @@ namespace Deportes.Servicio.Interfaces.IEvento
     {
         public void AgregarEvento(string nombre, string provincia, string localidad, string direccion, string numero, string hora, int idUsuarioCreador, int idDeporte, DateTime fecha);
 
-        public IList<DtoEventoDeporte> GetAllEventosConDeportes();
+        public IList<DtoEventoDeporte> GetAllEventosConDeportes(int limit, int offset);
         public IList<DtoEventoDeporte> GetEventosCreadosPorUsuario(int idUsuario);
         public DtoEventoDeporte GetEventoConDeporte(int idEvento);
         public Evento GetEvento(int idEvento);
@@ -22,5 +22,8 @@ namespace Deportes.Servicio.Interfaces.IEvento
         public IList<DtoEventoDeporte> GetEventosCreadosPorUsuarioFinalizado(int idUsuario);
 
         public IList<DtoEventoDeporte> GetEventosEnLosQueParticipoFinalizado(int idUsuario);
+        public IList<DtoEventoDeporte> BuscadorDeEventosConDeporte(string? buscador);
+        public int CantidadDeParticipantesEnUnEvento(int idEvento);
+
     }
 }

@@ -17,6 +17,7 @@ namespace Deportes.Servicio.Interfaces.IParticipantes
 
         public void AceptarParticipante(int idParticipantet);
         public List<DtoNotificacion> ObtenerNotificacionesPorUsuario(int idUsuario);
+        public Participante ObtenerParticipantePorIdParticipante(int idParticipante);
 
     }
 }

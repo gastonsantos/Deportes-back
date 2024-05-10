@@ -10,5 +10,6 @@ namespace Deportes.Servicio.Interfaces.IDeporte
     public interface IDeporteService
     {
         public IList<Deporte> GetAllDeportes();
+        public Deporte GetDeportePorId(int idDeporte);
     }
 }

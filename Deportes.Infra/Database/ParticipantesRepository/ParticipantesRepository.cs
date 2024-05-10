@@ -29,6 +29,14 @@ public class ParticipantesRepository: IParticipantesRepository
 
     }
 
+    public Participante ObtenerParticipantePorIdParticipante(int idParticipante)
+    {
+        return _context.Participante.FirstOrDefault(p => p.IdParticipantes == idParticipante);
+    }
+
+
+
+
 
     public void EnviarNotificacionParticipante(int idEvento,int idUsusarioQueInvita, int idUsuarioInvitado, bool esCreador)
     {
