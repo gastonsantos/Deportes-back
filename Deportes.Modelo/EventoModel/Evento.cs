@@ -1,6 +1,7 @@
 ﻿using Deportes.Modelo.CalificacionModel;
 using Deportes.Modelo.DeporteModel;
 using Deportes.Modelo.ParticipanteModel;
+using Deportes.Modelo.ResultadoModel;
 using Deportes.Modelo.UsuarioModel;
 using System;
 using System.Collections.Generic;
@@ -41,4 +42,5 @@ public  class Evento
     public virtual Usuario IdUsuarioCreadorNavigation { get; set; } = null!;
 
     public virtual ICollection<Participante> Participantes { get; set; } = new List<Participante>();
+    public virtual ICollection<Resultado> Resultados { get; set; } = new List<Resultado>();
 }

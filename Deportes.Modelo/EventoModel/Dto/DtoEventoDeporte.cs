@@ -1,4 +1,6 @@
 ﻿using Deportes.Modelo.ParticipanteModel;
+using Deportes.Modelo.ResultadoModel;
+using Deportes.Modelo.ResultadoModel.Dto;
 using Deportes.Modelo.UsuarioModel.Dto;
 using System;
 using System.Collections.Generic;
@@ -27,5 +29,6 @@ namespace Deportes.Modelo.EventoModel.Dto
         public int  IdUsuarioDuenio { get; set; }
         public string NombreDuenio { get; set; } = null!;
         public int IdParticipante { get; set; }
+        public DtoResultado? DtoResultado { get; set; } = null!;
     }
 }

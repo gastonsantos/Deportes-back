@@ -131,7 +131,7 @@ public class EventoController : Controller
     public ActionResult TraerEventosPorUsuarioFinalizado([FromBody] DtoEventoId eventoDto)
     {
 
-        var eventos = _eventoServices.GetEventosCreadosPorUsuarioFinalizado(eventoDto.Id);
+        var eventos = _eventoServices.GetEventosCreadosPorUsuarioFinalizado(eventoDto.Id,5, 0).ToArray();
         return Ok(eventos);
 
     }
@@ -146,6 +146,19 @@ public class EventoController : Controller
 
         var eventos = _eventoServices.BuscadorDeEventosConDeporte(buscador.Buscador);
         return Ok(eventos);
+
+    }
+
+    [HttpPost("agregarResultadoDelEvento", Name = "agragarResultadoDelEvento")]
+    [Produces("application/json")]
+    [SwaggerOperation(Summary = "Permite agregar un resultado")]
+    [SwaggerResponse(400, "El objeto request es invalido.")]
+    [SwaggerResponse(200, "Se ha agregado el resultado del partido")]
+    public ActionResult AgregarResultadoDelEvento([FromBody] DtoAgregarResultado resultadoDto)
+    {
+
+        _eventoServices.AgregarResultado(resultadoDto.IdEvento, resultadoDto.ResultadoLocal, resultadoDto.ResultadoVisitante);
+        return Ok();
 
     }
 }
