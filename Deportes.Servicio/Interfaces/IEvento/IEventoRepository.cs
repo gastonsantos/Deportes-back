@@ -10,7 +10,7 @@ namespace Deportes.Servicio.Interfaces.IEvento
 {
     public interface IEventoRepository
     {
-        public void AgregarEvento(Evento evento);
+        public int AgregarEvento(Evento evento);
         public IList<DtoEventoDeporte> GetAllEventosConDeportes();
         public IList<DtoEventoDeporte> GetEventosCreadosPorUsuario(int idUsuario);
         public DtoEventoDeporte GetEventoConDeporte(int idEvento);

@@ -12,6 +12,7 @@ using Deportes.Modelo.FichaDeportistaModel;
 using Deportes.Modelo.FichaFutbolModel;
 using Deportes.Modelo.FichaTenisModel;
 using Deportes.Modelo.CalificacionModel;
+using Deportes.Modelo.ResultadoModel;
 
 namespace Deportes.Infra;
 
@@ -27,6 +28,8 @@ public class DeportesContext : DbContext
     public  DbSet<Usuario> Usuario { get; set; }
     public virtual DbSet<FichaBasquet> FichaBasquet { get; set; }
     public virtual DbSet<FichaTeni> FichaTeni { get; set; }
+
+    public virtual DbSet<Resultado> Resultados { get; set; }
 
     public DeportesContext(DbContextOptions<DeportesContext> options)
    : base(options)
@@ -166,6 +169,16 @@ public class DeportesContext : DbContext
                 .HasForeignKey(d => d.IdUsuario)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_FichaTenis_Usuario");
+        });
+        modelBuilder.Entity<Resultado>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__Resultad__3214EC072CC358C5");
+
+            entity.ToTable("Resultado");
+
+            entity.HasOne(d => d.IdEventoNavigation).WithMany(p => p.Resultados)
+                .HasForeignKey(d => d.IdEvento)
+                .HasConstraintName("FK_Resultado_Evento");
         });
 
         modelBuilder.Entity<HistorialRefreshToken>(entity =>

@@ -1,6 +1,7 @@
 ﻿using Deportes.Modelo.DeporteModel;
 using Deportes.Modelo.EventoModel;
 using Deportes.Modelo.EventoModel.Dto;
+using Deportes.Modelo.ResultadoModel.Dto;
 using Deportes.Modelo.UsuarioModel;
 using Deportes.Modelo.UsuarioModel.Dto;
 using Deportes.Servicio.Interfaces.IEvento;
@@ -178,7 +179,9 @@ public class EventoRepository : IEventoRepository
     public IList<DtoEventoDeporte> GetEventosCreadosPorUsuarioFinalizado(int idUsuario)
     {
 
-        return _context.Evento.Where(c => c.IdUsuarioCreador == idUsuario && c.Finalizado == true).Select
+        return _context.Evento.Where(c => c.IdUsuarioCreador == idUsuario && c.Finalizado == true)
+            .OrderByDescending(e => e.Fecha)
+            .Select
             (e => new DtoEventoDeporte
             {
                 IdEvento = e.IdEvento,
@@ -213,6 +216,13 @@ public class EventoRepository : IEventoRepository
                         Email = u.IdUsuarioCreadorEventoNavigation.Email
                     }))
                             .ToList(),
+                DtoResultado = _context.Resultados
+                .Where(r => r.IdEvento == e.IdEvento)
+                .Select(p => new DtoResultado
+                {
+                    ResultadoLocal=p.ResultadoLocal,
+                    ResultadoVisitante=p.ResultadoVisitante
+                }).FirstOrDefault(),
                 Imagen = e.IdDeporteNavigation.Imagen,
                 NombreDuenio = e.IdUsuarioCreadorNavigation.Nombre + " " + e.IdUsuarioCreadorNavigation.Apellido
             })
@@ -319,10 +329,11 @@ public class EventoRepository : IEventoRepository
 
 
 
-    public void AgregarEvento(Evento evento)
+    public int AgregarEvento(Evento evento)
     {
         _context.Evento.Add(evento);
         _context.SaveChanges();
+        return evento.IdEvento;
 
     }
 
@@ -410,6 +421,13 @@ public class EventoRepository : IEventoRepository
                         Email = u.IdUsuarioCreadorEventoNavigation.Email
                     }))
                             .ToList(),
+                DtoResultado = _context.Resultados
+                .Where(r => r.IdEvento == e.IdEvento)
+                .Select(p => new DtoResultado
+                {
+                    ResultadoLocal = p.ResultadoLocal,
+                    ResultadoVisitante = p.ResultadoVisitante
+                }).FirstOrDefault(),
                 IdParticipante = _context.Participante.Where(p => p.IdEvento == e.IdEvento && p.Aceptado == true).Select(par => par.IdParticipantes).FirstOrDefault(),
                 Imagen = e.IdDeporteNavigation.Imagen,
                 NombreDuenio = e.IdUsuarioCreadorNavigation.Nombre + " " + e.IdUsuarioCreadorNavigation.Apellido
