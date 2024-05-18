@@ -153,7 +153,8 @@ builder.Services.AddCors(options =>
     {
         builder.WithOrigins("https://deportes-front.vercel.app", "http://localhost:3000")
                .AllowAnyMethod()
-               .AllowAnyHeader();
+               .AllowAnyHeader()
+               .AllowCredentials();
     });
 });
 
