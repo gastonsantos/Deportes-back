@@ -151,10 +151,10 @@ builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(builder =>
     {
-        builder.WithOrigins("https://deportes-front.vercel.app", "http://localhost:3000")
-               .AllowAnyMethod()
-               .AllowAnyHeader()
-               .AllowCredentials();
+        builder.AllowAnyOrigin()
+              .AllowAnyMethod()
+              .AllowAnyHeader();
+             
     });
 });
 
