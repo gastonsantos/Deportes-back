@@ -148,7 +148,7 @@ public class UsuarioController : Controller
   
 
 
-    //[Authorize] 
+    [Authorize] 
     [HttpGet("AllDeportes", Name = "AllDeportes")]
     [Produces("application/json")]
     [SwaggerOperation(Summary = "Permite devolver todos los Deportes")]

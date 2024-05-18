@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 using Deportes.Modelo.FichaTenisModel;
 using Deportes.Modelo.FichaBasquetModel;
-
+using Microsoft.AspNetCore.Authorization;
 
 namespace Deportes.api.Controllers;
 
@@ -27,7 +27,7 @@ public class FichaController : Controller
         _httpContextAccessor = httpContextAccessor;
       
     }
-
+    [Authorize]
     [HttpPost("AgregarFichaDeportista", Name = "AgragarFichaDeportista")]
     [Produces("application/json")]
     [SwaggerOperation(Summary = "Permite agregar la ficha de deportista basica")]
@@ -41,7 +41,7 @@ public class FichaController : Controller
 
     }
 
-
+    [Authorize]
     [HttpPost("ActualizaFichaDeportista", Name = "ActualizaFichaDeportista")]
     [Produces("application/json")]
     [SwaggerOperation(Summary = "Permite actualizar la ficha de deportista basica")]
@@ -54,7 +54,7 @@ public class FichaController : Controller
         return Ok();
 
     }
-
+    [Authorize]
     [HttpPost("ObtieneFichaDeportista", Name = "ObtieneFichaDeportista")]
     [Produces("application/json")]
     [SwaggerOperation(Summary = "Permite obtener la ficha de deportista basica")]
@@ -70,6 +70,7 @@ public class FichaController : Controller
 
 
     /*Agregar eliminar leer y buscar una ficha de estadisticas de futbol*/
+    [Authorize]
     [HttpPost("AgregarFichaFutbol", Name = "AgregarFichaFutbol")]
     [Produces("application/json")]
     [SwaggerOperation(Summary = "Permite agregar la ficha de futbol basica")]
@@ -95,8 +96,8 @@ public class FichaController : Controller
             _fichaServices.EliminarFichaFutbol(id);
             return Ok();
         }
-
-        [HttpPost("ObtenerFichaFutbol", Name = "ObtenerFichaFutbol")]
+    [Authorize]
+    [HttpPost("ObtenerFichaFutbol", Name = "ObtenerFichaFutbol")]
         [Produces("application/json")]
         [SwaggerOperation(Summary = "Permite buscar por id la ficha de futbol basica")]
         [SwaggerResponse(400, "El objeto request es invalido.")]
@@ -106,8 +107,8 @@ public class FichaController : Controller
             var fichaFutbol = _fichaServices.DevolverFichaFutbol(usuario.Id); 
             return Ok(fichaFutbol);
         }
-
-        [HttpGet("BuscarFichaFutbol", Name = "BuscarFichaFutbol")]
+    [Authorize]
+    [HttpGet("BuscarFichaFutbol", Name = "BuscarFichaFutbol")]
         [Produces("application/json")]
         [SwaggerOperation(Summary = "Permite buscar todas  las ficha de futbol basica")]
         [SwaggerResponse(400, "El objeto request es invalido.")]
@@ -117,8 +118,8 @@ public class FichaController : Controller
             var fichasFutbol = _fichaServices.DevolverFichasDeFutbol();
             return Ok(fichasFutbol);
         }
-
-        [HttpPut("ActualizarFichaFutbol", Name = "ActualizarFichaFutbol")]
+    [Authorize]
+    [HttpPut("ActualizarFichaFutbol", Name = "ActualizarFichaFutbol")]
         [Produces("application/json")]
         [SwaggerOperation(Summary = "Permite actaulizar una ficha  las ficha de futbol basica")]
         [SwaggerResponse(400, "El objeto request es invalido.")]

@@ -24,7 +24,7 @@ public class ParticipantesController : Controller
         _participantesServices= participantesServices;
     }
 
-
+    [Authorize]
     [HttpPost("AgregarParticipante", Name = "AgregarParticipante")]
     [Produces("application/json")]
     [SwaggerOperation(Summary = "Permite hacer una prueba con datos HardCodeados de envio de notificacion")]
@@ -35,7 +35,7 @@ public class ParticipantesController : Controller
         _participantesServices.EnviarNotificacionParticipante(dto.idEvento, dto.idUsuarioQueInvita, dto.idUsuarioInvitado);
         return Ok();
     }
-
+    [Authorize]
     [HttpPost("ObtenerNotificaciones", Name = "ObtenerNotificaciones")]
     [Produces("application/json")]
     [SwaggerOperation(Summary = "Permite obtener las notificaciones")]
@@ -48,7 +48,7 @@ public class ParticipantesController : Controller
         return Ok(notificaciones);
     }
 
-
+    [Authorize]
     [HttpPost("ObtenerNotificacionesPorIdUsuario", Name = "ObtenerNotificacionesPorIdUsuario")]
     [Produces("application/json")]
     [SwaggerOperation(Summary = "Permite obtener las notificaciones")]
@@ -60,6 +60,7 @@ public class ParticipantesController : Controller
         var notificaciones = _participantesServices.ObtenerNotificacionesPorUsuario(notificacion.idUsuario);
         return Ok(notificaciones);
     }
+    [Authorize]
     [HttpPost("AceptarInvitacion", Name = "AceptarInvitacion")]
     [Produces("application/json")]
     [SwaggerOperation(Summary = "Permite obtener las notificaciones")]
@@ -71,6 +72,7 @@ public class ParticipantesController : Controller
          _participantesServices.AceptarParticipante(notificacion.idUsuario);
         return Ok();
     }
+    [Authorize]
     [HttpPost("RechazarInvitacion", Name = "RechazarInvitacion")]
     [Produces("application/json")]
     [SwaggerOperation(Summary = "Permite obtener las notificaciones")]

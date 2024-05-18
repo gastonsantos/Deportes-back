@@ -5,6 +5,7 @@ using Deportes.Servicio.Servicios.FichaServices;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 using Deportes.api.Controllers.Dto;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Deportes.api.Controllers;
 
@@ -22,6 +23,7 @@ public class EventoController : Controller
         _httpContextAccessor = httpContextAccessor;
 
     }
+    [Authorize]
     [HttpPost("AgregarEvento", Name = "AgragarEvento")]
     [Produces("application/json")]
     [SwaggerOperation(Summary = "Permite un Evento")]
@@ -34,6 +36,7 @@ public class EventoController : Controller
         return Ok();
 
     }
+    [Authorize]
     [HttpGet("ObtenerEventos", Name = "ObtenerEventos")]
     [Produces("application/json")]
     [SwaggerOperation(Summary = "Devuelve todos los eventos")]
@@ -46,6 +49,7 @@ public class EventoController : Controller
         return Ok(eventos);
 
     }
+    [Authorize]
     [HttpPost("ObtenerEventosPorUsuario", Name = "ObtenerEventosPorUsuario")]
     [Produces("application/json")]
     [SwaggerOperation(Summary = "Permite obtener los Eventos por Usuario")]
@@ -58,6 +62,7 @@ public class EventoController : Controller
         return Ok(eventos);
 
     }
+    [Authorize]
     [HttpGet("EventoDetalle/{id}", Name = "EventoDetalle")]
     [Produces("application/json")]
     [SwaggerOperation(Summary = "Permite obtener el detalle de Evento")]
@@ -70,7 +75,7 @@ public class EventoController : Controller
         return Ok(eventos);
 
     }
-
+    [Authorize]
     [HttpPost("ModificarEvento", Name = "ModificarEvento")]
     [Produces("application/json")]
     [SwaggerOperation(Summary = "Permite un modificar Evento")]
@@ -83,7 +88,7 @@ public class EventoController : Controller
         return Ok();
 
     }
-
+    [Authorize]
     [HttpPost("CancelarEvento", Name = "CancelarEvento")]
     [Produces("application/json")]
     [SwaggerOperation(Summary = "Permite cancelar un evento")]
@@ -97,7 +102,7 @@ public class EventoController : Controller
 
     }
 
-
+    [Authorize]
     [HttpPost("ObtenerEventosQueParticipo", Name = "ObtenerEventosQueParticipo")]
     [Produces("application/json")]
     [SwaggerOperation(Summary = "Permite obtener los Eventos por Usuario que participo")]
@@ -110,6 +115,7 @@ public class EventoController : Controller
         return Ok(eventos);
 
     }
+    [Authorize]
     [HttpPost("ObtenerEventosQueParticipoFinalizado", Name = "ObtenerEventosQueParticipoFinalizado")]
     [Produces("application/json")]
     [SwaggerOperation(Summary = "Permite obtener los Eventos por Usuario que participe")]
@@ -122,7 +128,7 @@ public class EventoController : Controller
         return Ok(eventos);
 
     }
-
+    [Authorize]
     [HttpPost("ObtenerEventosPorUsuarioFinalizado", Name = "ObtenerEventosPorUsuarioFinalizado")]
     [Produces("application/json")]
     [SwaggerOperation(Summary = "Permite obtener los Eventos por Usuario Finalizado")]
@@ -135,7 +141,7 @@ public class EventoController : Controller
         return Ok(eventos);
 
     }
-
+    [Authorize]
     [HttpPost("buscarEventoPorDeporteCiudad", Name = "buscarEventoPorDeporteCiudad")]
     [Produces("application/json")]
     [SwaggerOperation(Summary = "Buscador de evento por nombre, ciudad, deporte o provincia")]
@@ -148,7 +154,7 @@ public class EventoController : Controller
         return Ok(eventos);
 
     }
-
+    [Authorize]
     [HttpPost("agregarResultadoDelEvento", Name = "agragarResultadoDelEvento")]
     [Produces("application/json")]
     [SwaggerOperation(Summary = "Permite agregar un resultado")]
