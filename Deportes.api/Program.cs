@@ -147,16 +147,16 @@ builder.Services.AddAuthentication(config =>
     };
 });
 
-builder.Services.AddCors(options => 
+builder.Services.AddCors(options =>
 {
-    options.AddDefaultPolicy(builder =>
+    options.AddPolicy("AllowSpecificOrigins", builder =>
     {
-        builder.AllowAnyOrigin()
-              .AllowAnyMethod()
-              .AllowAnyHeader();
-             
+        builder.WithOrigins("https://deportes-front.vercel.app", "http://localhost:3000")
+               .AllowAnyMethod()
+               .AllowAnyHeader();
     });
 });
+
 
 
 var app = builder.Build();
@@ -172,7 +172,7 @@ app.UseMiddleware<ErrorHandlerMiddleware>();
 
 app.UseRouting();
 //Cors
-app.UseCors();
+app.UseCors("AllowSpecificOrigins");
 
 app.UseHttpsRedirection();
 
