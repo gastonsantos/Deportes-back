@@ -153,7 +153,7 @@ public class UsuarioService : IUsuarioService
         {
             Para = usuario.Email,
             Asunto = "Confirma tu cuenta",
-            Contenido = $"Hola {usuario.Nombre},<br>Para confirmar tu cuenta, haz clic en el siguiente enlace:<br><a href='http://localhost:3000/pages/confirmarMail/{usuario.TokenConfirmacion}'>Confirmar cuenta</a>"
+            Contenido = $"Hola {usuario.Nombre},<br>Para confirmar tu cuenta, haz clic en el siguiente enlace:<br><a href='https://deportes-front.vercel.app/pages/confirmarMail/{usuario.TokenConfirmacion}'>Confirmar cuenta</a>"
         };
         _correoServices.Enviar(correo);
        
@@ -185,7 +185,7 @@ public class UsuarioService : IUsuarioService
         {
             Para = usuario.Email,
             Asunto = "Cambiar Contraseña",
-            Contenido = $"Hola {usuario.Nombre},<br>Si usted no ah pedido cambiar contraseña ignorar este mensaje,si no, haz clic en el siguiente enlace:<br><a href='http://localhost:3000/pages/cambioContrasenia/{usuario.TokenCambioContrasenia}'>Cambiar</a>"
+            Contenido = $"Hola {usuario.Nombre},<br>Si usted no pedio cambiar contraseña ignorar este mensaje,si no, haz clic en el siguiente enlace:<br><a href='https://deportes-front.vercel.app/pages/cambioContrasenia/{usuario.TokenCambioContrasenia}'>Cambiar</a>"
         };
         _correoServices.Enviar(correo);
 

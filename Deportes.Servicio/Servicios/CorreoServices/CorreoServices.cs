@@ -9,21 +9,29 @@ using System.Threading.Tasks;
 using MailKit.Net.Smtp;
 using Deportes.Modelo.CorreoModel;
 using Deportes.Servicio.Interfaces.ICorreo;
+using Deportes.Servicio.Interfaces.IFichas;
+using Deportes.Servicio.Interfaces.IUsuario;
+using Microsoft.Extensions.Configuration;
 
 namespace Deportes.Servicio.Servicios.CorreoServices;
 
 public  class CorreoServices : ICorreoServices
 {
+    private  IConfiguration _configuration;
+    public CorreoServices(IConfiguration configuration)
+    {
+        _configuration = configuration;
+    }
 
     private static string _Host = "smtp.gmail.com";
     private static int _Puerto = 587;
 
     private static string _NombreEnvia = "Deportes, Tu Deporte";
     private static string _Correo = "deportestudeporte@gmail.com";
-    private static string _Clave = "aouezxboczitdcza";
-    // aoue zxbo czit dcza
+   
     public bool Enviar(Correo correodto)
     {
+        var _Clave = _configuration.GetValue<string>("Email:key");
         try
         {
             var email = new MimeMessage();

@@ -1,9 +1,13 @@
 ﻿using Deportes.Modelo.ParticipanteModel;
 using Deportes.Modelo.ParticipanteModel.Dto;
+using Deportes.Modelo.UsuarioModel;
 using Deportes.Servicio.Interfaces.IDeporte;
 using Deportes.Servicio.Interfaces.IEvento;
 using Deportes.Servicio.Interfaces.IParticipantes;
+using Deportes.Servicio.Interfaces.IUsuario;
+using Deportes.Servicio.Servicios.EventoServices.Errores;
 using Deportes.Servicio.Servicios.ParticipantesServices.Errores;
+using Deportes.Servicio.Servicios.UsuarioServices.Errores;
 using MimeKit.Tnef;
 using System;
 using System.Collections.Generic;
@@ -18,15 +22,23 @@ public class ParticipantesServices : IParticipantesServices
     private readonly IParticipantesRepository _participantesRepository;
     private readonly IEventoRepository _eventoRepository;
     private readonly IDeporteRepository _deporteRepository;
-    public ParticipantesServices(IParticipantesRepository participantesRepository, IEventoRepository eventoRepository, IDeporteRepository deporteRepository)
+    private readonly IUsuarioRepository _usuarioRepository;
+    public ParticipantesServices(IParticipantesRepository participantesRepository, IEventoRepository eventoRepository, IDeporteRepository deporteRepository, IUsuarioRepository usuarioRepository)
     {
         _participantesRepository= participantesRepository;
         _eventoRepository= eventoRepository;
         _deporteRepository= deporteRepository;
+        _usuarioRepository= usuarioRepository;
     }
 
     public void AceptarParticipante(int idParticipante)
     {
+        var usuario = _usuarioRepository.ObtenerUsuarioPorId(idParticipante);
+        if (usuario == null)
+        {
+            throw new UsuarioNoEncontradoException();
+        }
+
         if (!PuedeAceptarNotificacion(idParticipante))
         {
             EliminarParticipante(idParticipante);
@@ -39,13 +51,25 @@ public class ParticipantesServices : IParticipantesServices
 
     public void EliminarParticipante(int idParticipante)
     {
+        var usuario = _usuarioRepository.ObtenerUsuarioPorId(idParticipante);
+        if (usuario == null)
+        {
+            throw new UsuarioNoEncontradoException();
+        }
         _participantesRepository.EliminarParticipante(idParticipante);
     }
 
     public void EnviarNotificacionParticipante(int idEvento, int idUsusarioQueInvita, int idUsuarioInvitado)
     {
+        var evento = _eventoRepository.GetEvento(idEvento);
+        if (evento == null)
+        {
+            throw new EventoNoEncontradoException();
+
+        }
+
         bool hayNotif =  YaHayNotificacion(idEvento, idUsusarioQueInvita, idUsuarioInvitado);
-        if (hayNotif == true)
+        if (hayNotif)
         {
             throw new NoSePuedeEnviarMasDeUnaInvitacionException();
         }
@@ -60,21 +84,39 @@ public class ParticipantesServices : IParticipantesServices
 
     public List<DtoNotificacion> ObtenerNotificacionesPorUsuario(int idUsuario)
     {
-
+        var usuario = _usuarioRepository.ObtenerUsuarioPorId(idUsuario);
+        if (usuario == null)
+        {
+            throw new UsuarioNoEncontradoException();
+        }
         return _participantesRepository.ObtenerNotificacionesPorUsuario(idUsuario);
     }
 
     public IList<Participante> ObtengoNotificacionParticipante(int idUsuario)
     {
+        var usuario = _usuarioRepository.ObtenerUsuarioPorId(idUsuario);
+        if (usuario == null)
+        {
+            throw new UsuarioNoEncontradoException();
+        }
         return _participantesRepository.ObtengoNotificacionParticipante(idUsuario);
     }
 
     public bool ElQueInvitaEsDuenio(int idUsuarioInvita, int idEvento)
     {
 
+        var usuario = _usuarioRepository.ObtenerUsuarioPorId(idUsuarioInvita);
+        if (usuario == null)
+        {
+            throw new UsuarioNoEncontradoException();
+        }
         var evento = _eventoRepository.GetEvento(idEvento);
+        if (evento == null)
+        {
+            throw new EventoNoEncontradoException();
 
-        if(evento.IdUsuarioCreador == idUsuarioInvita)
+        }
+        if (evento.IdUsuarioCreador == idUsuarioInvita)
         {
             return true;
         }
@@ -89,7 +131,13 @@ public class ParticipantesServices : IParticipantesServices
 
     public bool YaHayNotificacion(int idEvento, int idUsusarioQueInvita, int idUsuarioInvitado)
     {
-
+        var usuario = _usuarioRepository.ObtenerUsuarioPorId(idUsusarioQueInvita);
+        var usuario2 = _usuarioRepository.ObtenerUsuarioPorId(idUsuarioInvitado);
+        if (usuario == null || usuario2 == null)
+        {
+            throw new UsuarioNoEncontradoException();
+        }
+        
         return  _participantesRepository.YaHayNotificacion(idEvento, idUsusarioQueInvita, idUsuarioInvitado);
     
     }
@@ -99,7 +147,7 @@ public class ParticipantesServices : IParticipantesServices
         return _participantesRepository.ObtenerParticipantePorIdParticipante(idParticipante);
     }
 
-    private bool PuedeAceptarNotificacion(int idParticipante)
+    public bool PuedeAceptarNotificacion(int idParticipante)
     {
         var participante = _participantesRepository.ObtenerParticipantePorIdParticipante(idParticipante);
 
