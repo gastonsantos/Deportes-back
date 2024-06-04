@@ -41,7 +41,10 @@ public class UsuarioService : IUsuarioService
     public DtoUsuario GetUsuarioParaPerfilInvitacion(int id)
     {
         var usuario = _usuarioRepository.ObtenerUsuarioPorId(id);
-
+        if (usuario == null)
+        {
+            throw new UsuarioNoEncontradoException();
+        }
         DtoUsuario dtoUsuario = new DtoUsuario();
         dtoUsuario.Id = usuario.Id;
         dtoUsuario.Nombre = usuario.Nombre;
@@ -65,10 +68,9 @@ public class UsuarioService : IUsuarioService
         {
             throw new UsuarioNoEncontradoException();
         }
-        else
-        {
+        
             return _usuarioRepository.ObtenerUsuarioPorId(id);
-        }
+        
        
     }
 
@@ -144,7 +146,7 @@ public class UsuarioService : IUsuarioService
         return Convert.ToBase64String(tokenBytes)
                .Replace('+', '-')
                .Replace('/', '_')
-               .Replace("=", ""); ;
+               .Replace("=", ""); 
     }
 
     private void EnviarCorreoConfirmacion(Usuario usuario)
@@ -153,7 +155,7 @@ public class UsuarioService : IUsuarioService
         {
             Para = usuario.Email,
             Asunto = "Confirma tu cuenta",
-            Contenido = $"Hola {usuario.Nombre},<br>Para confirmar tu cuenta, haz clic en el siguiente enlace:<br><a href='http://localhost:3000/pages/confirmarMail/{usuario.TokenConfirmacion}'>Confirmar cuenta</a>"
+            Contenido = $"Hola {usuario.Nombre},<br>Para confirmar tu cuenta, haz clic en el siguiente enlace:<br><a href='https://deportes-front.vercel.app/pages/confirmarMail/{usuario.TokenConfirmacion}'>Confirmar cuenta</a>"
         };
         _correoServices.Enviar(correo);
        
@@ -185,7 +187,7 @@ public class UsuarioService : IUsuarioService
         {
             Para = usuario.Email,
             Asunto = "Cambiar Contraseña",
-            Contenido = $"Hola {usuario.Nombre},<br>Si usted no ah pedido cambiar contraseña ignorar este mensaje,si no, haz clic en el siguiente enlace:<br><a href='http://localhost:3000/pages/cambioContrasenia/{usuario.TokenCambioContrasenia}'>Cambiar</a>"
+            Contenido = $"Hola {usuario.Nombre},<br>Si usted no pidio cambiar contraseña ignorar este mensaje,si no, haz clic en el siguiente enlace:<br><a href='https://deportes-front.vercel.app/pages/cambioContrasenia/{usuario.TokenCambioContrasenia}'>Cambiar</a>"
         };
         _correoServices.Enviar(correo);
 

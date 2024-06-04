@@ -70,11 +70,7 @@ public class EventoServices : IEventoServices
         evento.Finalizado = false;
          var idEvento = _eventoRepository.AgregarEvento(evento);
 
-        Resultado resultado = new Resultado();
-        resultado.IdEvento = idEvento;
-        resultado.ResultadoLocal = 0;
-        resultado.ResultadoVisitante = 0;
-        _resultadoRepository.AgregarResultado(resultado);
+         AgregarResultadoPredeterminado(idEvento);
 
     }
 
@@ -95,7 +91,7 @@ public class EventoServices : IEventoServices
         {
             throw new EventoNoEncontradoException();
         }
-       // DtoEventoDeporte eventoDep = new DtoEventoDeporte();
+     
          var eventoDep = _eventoRepository.GetEventoConDeporte(idEvento);
 
         eventoDep.CantJugadoresAnotados = _participantesRepository.CantidadDeUsuarioQueEstanAnotadosEnEvento(idEvento);
@@ -189,7 +185,7 @@ public class EventoServices : IEventoServices
         return _eventoRepository.GetEventosCreadosPorUsuarioFinalizado(idUsuario)
             .Skip(offset)
             .Take(limit)
-            .ToList(); ;
+            .ToList(); 
     }
 
     public IList<DtoEventoDeporte> GetEventosEnLosQueParticipoFinalizado(int idUsuario)
@@ -262,5 +258,13 @@ public class EventoServices : IEventoServices
         return fecha.Date >= fechaActual.Date;
     }
 
+    private void AgregarResultadoPredeterminado(int idEvento)
+    {
+        Resultado resultado = new Resultado();
+        resultado.IdEvento = idEvento;
+        resultado.ResultadoLocal = 0;
+        resultado.ResultadoVisitante = 0;
+        _resultadoRepository.AgregarResultado(resultado);
+    }
     
 }

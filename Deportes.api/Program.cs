@@ -98,7 +98,8 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
 builder.Services.AddDbContext<DeportesContext>(options =>
    //options.UseSqlServer("Data Source=DESKTOP-TS9IBN4;Initial Catalog=Deportes;Integrated Security=True; TrustServerCertificate=True;"));
    // options.UseSqlServer("Server=localhost,1433;Database=Deportes;User Id=sa;Password=Ergittek2023;TrustServerCertificate=True;"));
-   options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+   options.UseSqlServer(builder.Configuration.GetConnectionString("GastonConnection")));
+//options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 
 builder.Services.AddScoped<DeportesContext>();
