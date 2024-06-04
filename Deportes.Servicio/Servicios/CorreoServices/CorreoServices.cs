@@ -26,7 +26,7 @@ public  class CorreoServices : ICorreoServices
     private static string _Host = "smtp.gmail.com";
     private static int _Puerto = 587;
 
-    private static string _NombreEnvia = "Deportes, Tu Deporte";
+    private static string _NombreEnvia = "Sports Squad, Tu Deporte";
     private static string _Correo = "deportestudeporte@gmail.com";
    
     public bool Enviar(Correo correodto)

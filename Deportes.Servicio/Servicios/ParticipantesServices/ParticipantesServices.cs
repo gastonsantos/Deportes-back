@@ -33,11 +33,7 @@ public class ParticipantesServices : IParticipantesServices
 
     public void AceptarParticipante(int idParticipante)
     {
-        var usuario = _usuarioRepository.ObtenerUsuarioPorId(idParticipante);
-        if (usuario == null)
-        {
-            throw new UsuarioNoEncontradoException();
-        }
+       
 
         if (!PuedeAceptarNotificacion(idParticipante))
         {
@@ -51,11 +47,7 @@ public class ParticipantesServices : IParticipantesServices
 
     public void EliminarParticipante(int idParticipante)
     {
-        var usuario = _usuarioRepository.ObtenerUsuarioPorId(idParticipante);
-        if (usuario == null)
-        {
-            throw new UsuarioNoEncontradoException();
-        }
+       
         _participantesRepository.EliminarParticipante(idParticipante);
     }
 
