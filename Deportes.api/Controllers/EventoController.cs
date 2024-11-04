@@ -23,19 +23,44 @@ public class EventoController : Controller
         _httpContextAccessor = httpContextAccessor;
 
     }
-    [Authorize]
+    // [Authorize]
     [HttpPost("AgregarEvento", Name = "AgragarEvento")]
     [Produces("application/json")]
-    [SwaggerOperation(Summary = "Permite un Evento")]
-    [SwaggerResponse(400, "El objeto request es invalido.")]
-    [SwaggerResponse(200, "Se ha agregado un Evento")]
+    [SwaggerOperation(Summary = "Permite agregar un Evento")]
+    [SwaggerResponse(400, "El objeto request es inválido.")]
+    [SwaggerResponse(200, "Se ha agregado un Evento correctamente")]
     public ActionResult AgregarEvento([FromBody] DtoEvento eventoDto)
     {
+        try
+        {
+            // Verificar si los datos recibidos son válidos
+            if (eventoDto == null)
+            {
+                return BadRequest("El objeto eventoDto es nulo.");
+            }
 
-        _eventoServices.AgregarEvento(eventoDto.Nombre, eventoDto.Provincia, eventoDto.Localidad, eventoDto.Direccion, eventoDto.Numero, eventoDto.Hora, eventoDto.IdUsuarioCreador, eventoDto.IdDeporte, eventoDto.Fecha);
-        return Ok();
+            // Validaciones adicionales, si es necesario (ej: campos obligatorios)
+            if (string.IsNullOrEmpty(eventoDto.Nombre) || eventoDto.IdUsuarioCreador == 0 || eventoDto.IdDeporte == 0)
+            {
+                return BadRequest("Faltan campos obligatorios en el evento.");
+            }
 
+            // Lógica para agregar el evento usando el servicio
+            _eventoServices.AgregarEvento(eventoDto.Nombre, eventoDto.Provincia, eventoDto.Localidad, eventoDto.Direccion, eventoDto.Numero, eventoDto.Hora, eventoDto.IdUsuarioCreador, eventoDto.IdDeporte, eventoDto.Fecha);
+
+            // Si todo es correcto, devolver respuesta exitosa
+            return Ok(new { Message = "Evento agregado correctamente" });
+        }
+        catch (Exception ex)
+        {
+            // Loguear el error si tienes un sistema de logging
+           
+
+            // Devolver un error genérico al cliente
+            return StatusCode(500, "Ocurrió un error al agregar el evento. Intenta nuevamente.");
+        }
     }
+
     [Authorize]
     [HttpGet("ObtenerEventos", Name = "ObtenerEventos")]
     [Produces("application/json")]

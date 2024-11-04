@@ -38,6 +38,7 @@ public class EventoServices : IEventoServices
 
     public void AgregarEvento(string nombre, string provincia, string localidad, string direccion, string numero, string hora, int idUsuarioCreador, int idDeporte, DateTime fecha)
     {
+        
         if (!IsNullOVacio(nombre) || !IsNullOVacio(provincia) || !IsNullOVacio(localidad) || !IsNullOVacio(direccion) || !IsNullOVacio(numero) || !IsNullOVacio(hora) || idUsuarioCreador == 0 || idUsuarioCreador == 0)
         {
             throw new ErrorEnEventoException();
@@ -54,7 +55,7 @@ public class EventoServices : IEventoServices
         {
             throw new ErrorEnEventoException();
         }
-
+        
 
         Evento evento = new Evento();
        

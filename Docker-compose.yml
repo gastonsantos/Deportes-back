@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=TuContraseñaSegura123  # Cambia esta contraseña por una segura
+    ports:
+      - "1433:1433"  # Mapea el puerto 1433 del contenedor al host
+    networks:
+      - app-network
+
+  api:
+    image: deportes-api:latest  # Cambia a tu nombre de imagen
+    build:
+      context: .  # Directorio donde se encuentra tu Dockerfile
+      dockerfile: Dockerfile  # Asegúrate de que el nombre de tu Dockerfile sea correcto
+    ports:
+      - "80:80" 
+      - "7067:7067"  # Mapeo de puertos
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development  # O Production, según tu entorno
+      - Jwt__Key=9SvJ1HQ5TMywe2bjPbfMvGJDxfX0fILSPeblTQ==  # Clave JWT
+      - ConnectionStrings__DefaultConnection=Server=sqlserver;Database=Deportes;User Id=sa;Password=TuContraseñaSegura123;TrustServerCertificate=True;
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge

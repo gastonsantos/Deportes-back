@@ -25,15 +25,15 @@ public class ParticipantesServices : IParticipantesServices
     private readonly IUsuarioRepository _usuarioRepository;
     public ParticipantesServices(IParticipantesRepository participantesRepository, IEventoRepository eventoRepository, IDeporteRepository deporteRepository, IUsuarioRepository usuarioRepository)
     {
-        _participantesRepository= participantesRepository;
-        _eventoRepository= eventoRepository;
-        _deporteRepository= deporteRepository;
-        _usuarioRepository= usuarioRepository;
+        _participantesRepository = participantesRepository;
+        _eventoRepository = eventoRepository;
+        _deporteRepository = deporteRepository;
+        _usuarioRepository = usuarioRepository;
     }
 
     public void AceptarParticipante(int idParticipante)
     {
-       
+
 
         if (!PuedeAceptarNotificacion(idParticipante))
         {
@@ -43,11 +43,11 @@ public class ParticipantesServices : IParticipantesServices
         _participantesRepository.AceptarParticipante(idParticipante);
     }
 
-    
+
 
     public void EliminarParticipante(int idParticipante)
     {
-       
+
         _participantesRepository.EliminarParticipante(idParticipante);
     }
 
@@ -60,7 +60,7 @@ public class ParticipantesServices : IParticipantesServices
 
         }
 
-        bool hayNotif =  YaHayNotificacion(idEvento, idUsusarioQueInvita, idUsuarioInvitado);
+        bool hayNotif = YaHayNotificacion(idEvento, idUsusarioQueInvita, idUsuarioInvitado);
         if (hayNotif)
         {
             throw new NoSePuedeEnviarMasDeUnaInvitacionException();
@@ -70,7 +70,7 @@ public class ParticipantesServices : IParticipantesServices
             throw new NoSePuedenEnviarInvitacionesAlMismoUsuario();
         }
 
-        var esCreador = ElQueInvitaEsDuenio(idUsusarioQueInvita ,idEvento);
+        var esCreador = ElQueInvitaEsDuenio(idUsusarioQueInvita, idEvento);
         _participantesRepository.EnviarNotificacionParticipante(idEvento, idUsusarioQueInvita, idUsuarioInvitado, esCreador);
     }
 
@@ -129,9 +129,9 @@ public class ParticipantesServices : IParticipantesServices
         {
             throw new UsuarioNoEncontradoException();
         }
-        
-        return  _participantesRepository.YaHayNotificacion(idEvento, idUsusarioQueInvita, idUsuarioInvitado);
-    
+
+        return _participantesRepository.YaHayNotificacion(idEvento, idUsusarioQueInvita, idUsuarioInvitado);
+
     }
 
     public Participante ObtenerParticipantePorIdParticipante(int idParticipante)
@@ -146,7 +146,7 @@ public class ParticipantesServices : IParticipantesServices
         var evento = _eventoRepository.GetEvento(participante.IdEvento);
 
         var deporte = _deporteRepository.GetDeportePorId(evento.IdDeporte);
-       if(_eventoRepository.CantidadDeParticipantesEnUnEvento(evento.IdEvento)+1 >= deporte.CantJugadores)
+        if (_eventoRepository.CantidadDeParticipantesEnUnEvento(evento.IdEvento) + 1 >= deporte.CantJugadores)
         {
             return false;
         }
