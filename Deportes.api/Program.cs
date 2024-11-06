@@ -162,7 +162,7 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 
-DatabaseSeeder.Initialize(app.Services);
+//DatabaseSeeder.Initialize(app.Services);
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
